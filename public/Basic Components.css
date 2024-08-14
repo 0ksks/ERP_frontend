@@ -1,0 +1,180 @@
+/* 背景 */
+body {
+  background: linear-gradient(to bottom, rgba(127, 167, 226, 1), rgba(197, 217, 247, 1), rgba(255, 255, 255, 1));
+  height: 100vh;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* 头部样式 */
+.header {
+  color: white;
+  padding: 1% 0;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.custom-icon-button {
+  position: absolute;
+  left: 20px;
+  font-size: 24px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* 登录输入框样式 */
+.login-input {
+  width: 50vh;
+  font-size: 2vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 登录输入框前置部分样式 */
+.login-input .el-input-group__prepend {
+  background-color: rgba(239, 252, 253, 1);
+}
+
+/* 登录输入框除前置部分外的样式 */
+.login-input .el-input__inner {
+  background-color: rgba(239, 252, 253, 1);
+}
+
+/* 登录按钮样式 */
+.login-button {
+  background-color: rgba(38, 135, 200, 1);
+  cursor: pointer;
+  width: 50vh;
+  height: 6.5vh;
+  font-size: 2vh;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* 无边框带下划线按钮组件 */
+.frameless-button {
+  color: rgba(122, 122, 122, 1);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Rigister下拉框样式 */
+.Login-dropdown-menu {
+  width: 50vh;
+  cursor: pointer;
+}
+
+/* 贴片按钮样式 */
+.patch {
+  display: flex;
+  justify-content: space-between;
+  width: 30vh;
+  height: 15vh;
+  border: solid rgb(214, 214, 214);
+  border-radius: 2vh;
+  box-shadow: 0 0.5vh 0.8vh rgba(0, 0, 0, 0.2);
+  background-color: white;
+  cursor: pointer;
+}
+
+.patch:hover {
+  background-color: rgb(249, 248, 248);
+}
+
+/*  无边框不带下划线下拉框样式 */
+.el-dropdown-link {
+  cursor: pointer;
+}
+
+/* 蓝白按钮样式 */
+.button {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  width: 16vh;
+  height: 6vh;
+  cursor: pointer;
+}
+
+/* 无边框不带下划线按钮样式 */
+.frameless-button-non {
+  color: rgb(252, 252, 252);
+  font-size: 2.5vh;
+  font-weight: bold;
+  background-color: rgba(127, 167, 226, 1);
+  /* 这一行删掉，只是为了展示白色字体 */
+}
+
+/* 搜索组件样式 */
+/* 搜索框样式 */
+.input-with-select {
+  width: 40vh;
+  height: 3vh;
+  background-color: #fff;
+}
+
+.search-button:hover {
+  color: gray;
+  height: 3vh;
+}
+
+/* 灰色按钮*/
+.info-button {
+  font-weight: bold;
+  width: 12vh;
+  height: 5vh;
+}
+
+/* 下拉框组件（窄版）样式 */
+.search-dropdown-menu {
+  width: 28vh;
+  min-height: 3.5vh;
+}
+
+.menu-option {
+  font-size: 1.8vh;
+}
+
+/* 灰色按钮组件（窄版）样式 */
+.info-button2 {
+  font-weight: bold;
+  width: 14vh;
+  height: 4.5vh;
+}
+
+/* 返回主页按钮样式 */
+.custom-icon-button {
+  font-size: 4vh;
+  width: 8vh;
+  height: 8vh;
+  border: none;
+}
+
+/* 带搜索图标无框按钮样式 */
+.frameless-button-search {
+  color: rgba(122, 122, 122, 1);
+  cursor: pointer;
+}
+
+/* 表格样式 */
+.custom-table {
+  width: 40%;
+  font-size: 1.5vh;
+}
+
+/* 输入信息界面布局样式 */
+.grid-content {
+  min-height: 5vh;
+}
+
+.input {
+  font-size: 1.8vh;
+}
+
+/* 分割线样式 */
+.divider {
+  width: 120vh;
+}

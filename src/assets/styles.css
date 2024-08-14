@@ -1,0 +1,9 @@
+/* src/assets/styles.css */
+body {
+    background: linear-gradient(to bottom, rgba(127, 167, 226, 1), rgba(197, 217, 247, 1), rgba(255, 255, 255, 1));
+    height: 100vh;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
