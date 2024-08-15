@@ -7,59 +7,49 @@
       <span class="title">Display Document Flow</span>
     </el-header>
 
-    <div style="margin-left: 5vh; text-align: center">
-      <el-row :gutter="8" class="input">
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            UserID:
-            <input v-model="address1" style="margin-left: 5vh" />
-          </div>
-        </el-col>
+    <el-row class="input">
+      <el-col :span="8"></el-col>
 
-        <!-- GO按钮 -->
-        <el-col :span="1">
-          <el-button
-            type="primary"
-            class="button"
-            style="
-              font-weight: bold;
-              height: 2vh;
-              width: 10vh;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            "
-            @click="console.log('fetch')"
-          >
-            <span style="margin: auto">GO</span>
-          </el-button>
-        </el-col>
-      </el-row>
-    </div>
+      <el-col :span="2">
+        <span class="label">User ID :</span>
+      </el-col>
+
+      <el-col :span="4">
+        <el-input v-model="searchQuery" placeholder="Enter User ID..." class="input-field"></el-input>
+      </el-col>
+
+      <el-col :span="1"></el-col>
+      <el-col :span="4">
+        <el-button type="primary" @click="applyFilter" plain>
+          GO
+        </el-button>
+      </el-col>
+    </el-row>
 
     <!-- 筛选出的记录 -->
-    <div style="margin-left: 10vh">
+    <div>
       <el-table
         :data="filteredTableData"
-        height="75vh"
-        border
+        :header-cell-style="{ textAlign: 'center',color:'rgba(73, 144, 236, 1)',backgroundColor: '#f0f0f0',height:'6vh'}"
+        :cell-style="{ textAlign: 'center' }"
+        height="80vh"
         class="custom-table"
-        style="width: 180vh; border-collapse: collapse; margin-top: 5vh"
+        style="width: 250vh;  margin-top: 2vh"
       >
         <el-table-column
           prop="userID"
           label="userID"
-          width="312"
+          width="495"
         ></el-table-column>
         <el-table-column
-          prop="PurchaseOrderID"
+          prop="purchaseOrderID"
           label="PurchaseOrderID"
-          width="510"
+          width="500"
         ></el-table-column>
         <el-table-column
-          prop="GoodReceiptID"
-          label="GoodReceiptID"
-          width="510"
+          prop="goodsReceiptID"
+          label="GoodsReceiptID"
+          width="500"
         ></el-table-column>
       </el-table>
     </div>
@@ -70,47 +60,51 @@
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import { ElMessageBox } from 'element-plus';
 
 export default {
   setup() {
-    const address1 = ref("");
-    const tableData = ref([]);
+    const searchQuery = ref("");  // Use searchQuery for user input
     const filteredTableData = ref([]);
     const router = useRouter();
 
-    const fetchData = () => {
-      console.log("fetch");
-      axios
-        .get("/api/document_flow/display_success/finished")
-        .then((response) => {
-          tableData.value = response.data;
-          applyFilter();
-        })
-        .catch((error) => {
-          console.error("Error fetching data", error);
+    async function fetchData(userID) {
+      try {
+        const response = await axios.get('/api/document_flow/display_success/finished', {
+          params: { userID }
         });
-    };
+        if (response.data.code === 1 && response.data.data.length > 0) {
+          filteredTableData.value = response.data.data;
+        } else {
+          filteredTableData.value = [];  // Clear data if no results
+          ElMessageBox.alert('No records found with the given ID.', 'Search Failed', {
+            confirmButtonText: 'OK',
+            type: 'error',
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        ElMessageBox.alert('Failed to fetch data!', 'Error', {
+          confirmButtonText: 'OK',
+          type: 'error',
+        });
+      }
+    }
+
+    function applyFilter() {
+      fetchData(searchQuery.value);  // Pass searchQuery to fetchData
+    }
 
     function navigateTo(path) {
       router.push(path);
     }
 
-    const applyFilter = () => {
-      if (address1.value.trim() === "") {
-        filteredTableData.value = tableData.value;
-      } else {
-        filteredTableData.value = tableData.value.filter((item) => {
-          return item.userID === address1.value;
-        });
-      }
-    };
-
     onMounted(() => {
-      fetchData();
+      // Fetch initial data if needed
     });
-
+    console.log('filteredTableData:', filteredTableData); // 输出过滤后的数据
     return {
-      address1,
+      searchQuery,
       filteredTableData,
       navigateTo,
       applyFilter,
@@ -122,6 +116,13 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
+.material {
+  background: linear-gradient(to bottom, rgba(127, 167, 226, 1), rgba(197, 217, 247, 1), rgba(255, 255, 255, 1));
+  height: 100vh;
+  margin: 0;
+  padding: 0 80px;
+  box-sizing: border-box;
+}
 .header {
   display: flex;
   align-items: center;
@@ -142,8 +143,18 @@ export default {
   color: white;
 }
 
-.top {
+.input {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.divider {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.label {
+  font-size: 17px;
+}
+
 </style>
