@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <link rel="stylesheet" href="src/html/src/styles/Basic Components.css">
+    <link rel="stylesheet" href="../src/styles/Basic Components.css">
     <title>Personal Space</title>
     <style>
         /* 通用样式 */
@@ -68,6 +68,14 @@
             margin: 10px 0;
             display: flex;
             align-items: center;
+        }
+
+        .username input {
+            font-size: 28px;
+            margin: 10px 0;
+            border: none;
+            background: transparent;
+            text-align: center;
         }
 
         .username::after {
@@ -150,12 +158,14 @@
     <div class="user-profile">
         <img src="profile-placeholder.jpeg" alt="User Avatar" class="avatar">
         <div class="user-info">
-            <h2 class="username">learn-000</h2>
+            <h2 class="username" id="username-display">
+                <input type="text" id="username-input" value="learn-000" readonly>
+            </h2>
             <p class="role">Administrator</p>
             <p class="user-id">0000001</p>
         </div>
         <div class="buttons">
-            <button class="edit-button">Edit</button>
+            <button class="edit-button" id="edit-button">Edit</button>
             <button class="signout-button" onclick="goToLogin()">Sign Out</button>
         </div>
     </div>
@@ -168,12 +178,30 @@
 
     <script>
         function goToHomepage() {
-            window.location.href = "/";
-        }
-        function goToLogin() {
-            window.location.href = "./login.html";
+            window.location.href = "homepage.html"; // 替换为实际的homepage路径
         }
 
+        function goToLogin() {
+            window.location.href = "login.html"; // 替换为实际的login页面路径
+        }
+
+        // Edit button functionality
+        const editButton = document.getElementById('edit-button');
+        const usernameInput = document.getElementById('username-input');
+
+        editButton.addEventListener('click', function () {
+            if (usernameInput.readOnly) {
+                // Enable editing
+                usernameInput.readOnly = false;
+                usernameInput.focus();
+                editButton.textContent = 'Save';
+            } else {
+                // Save the changes
+                usernameInput.readOnly = true;
+                editButton.textContent = 'Edit';
+                // Here you could also add code to save the username to a server or localStorage
+            }
+        });
     </script>
 </body>
 
