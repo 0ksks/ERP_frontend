@@ -274,13 +274,19 @@ export default {
         }
 
         // 发送请求获取指定 Supplier ID 的详细信息
-        const response = await axios.get('/api/supplier/query_success', {
-          params: {
+        const response = await axios.post(
+          '/api/supplier/query',
+          {
             supplierID: searchQuery.value,
           },
-        });
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
 
-        if (response.data.code === 1 && response.data.data.length > 0) {
+        if (response.data.code === 200 && response.data.data.length > 0) {
           selectedSupplier.value = response.data.data[0]; // 假设返回的 data 是数组，取第一个元素
         } else {
           ElMessageBox.alert(

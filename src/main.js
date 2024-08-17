@@ -7,10 +7,10 @@ import 'element-plus/dist/index.css';
 import * as ElIconList from '@element-plus/icons-vue';
 import './assets/styles.css'; // 引入全局样式
 // 引入 Mock 服务
-import './mocks/Supplier.js';
-import './mocks/Material.js';
-import './mocks/DocumentFlow.js';
-import './mocks/Stock.js';
+// import './mocks/Supplier.js';
+// import './mocks/Material.js';
+// import './mocks/DocumentFlow.js';
+// import './mocks/Stock.js';
 // 引入可编辑表格拓展包
 import VxeTable from 'vxe-table';
 import 'vxe-table/lib/style.css';

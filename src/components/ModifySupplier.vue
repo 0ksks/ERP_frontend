@@ -237,8 +237,11 @@ export default {
 
     const fetchSupplierDetails = async supplierID => {
       try {
-        const response = await axios.get('/api/supplier/query_success', {
+        const response = await axios.get('/api/supplier/query', {
           params: { supplierID },
+          headers: {
+            'Content-Type': 'application/json',
+          },
         });
 
         if (response.data.code === 1 && response.data.data.length > 0) {

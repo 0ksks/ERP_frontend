@@ -316,7 +316,8 @@ export default {
         // 发送请求保存供应商数据
         const response = await axios.post(
           '/api/supplier/create_success',
-          form.value
+          form.value,
+          
         );
 
         if (response.data.code === 1) {
