@@ -64,21 +64,21 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import axios from 'axios';
-import { ElMessageBox } from 'element-plus';
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
+import { ElMessageBox } from "element-plus";
 
 export default {
   setup() {
-    const searchQuery = ref(''); // Use searchQuery for user input
+    const searchQuery = ref(""); // Use searchQuery for user input
     const filteredTableData = ref([]);
     const router = useRouter();
 
     async function fetchData(userID) {
       try {
         const response = await axios.get(
-          '/api/document_flow/display_success/finished',
+          "/api/document_flow/display_success/finished",
           {
             params: { userID },
           }
@@ -88,19 +88,19 @@ export default {
         } else {
           filteredTableData.value = []; // Clear data if no results
           ElMessageBox.alert(
-            'No records found with the given ID.',
-            'Search Failed',
+            "No records found with the given ID.",
+            "Search Failed",
             {
-              confirmButtonText: 'OK',
-              type: 'error',
+              confirmButtonText: "OK",
+              type: "error",
             }
           );
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
-        ElMessageBox.alert('Failed to fetch data!', 'Error', {
-          confirmButtonText: 'OK',
-          type: 'error',
+        console.error("Error fetching data:", error);
+        ElMessageBox.alert("Failed to fetch data!", "Error", {
+          confirmButtonText: "OK",
+          type: "error",
         });
       }
     }
@@ -116,7 +116,7 @@ export default {
     onMounted(() => {
       // Fetch initial data if needed
     });
-    console.log('filteredTableData:', filteredTableData); // 输出过滤后的数据
+    console.log("filteredTableData:", filteredTableData); // 输出过滤后的数据
     return {
       searchQuery,
       filteredTableData,
@@ -128,7 +128,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
 .material {
   background: linear-gradient(

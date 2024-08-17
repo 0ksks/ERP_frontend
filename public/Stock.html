@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -108,45 +108,45 @@
 
     <script>
       new Vue({
-        el: '#app',
+        el: "#app",
         data: {
-          materialID: '00000023',
+          materialID: "00000023",
           gridData: [
             {
-              stockID: '001',
-              plant: 'Plant A',
-              storageLocation: 'Location 1',
+              stockID: "001",
+              plant: "Plant A",
+              storageLocation: "Location 1",
               quantity: 100,
-              unitOfMeasure: 'pcs',
-              stockType: 'Type A',
-              valuationType: 'Type X',
-              batch: 'Batch 2023',
-              specialStockIndicator: 'Yes',
-              userID: 'user1',
+              unitOfMeasure: "pcs",
+              stockType: "Type A",
+              valuationType: "Type X",
+              batch: "Batch 2023",
+              specialStockIndicator: "Yes",
+              userID: "user1",
             },
             {
-              stockID: '002',
-              plant: 'Plant B',
-              storageLocation: 'Location 2',
+              stockID: "002",
+              plant: "Plant B",
+              storageLocation: "Location 2",
               quantity: 50,
-              unitOfMeasure: 'kg',
-              stockType: 'Type B',
-              valuationType: 'Type Y',
-              batch: 'Batch 2024',
-              specialStockIndicator: 'No',
-              userID: 'user2',
+              unitOfMeasure: "kg",
+              stockType: "Type B",
+              valuationType: "Type Y",
+              batch: "Batch 2024",
+              specialStockIndicator: "No",
+              userID: "user2",
             },
             {
-              stockID: '003',
-              plant: 'Plant A',
-              storageLocation: 'Location 3',
+              stockID: "003",
+              plant: "Plant A",
+              storageLocation: "Location 3",
               quantity: 75,
-              unitOfMeasure: 'pcs',
-              stockType: 'Type C',
-              valuationType: 'Type Z',
-              batch: 'Batch 2023',
-              specialStockIndicator: 'Yes',
-              userID: 'user3',
+              unitOfMeasure: "pcs",
+              stockType: "Type C",
+              valuationType: "Type Z",
+              batch: "Batch 2023",
+              specialStockIndicator: "Yes",
+              userID: "user3",
             },
           ],
           dialogFormVisible: false,
@@ -161,15 +161,15 @@
             });
           },
           initChart() {
-            const canvas = document.getElementById('stockChartCanvas');
+            const canvas = document.getElementById("stockChartCanvas");
             if (!canvas) {
-              console.error('Canvas element not found.');
+              console.error("Canvas element not found.");
               return;
             }
 
-            const ctx = canvas.getContext('2d');
+            const ctx = canvas.getContext("2d");
             if (!ctx) {
-              console.error('Failed to get Canvas 2D context.');
+              console.error("Failed to get Canvas 2D context.");
               return;
             }
 
@@ -177,35 +177,35 @@
 
             // 计算每个 stockID 的 quantity 累加和
             let cumulativeSum = 0;
-            const cumulativeData = data.map(item => {
+            const cumulativeData = data.map((item) => {
               cumulativeSum += item.quantity;
               return cumulativeSum;
             });
 
             // 提取计算后的数据作为折线图的数据
-            const stockIDs = data.map(item => item.stockID);
+            const stockIDs = data.map((item) => item.stockID);
 
             if (this.chart) {
               this.chart.destroy();
             }
 
             this.chart = new Chart(ctx, {
-              type: 'bar',
+              type: "bar",
               data: {
                 labels: stockIDs,
                 datasets: [
                   {
-                    label: 'Quantity',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    label: "Quantity",
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: "rgba(54, 162, 235, 1)",
                     borderWidth: 1,
-                    data: data.map(item => item.quantity),
+                    data: data.map((item) => item.quantity),
                   },
                   {
-                    label: 'Cumulative Quantity',
-                    type: 'line',
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    label: "Cumulative Quantity",
+                    type: "line",
+                    backgroundColor: "rgba(255, 99, 132, 0.2)",
+                    borderColor: "rgba(255, 99, 132, 1)",
                     borderWidth: 2,
                     data: cumulativeData,
                   },
@@ -217,13 +217,13 @@
                     beginAtZero: true,
                     title: {
                       display: true,
-                      text: 'Quantity',
+                      text: "Quantity",
                     },
                   },
                   x: {
                     title: {
                       display: true,
-                      text: 'Stock ID',
+                      text: "Stock ID",
                     },
                   },
                 },

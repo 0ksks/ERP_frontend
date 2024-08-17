@@ -127,51 +127,51 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import axios from 'axios';
-import { ElMessage } from 'element-plus';
+import { ref, computed } from "vue";
+import axios from "axios";
+import { ElMessage } from "element-plus";
 
-const poNum = ref('');
-const supplierID = ref('');
-const orderDate = ref('');
-const deliveryDate = ref('');
+const poNum = ref("");
+const supplierID = ref("");
+const orderDate = ref("");
+const deliveryDate = ref("");
 const totalPrice = ref(0.0);
 
 //根据订单号查询并展示订单
 const find = () => {
   axios
-    .get('/purchase_order/query', {
+    .get("/purchase_order/query", {
       params: { purchaseOrderID: poNum.value },
       headers: {
-        Authorization: 'Bearer YOUR_ACCESS_TOKEN', // 改token
-        'Content-Type': 'application/json',
+        Authorization: "Bearer YOUR_ACCESS_TOKEN", // 改token
+        "Content-Type": "application/json",
       },
     })
-    .then(response => {
+    .then((response) => {
       if (response.status === 200) {
         // 处理正常的响应情况
-        console.log('Purchase Orders Found:', response.data);
+        console.log("Purchase Orders Found:", response.data);
         // 更新数据
         updateData(response.data);
       } else if (response.status === 204) {
         // 处理订单未找到的情况
-        console.log('Response:', response);
+        console.log("Response:", response);
         ElMessage({
-          message: 'purchase order not found',
-          type: 'warning',
+          message: "purchase order not found",
+          type: "warning",
         });
       }
     })
-    .catch(error => {
-      console.error('Error querying Purchase Orders:', error);
+    .catch((error) => {
+      console.error("Error querying Purchase Orders:", error);
     });
 };
 
 // 更新 poData和metaData
-const updateData = responseData => {
+const updateData = (responseData) => {
   // 假设 responseData 是一个数组，每个元素都是一个采购订单的信息
   if (Array.isArray(responseData)) {
-    poData.value = responseData.map(order => ({
+    poData.value = responseData.map((order) => ({
       materialId: order.materialId,
       quantity: order.quantity,
       netPrice: order.netPrice,
@@ -185,7 +185,7 @@ const updateData = responseData => {
     orderDate.value = responseData.orderDate;
     deliveryDate.value = responseData.deliveryDate;
   } else {
-    console.error('Invalid data format received from server.');
+    console.error("Invalid data format received from server.");
   }
 };
 
@@ -198,10 +198,10 @@ const metaData = computed(() => ({
 }));
 
 // 辅助函数用于格式化日期
-const formatDate = date => {
+const formatDate = (date) => {
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份是从0开始的，所以需要 +1
-  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // 月份是从0开始的，所以需要 +1
+  const day = String(date.getDate()).padStart(2, "0");
   return `${year}/${month}/${day}`;
 };
 
@@ -241,8 +241,8 @@ const totalprice = () => {
 //修改订单
 const save = () => {
   const purchaseOrderItems = poData.value
-    .filter(item => item.quantity && item.netPrice)
-    .map(item => ({
+    .filter((item) => item.quantity && item.netPrice)
+    .map((item) => ({
       materialID: item.materialId,
       quantity: item.quantity,
       netPrice: item.netPrice, //未单独定义为float，因为js好像不定义数据类型
@@ -255,7 +255,7 @@ const save = () => {
   // 注意这里是将完整的表单重新覆盖原有的表单，而并非原始的Patch路径，可能需要和端口部分的同学商量一下，下面有Patch版本的
   axios
     .post(
-      '/purchase_order/update',
+      "/purchase_order/update",
       {
         ...metaData.value,
         items: purchaseOrderItems,
@@ -265,21 +265,21 @@ const save = () => {
         headers: {
           // 这里要更换为调试用的用户token
           // Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     )
-    .then(response => {
+    .then((response) => {
       if (response.status === 200) {
         // 显示成功提示
         ElMessage({
-          message: '修改成功',
-          type: 'success',
+          message: "修改成功",
+          type: "success",
         });
       }
     })
-    .catch(error => {
-      console.error('Error updating Purchase Orders:', error);
+    .catch((error) => {
+      console.error("Error updating Purchase Orders:", error);
     });
 
   // Patch版本
@@ -308,12 +308,12 @@ const save = () => {
 };
 
 const tableRef = ref();
-const insertEvent = async row => {
+const insertEvent = async (row) => {
   const $table = tableRef.value;
   if ($table) {
     const record = {};
     const { row: newRow } = await $table.insertAt(record, row);
-    await $table.setEditCell(newRow, 'name');
+    await $table.setEditCell(newRow, "name");
   }
   addNewRow();
 };

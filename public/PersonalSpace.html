@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,7 +15,7 @@
       html {
         margin: 0;
         padding: 0;
-        font-family: 'Arial', sans-serif;
+        font-family: "Arial", sans-serif;
         background-color: #f2f6fc;
         text-align: center;
       }
@@ -78,13 +78,6 @@
         border: none;
         background: transparent;
         text-align: center;
-      }
-
-      .username::after {
-        content: url('edit-icon.png');
-        /* 假设编辑图标文件名为edit-icon.png */
-        margin-left: 10px;
-        cursor: pointer;
       }
 
       .role,
@@ -160,7 +153,7 @@
 
     <div class="user-profile">
       <img
-        src="profile-placeholder.jpeg"
+        src="images/profile-placeholder.jpeg"
         alt="User Avatar"
         class="avatar"
       />
@@ -188,28 +181,76 @@
 
     <script>
       function goToHomepage() {
-        window.location.href = '/'; // 替换为实际的homepage路径
+        window.location.href = "homepage.html";
       }
 
       function goToLogin() {
-        window.location.href = 'login.html'; // 替换为实际的login页面路径
+        window.location.href = "login.html";
       }
 
-      // Edit button functionality
-      const editButton = document.getElementById('edit-button');
-      const usernameInput = document.getElementById('username-input');
+      // Debugging: Ensure script is loaded
+      console.log("Script loaded successfully");
 
-      editButton.addEventListener('click', function () {
+      // Fetch token from Pinia store
+      const store = Pinia.useStore();
+      const token = store.token;
+
+      // Debugging: Ensure token is fetched
+      console.log("Token:", token);
+
+      // Set global headers for all POST requests
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
+
+      // Edit button functionality
+      const editButton = document.getElementById("edit-button");
+      const usernameInput = document.getElementById("username-input");
+
+      // Debugging: Ensure elements are fetched
+      console.log("Edit Button:", editButton);
+      console.log("Username Input:", usernameInput);
+
+      editButton.addEventListener("click", function () {
+        console.log("Edit button clicked");
+
         if (usernameInput.readOnly) {
           // Enable editing
           usernameInput.readOnly = false;
           usernameInput.focus();
-          editButton.textContent = 'Save';
+          editButton.textContent = "Save";
+          console.log("Editing enabled");
         } else {
           // Save the changes
+          const newUsername = usernameInput.value.trim();
+          if (newUsername === "") {
+            alert("Username cannot be empty.");
+            return;
+          }
+
           usernameInput.readOnly = true;
-          editButton.textContent = 'Edit';
-          // Here you could also add code to save the username to a server or localStorage
+          editButton.textContent = "Edit";
+
+          console.log("Saving username:", newUsername);
+
+          // Send POST request to save the new username
+          fetch("/save-username", {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify({ username: newUsername }),
+          })
+            .then((response) => {
+              if (response.ok) {
+                alert("Username saved successfully");
+              } else {
+                alert("Failed to save username");
+              }
+            })
+            .catch((error) => {
+              console.error("Error saving username:", error);
+              alert("An error occurred while saving the username");
+            });
         }
       });
     </script>

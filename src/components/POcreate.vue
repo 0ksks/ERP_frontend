@@ -162,16 +162,16 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import axios from 'axios';
-import { ElMessage } from 'element-plus';
+import { ref, computed } from "vue";
+import axios from "axios";
+import { ElMessage } from "element-plus";
 
-const supplierID = ref('');
-const orderDate = ref('');
-const deliveryDate = ref('');
-const standardPOnum = ref('0000000');
+const supplierID = ref("");
+const orderDate = ref("");
+const deliveryDate = ref("");
+const standardPOnum = ref("0000000");
 const totalPrice = ref(0.0);
-const stockID = ref('');
+const stockID = ref("");
 
 // 表格中的准备采购的商品总信息
 const poData = ref([
@@ -179,20 +179,20 @@ const poData = ref([
   // 按Add Item 增加空白行，按save保存并传输数据
   {
     number: 5,
-    materialId: 'M123456',
+    materialId: "M123456",
     quantity: 100,
     netPrice: 150.5,
-    currency: 'USD',
-    purchasingGroup: 'PG123',
-    purchasingOrganization: 'PO1234',
-    plant: 'PL12345',
-    storageLocation: 'SL123',
-    unitOfMeasure: 'PCS',
-    stockType: 'STANDARD',
-    valuationType: 'VT123',
-    batch: 'B123456',
-    specialStockIndicator: 'SS123',
-    paymentTerms: 'a',
+    currency: "USD",
+    purchasingGroup: "PG123",
+    purchasingOrganization: "PO1234",
+    plant: "PL12345",
+    storageLocation: "SL123",
+    unitOfMeasure: "PCS",
+    stockType: "STANDARD",
+    valuationType: "VT123",
+    batch: "B123456",
+    specialStockIndicator: "SS123",
+    paymentTerms: "a",
   },
   // 空的数据行
   {},
@@ -206,10 +206,10 @@ const metaData = computed(() => ({
 }));
 
 // 辅助函数用于格式化日期
-const formatDate = date => {
+const formatDate = (date) => {
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份是从0开始的，所以需要 +1
-  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // 月份是从0开始的，所以需要 +1
+  const day = String(date.getDate()).padStart(2, "0");
   return `${year}/${month}/${day}`;
 };
 
@@ -234,8 +234,8 @@ const totalprice = () => {
 //保存并传输数据
 const save = () => {
   const purchaseOrderItems = poData.value
-    .filter(item => item.quantity && item.netPrice)
-    .map(item => ({
+    .filter((item) => item.quantity && item.netPrice)
+    .map((item) => ({
       quantity: item.quantity,
       netPrice: item.netPrice, //未单独定义为float，因为js好像不定义数据类型
       currency: item.currency,
@@ -246,8 +246,8 @@ const save = () => {
     }));
 
   const stockItems = poData.value
-    .filter(item => item.quantity && item.netPrice)
-    .map(item => ({
+    .filter((item) => item.quantity && item.netPrice)
+    .map((item) => ({
       materialID: item.materialId,
       plant: item.plant,
       storageLocation: item.storageLocation,
@@ -260,7 +260,7 @@ const save = () => {
     }));
   axios
     .post(
-      '/stock/create',
+      "/stock/create",
       {
         items: stockItems,
         // userID
@@ -269,27 +269,27 @@ const save = () => {
         headers: {
           // 这里要更换为调试用的用户token
           // Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     )
-    .then(response => {
+    .then((response) => {
       if (response.status === 201) {
         // 显示成功提示
         ElMessage({
-          message: 'Success',
-          type: 'success',
+          message: "Success",
+          type: "success",
         });
       }
       stockID.value = response.data;
     })
-    .catch(error => {
-      console.error('Error creating stock', error);
+    .catch((error) => {
+      console.error("Error creating stock", error);
     });
 
   axios
     .post(
-      '/purchase_order/create',
+      "/purchase_order/create",
       {
         ...metaData.value,
         items: purchaseOrderItems,
@@ -300,36 +300,36 @@ const save = () => {
         headers: {
           // 这里要更换为调试用的用户token
           // Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     )
-    .then(response => {
+    .then((response) => {
       if (response.status === 201) {
         // 显示成功提示
         ElMessage({
-          message: 'Success',
-          type: 'success',
+          message: "Success",
+          type: "success",
         });
       }
-      console.log('Purchase Orders Created:', response.data);
+      console.log("Purchase Orders Created:", response.data);
 
       // 显示创建完成后的订单号，可能需要根据不同的response进行调整
       standardPOnum.value = response.data;
     })
-    .catch(error => {
-      console.error('Error creating Purchase Orders:', error);
+    .catch((error) => {
+      console.error("Error creating Purchase Orders:", error);
     });
 };
 
 // 创建表格实例，实现表格行的增加
 const tableRef = ref();
-const insertEvent = async row => {
+const insertEvent = async (row) => {
   const $table = tableRef.value;
   if ($table) {
     const record = {};
     const { row: newRow } = await $table.insertAt(record, row);
-    await $table.setEditCell(newRow, 'name');
+    await $table.setEditCell(newRow, "name");
   }
   addNewRow();
 };

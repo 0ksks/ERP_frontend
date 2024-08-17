@@ -116,9 +116,9 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-import axios from 'axios';
-import { ElMessage } from 'element-plus';
+import { ref } from "vue";
+import axios from "axios";
+import { ElMessage } from "element-plus";
 
 export default {
   data() {
@@ -127,42 +127,42 @@ export default {
       result: ref(false),
       detail: ref(false),
       found: ref(true),
-      searchPO: ref(''),
-      poDetail: ref(''),
-      formLabelWidth: '140px',
-      sterm: ref(''),
-      selectPO: ref(''),
+      searchPO: ref(""),
+      poDetail: ref(""),
+      formLabelWidth: "140px",
+      sterm: ref(""),
+      selectPO: ref(""),
       tableData: [
         {
-          searchTerm: '111',
-          POnumber: '11111111',
+          searchTerm: "111",
+          POnumber: "11111111",
         },
         {
-          searchTerm: '222',
-          POnumber: '22222222',
+          searchTerm: "222",
+          POnumber: "22222222",
         },
         {
-          searchTerm: '333',
-          POnumber: '33333333',
+          searchTerm: "333",
+          POnumber: "33333333",
         },
       ],
       poData: [
         {
           number: 5,
-          materialId: 'M123456',
+          materialId: "M123456",
           quantity: 100,
           netPrice: 150.5,
-          currency: 'USD',
-          purchasingGroup: 'PG123',
-          purchasingOrganization: 'PO1234',
-          plant: 'PL12345',
-          storageLocation: 'SL123',
-          unitOfMeasure: 'PCS',
-          stockType: 'STANDARD',
-          valuationType: 'VT123',
-          batch: 'B123456',
-          specialStockIndicator: 'SS123',
-          paymentTerms: 'PT123',
+          currency: "USD",
+          purchasingGroup: "PG123",
+          purchasingOrganization: "PO1234",
+          plant: "PL12345",
+          storageLocation: "SL123",
+          unitOfMeasure: "PCS",
+          stockType: "STANDARD",
+          valuationType: "VT123",
+          batch: "B123456",
+          specialStockIndicator: "SS123",
+          paymentTerms: "PT123",
         },
       ],
     };
@@ -191,38 +191,38 @@ export default {
     },
     queryByPO(searchPO) {
       axios
-        .get('/purchase_order/query', {
+        .get("/purchase_order/query", {
           params: { purchaseOrderID: searchPO.value },
           headers: {
-            Authorization: 'Bearer YOUR_ACCESS_TOKEN', // 更改 token
-            'Content-Type': 'application/json',
+            Authorization: "Bearer YOUR_ACCESS_TOKEN", // 更改 token
+            "Content-Type": "application/json",
           },
         })
-        .then(response => {
+        .then((response) => {
           if (response.status === 200) {
             // 处理正常的响应情况
 
-            console.log('Purchase Orders Found:', response.data);
+            console.log("Purchase Orders Found:", response.data);
             // 更新数据
             this.updateData(response.data);
             this.poDetail = response.data.purchaseOrderID; //根据返回值情况修改
           } else if (response.status === 204) {
             // 处理订单未找到的情况
-            console.log('Response:', response);
+            console.log("Response:", response);
             ElMessage({
-              message: 'purchase order not found',
-              type: 'warning',
+              message: "purchase order not found",
+              type: "warning",
             });
           }
         })
-        .catch(error => {
-          console.error('Error querying Purchase Orders:', error);
+        .catch((error) => {
+          console.error("Error querying Purchase Orders:", error);
         });
     },
     updateData(responseData) {
       // 假设 responseData 是一个数组，每个元素都是一个采购订单的信息
       if (Array.isArray(responseData)) {
-        poData.value = responseData.map(order => ({
+        poData.value = responseData.map((order) => ({
           materialId: order.materialId,
           quantity: order.quantity,
           netPrice: order.netPrice,
@@ -236,49 +236,49 @@ export default {
         orderDate.value = responseData.orderDate;
         deliveryDate.value = responseData.deliveryDate;
       } else {
-        console.error('Invalid data format received from server.');
+        console.error("Invalid data format received from server.");
       }
     },
     go(sterm) {
       //query By UserID(search term)
       this.result = true;
       axios
-        .get('/purchase_order/query', {
+        .get("/purchase_order/query", {
           params: { userID: sterm.value },
           headers: {
-            Authorization: 'Bearer YOUR_ACCESS_TOKEN', // 更改 token
-            'Content-Type': 'application/json',
+            Authorization: "Bearer YOUR_ACCESS_TOKEN", // 更改 token
+            "Content-Type": "application/json",
           },
         })
-        .then(response => {
+        .then((response) => {
           if (response.status === 200) {
             // 处理正常的响应情况
             this.found = true;
-            console.log('Purchase Orders Found:', response.data);
+            console.log("Purchase Orders Found:", response.data);
             // 制作表格数据
             this.updateTableData(response.data);
           } else if (response.status === 204) {
             // 处理订单未找到的情况
-            console.log('Response:', response);
+            console.log("Response:", response);
             ElMessage({
-              message: 'purchase order not found',
-              type: 'warning',
+              message: "purchase order not found",
+              type: "warning",
             });
           }
         })
-        .catch(error => {
-          console.error('Error querying Purchase Orders:', error);
+        .catch((error) => {
+          console.error("Error querying Purchase Orders:", error);
         });
     },
     updateTableData(responseData) {
       // 假设 responseData 是一个数组，每个元素都是一个采购订单的信息
       if (Array.isArray(responseData)) {
-        this.tableData = responseData.map(order => ({
+        this.tableData = responseData.map((order) => ({
           searchTerm: order.searchTerm, //根据返回值的情况修改
           POnumber: order.POnumber,
         }));
       } else {
-        console.error('Invalid data format received from server.');
+        console.error("Invalid data format received from server.");
       }
     },
   },

@@ -215,7 +215,7 @@
           plain
           @click="activeTab !== 'purchasing' ? nextTab() : handleSave()"
         >
-          {{ activeTab !== 'purchasing' ? 'Next Tab' : 'Save' }}
+          {{ activeTab !== "purchasing" ? "Next Tab" : "Save" }}
         </el-button>
       </el-main>
     </el-container>
@@ -223,24 +223,24 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import axios from 'axios';
-import { ElMessageBox } from 'element-plus';
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import axios from "axios";
+import { ElMessageBox } from "element-plus";
 
 export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
-    const activeTab = ref('common');
+    const activeTab = ref("common");
     const selectedSupplier = ref(null);
 
-    const fetchSupplierDetails = async supplierID => {
+    const fetchSupplierDetails = async (supplierID) => {
       try {
-        const response = await axios.get('/api/supplier/query', {
+        const response = await axios.get("/api/supplier/query", {
           params: { supplierID },
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         });
 
@@ -248,20 +248,20 @@ export default {
           selectedSupplier.value = response.data.data[0];
         } else {
           ElMessageBox.alert(
-            'No supplier found with the given ID.',
-            'Search Failed',
+            "No supplier found with the given ID.",
+            "Search Failed",
             {
-              confirmButtonText: 'OK',
-              type: 'error',
+              confirmButtonText: "OK",
+              type: "error",
             }
           );
           selectedSupplier.value = null;
         }
       } catch (error) {
-        console.error('Error fetching supplier data:', error);
-        ElMessageBox.alert('Failed to fetch supplier data!', 'Error', {
-          confirmButtonText: 'OK',
-          type: 'error',
+        console.error("Error fetching supplier data:", error);
+        ElMessageBox.alert("Failed to fetch supplier data!", "Error", {
+          confirmButtonText: "OK",
+          type: "error",
         });
       }
     };
@@ -271,62 +271,62 @@ export default {
       if (supplierID) {
         fetchSupplierDetails(supplierID);
       } else {
-        ElMessageBox.alert('No Supplier ID provided.', 'Error', {
-          confirmButtonText: 'OK',
-          type: 'error',
+        ElMessageBox.alert("No Supplier ID provided.", "Error", {
+          confirmButtonText: "OK",
+          type: "error",
         });
       }
     });
 
-    const navigateTo = path => {
+    const navigateTo = (path) => {
       router.push(path);
     };
 
     const handleSave = async () => {
       if (!selectedSupplier.value) {
-        ElMessageBox.alert('No supplier data to save.', 'Error', {
-          confirmButtonText: 'OK',
-          type: 'error',
+        ElMessageBox.alert("No supplier data to save.", "Error", {
+          confirmButtonText: "OK",
+          type: "error",
         });
         return;
       }
 
       try {
         const response = await axios.patch(
-          '/api/supplier/update_success',
+          "/api/supplier/update_success",
           selectedSupplier.value
         );
 
         if (response.data.code === 1) {
           ElMessageBox.alert(
-            'Supplier information saved successfully!',
-            'Success',
+            "Supplier information saved successfully!",
+            "Success",
             {
-              confirmButtonText: 'OK',
-              type: 'success',
+              confirmButtonText: "OK",
+              type: "success",
             }
           );
         } else {
-          ElMessageBox.alert('Failed to save supplier information.', 'Error', {
-            confirmButtonText: 'OK',
-            type: 'error',
+          ElMessageBox.alert("Failed to save supplier information.", "Error", {
+            confirmButtonText: "OK",
+            type: "error",
           });
         }
       } catch (error) {
-        console.error('Error saving supplier data:', error);
-        ElMessageBox.alert('Failed to save supplier data!', 'Error', {
-          confirmButtonText: 'OK',
-          type: 'error',
+        console.error("Error saving supplier data:", error);
+        ElMessageBox.alert("Failed to save supplier data!", "Error", {
+          confirmButtonText: "OK",
+          type: "error",
         });
       }
     };
 
     // Define nextTab method
     const nextTab = () => {
-      if (activeTab.value === 'common') {
-        activeTab.value = 'vendor';
-      } else if (activeTab.value === 'vendor') {
-        activeTab.value = 'purchasing';
+      if (activeTab.value === "common") {
+        activeTab.value = "vendor";
+      } else if (activeTab.value === "vendor") {
+        activeTab.value = "purchasing";
       }
     };
 
@@ -342,7 +342,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
 .supplier {
   background: linear-gradient(
@@ -400,7 +400,7 @@ export default {
   margin-bottom: 5px;
   display: inline-block;
   width: 160px;
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
   color: #498be6;
 }
 .text-label {
@@ -408,7 +408,7 @@ export default {
   margin-bottom: 5px;
   display: inline-block;
   width: 120px;
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
   color: #498be6;
 }
 
@@ -417,7 +417,7 @@ export default {
   margin-bottom: 20px;
   display: inline-block;
   width: 190px;
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
 }
 
 .divider {
@@ -428,13 +428,13 @@ export default {
 .label {
   font-size: 14px;
   display: inline-block;
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
 }
 
 .value {
   display: inline-block;
   width: 150px; /* 设置标签的固定宽度 */
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
 }
 
 .top {

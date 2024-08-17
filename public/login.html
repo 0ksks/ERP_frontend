@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -17,7 +17,7 @@
         height: 100%;
         margin: 0;
         font-family: Arial, sans-serif;
-        background: url('index_bg.jpg') no-repeat center center fixed;
+        background: url("images/index_bg.jpg") no-repeat center center fixed;
         background-size: cover;
         display: flex;
         justify-content: center;
@@ -54,6 +54,7 @@
       }
     </style>
   </head>
+
   <body>
     <div id="app" class="form-container">
       <el-input
@@ -141,20 +142,21 @@
     </div>
 
     <script>
+      import { useAuthStore } from "../src/store";
       new Vue({
-        el: '#app',
+        el: "#app",
         data: function () {
           return {
-            username: '',
-            password: '',
+            username: "",
+            password: "",
             registerDialogVisible: false,
             changePasswordDialogVisible: false,
-            registerUsername: '',
-            registerPassword: '',
-            registerConfirmPassword: '',
-            currentPassword: '',
-            newPassword: '',
-            confirmNewPassword: '',
+            registerUsername: "",
+            registerPassword: "",
+            registerConfirmPassword: "",
+            currentPassword: "",
+            newPassword: "",
+            confirmNewPassword: "",
           };
         },
         methods: {
@@ -165,24 +167,32 @@
             };
 
             axios
-              .post('https://your-api-endpoint/login', loginData)
-              .then(response => {
+              .post("/User/login", loginData, {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer <token>",
+                },
+              })
+              .then((response) => {
                 const res = response.data;
                 if (res.code === 1) {
+                  // 使用 Pinia 存储 token
+                  const authStore = useAuthStore();
+                  authStore.setToken(res.data.token);
                   this.$message({
                     message: `Login successful! Welcome ${res.data.username} (${res.data.role})`,
-                    type: 'success',
+                    type: "success",
                   });
                   // 登录成功后跳转到主页
-                  window.location.href = 'homepage.html';
+                  window.location.href = "homepage.html";
                 } else {
                   this.$message.error(res.message);
                 }
               })
-              .catch(error => {
-                console.error('Error during login:', error);
+              .catch((error) => {
+                console.error("Error during login:", error);
                 this.$message.error(
-                  'An error occurred while trying to log in.'
+                  "An error occurred while trying to log in."
                 );
               });
           },
@@ -191,7 +201,7 @@
           },
           register: function () {
             if (this.registerPassword !== this.registerConfirmPassword) {
-              this.$message.error('Passwords do not match');
+              this.$message.error("Passwords do not match");
               return;
             }
 
@@ -201,23 +211,28 @@
             };
 
             axios
-              .post('https://your-api-endpoint/register', registerData)
-              .then(response => {
+              .post("/User/register", registerData, {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer <token>",
+                },
+              })
+              .then((response) => {
                 const res = response.data;
                 if (res.code === 1) {
                   this.$message({
                     message: `Registration successful! Your UserID is ${res.data.userID}`,
-                    type: 'success',
+                    type: "success",
                   });
                   this.registerDialogVisible = false;
                 } else {
                   this.$message.error(res.message);
                 }
               })
-              .catch(error => {
-                console.error('Error during registration:', error);
+              .catch((error) => {
+                console.error("Error during registration:", error);
                 this.$message.error(
-                  'An error occurred while trying to register.'
+                  "An error occurred while trying to register."
                 );
               });
           },
@@ -226,7 +241,7 @@
           },
           changePassword: function () {
             if (this.newPassword !== this.confirmNewPassword) {
-              this.$message.error('New passwords do not match');
+              this.$message.error("New passwords do not match");
               return;
             }
 
@@ -236,26 +251,28 @@
             };
 
             axios
-              .post(
-                'https://your-api-endpoint/change-password',
-                changePasswordData
-              )
-              .then(response => {
+              .post("/User/changePassword", changePasswordData, {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer <token>",
+                },
+              })
+              .then((response) => {
                 const res = response.data;
                 if (res.code === 1) {
                   this.$message({
-                    message: 'Password changed successfully!',
-                    type: 'success',
+                    message: "Password changed successfully!",
+                    type: "success",
                   });
                   this.changePasswordDialogVisible = false;
                 } else {
                   this.$message.error(res.message);
                 }
               })
-              .catch(error => {
-                console.error('Error during password change:', error);
+              .catch((error) => {
+                console.error("Error during password change:", error);
                 this.$message.error(
-                  'An error occurred while trying to change the password.'
+                  "An error occurred while trying to change the password."
                 );
               });
           },

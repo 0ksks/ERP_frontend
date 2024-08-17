@@ -101,9 +101,9 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-import axios from 'axios';
-import { ElMessage } from 'element-plus';
+import { ref } from "vue";
+import axios from "axios";
+import { ElMessage } from "element-plus";
 
 export default {
   mounted() {
@@ -115,22 +115,22 @@ export default {
   },
   data() {
     return {
-      recID: ref('0000'),
-      supplierID: ref('temp'),
-      poNUm: ref('00000000'),
-      poType: ref('defaultType'),
-      receiptDate: ref(''),
-      documentDate: ref(''),
-      postingDate: ref(''),
+      recID: ref("0000"),
+      supplierID: ref("temp"),
+      poNUm: ref("00000000"),
+      poType: ref("defaultType"),
+      receiptDate: ref(""),
+      documentDate: ref(""),
+      postingDate: ref(""),
       goodsData: [
         {
-          stockID: '001',
-          materialId: 'M123456',
+          stockID: "001",
+          materialId: "M123456",
           quantity: 100,
-          batch: 'B123456', //属于 Stock
-          storageLocation: 'SL123', //Stock
-          plant: 'PL12345',
-          movementType: 'MT123', //Stock
+          batch: "B123456", //属于 Stock
+          storageLocation: "SL123", //Stock
+          plant: "PL12345",
+          movementType: "MT123", //Stock
         },
       ],
       selectedRows: [],
@@ -155,89 +155,89 @@ export default {
     },
     fetchData(poDetail) {
       axios
-        .get('/purchase_order/query', {
+        .get("/purchase_order/query", {
           params: { purchaseOrderID: poDetail },
           headers: {
-            Authorization: 'Bearer YOUR_ACCESS_TOKEN', // 更改 token
-            'Content-Type': 'application/json',
+            Authorization: "Bearer YOUR_ACCESS_TOKEN", // 更改 token
+            "Content-Type": "application/json",
           },
         })
-        .then(response => {
+        .then((response) => {
           if (response.status === 200) {
-            console.log('Purchase Orders Found:', response.data);
+            console.log("Purchase Orders Found:", response.data);
             // 更新数据
             this.updateData(response.data);
           } else if (response.status === 204) {
             // 处理订单未找到的情况
-            console.log('Response:', response);
+            console.log("Response:", response);
             ElMessage({
-              message: 'purchase order not found',
-              type: 'warning',
+              message: "purchase order not found",
+              type: "warning",
             });
           }
         })
-        .catch(error => {
-          console.error('Error querying Purchase Orders:', error);
+        .catch((error) => {
+          console.error("Error querying Purchase Orders:", error);
         });
     },
     updateData(responseData) {
       if (Array.isArray(responseData)) {
-        this.goodsData.value = responseData.map(order => ({
+        this.goodsData.value = responseData.map((order) => ({
           stockId: order.stockId,
           quantity: order.quantity,
           plant: order.plant,
         }));
         this.supplierID = responseData.supplierID;
       } else {
-        console.error('Invalid data format received from server.');
+        console.error("Invalid data format received from server.");
       }
     },
     updateGoodsData(responseData) {
       if (Array.isArray(responseData)) {
-        this.goodsData.value = responseData.map(order => ({
+        this.goodsData.value = responseData.map((order) => ({
           materialID: order.materialId,
           batch: order.batch,
           storageLocation: order.storageLocation,
         }));
         this.supplierID = responseData.supplierID;
       } else {
-        console.error('Invalid data format received from server.');
+        console.error("Invalid data format received from server.");
       }
     },
     queryStock(stockId) {
       axios
-        .get('/stock/query', {
+        .get("/stock/query", {
           params: { stockID: stockId },
           headers: {
-            Authorization: 'Bearer YOUR_ACCESS_TOKEN', // 更改 token
-            'Content-Type': 'application/json',
+            Authorization: "Bearer YOUR_ACCESS_TOKEN", // 更改 token
+            "Content-Type": "application/json",
           },
         })
-        .then(response => {
+        .then((response) => {
           if (response.status === 200) {
             // 处理成功的响应情况
-            console.log('库存信息查询成功:', response.data);
+            console.log("库存信息查询成功:", response.data);
             this.updateGoodsData(response.data);
           } else {
-            console.log('库存信息查询失败，状态码:', response.status);
+            console.log("库存信息查询失败，状态码:", response.status);
           }
         })
-        .catch(error => {
-          console.error('查询库存信息时出错:', error);
+        .catch((error) => {
+          console.error("查询库存信息时出错:", error);
         });
     },
 
     formatDate(date) {
       const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份是从0开始的，所以需要 +1
-      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, "0"); // 月份是从0开始的，所以需要 +1
+      const day = String(date.getDate()).padStart(2, "0");
       return `${year}/${month}/${day}`;
     },
     post() {
       // 获取选择的数据
       const selectedRows = this.selectedRows;
       // 格式化数据
-      const goodsReceiptItems = selectedRows.map(item => ({
+      const goodsReceiptItems = selectedRows.map((item) => ({
         materialID: item.materialID,
         quantity: item.quantity,
         batch: item.batch,
@@ -251,27 +251,27 @@ export default {
         //user ID
       };
       axios
-        .post('/goods_receipt/create', requestBody, {
+        .post("/goods_receipt/create", requestBody, {
           headers: {
             // 这里要更换为调试用的用户token
-            Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-            'Content-Type': 'application/json',
+            Authorization: "Bearer YOUR_ACCESS_TOKEN",
+            "Content-Type": "application/json",
           },
         })
-        .then(response => {
+        .then((response) => {
           if (response.status === 201) {
             // 显示成功提示
             ElMessage({
-              message: 'Success',
-              type: 'success',
+              message: "Success",
+              type: "success",
             });
-            console.log('Goods Receipt Created:', response.data);
+            console.log("Goods Receipt Created:", response.data);
             // 显示创建完成后的Receipt Num
             this.recID = response.data;
           }
         })
-        .catch(error => {
-          console.error('Error creating Goods Receipt:', error);
+        .catch((error) => {
+          console.error("Error creating Goods Receipt:", error);
         });
     },
   },

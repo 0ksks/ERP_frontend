@@ -244,7 +244,7 @@
           plain
           @click="activeTab !== 'purchasing' ? nextTab() : saveSupplier()"
         >
-          {{ activeTab !== 'purchasing' ? 'Next Tab' : 'Save' }}
+          {{ activeTab !== "purchasing" ? "Next Tab" : "Save" }}
         </el-button>
       </el-main>
     </el-container>
@@ -252,21 +252,21 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
-import { ref } from 'vue';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-import { ElMessageBox } from 'element-plus';
+import { useRouter } from "vue-router";
+import { ref } from "vue";
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
+import { ElMessageBox } from "element-plus";
 
 // 设置模拟请求
 const mock = new MockAdapter(axios);
 
 // 模拟POST /supplier/create请求的响应
-mock.onPost('/api/supplier/create_success').reply(200, {
+mock.onPost("/api/supplier/create_success").reply(200, {
   code: 1,
-  message: 'success',
+  message: "success",
   data: {
-    supplierID: 'supplierID_value',
+    supplierID: "supplierID_value",
   },
 });
 
@@ -274,23 +274,23 @@ export default {
   setup() {
     const router = useRouter();
     const form = ref({
-      businessPartner: '',
-      bpRole: '',
-      companyCode: '',
+      businessPartner: "",
+      bpRole: "",
+      companyCode: "",
     });
 
     const selectedSupplier = ref({});
-    const activeTab = ref('common');
+    const activeTab = ref("common");
 
     function navigateTo(path) {
       router.push(path);
     }
     // Define nextTab method
     const nextTab = () => {
-      if (activeTab.value === 'common') {
-        activeTab.value = 'vendor';
-      } else if (activeTab.value === 'vendor') {
-        activeTab.value = 'purchasing';
+      if (activeTab.value === "common") {
+        activeTab.value = "vendor";
+      } else if (activeTab.value === "vendor") {
+        activeTab.value = "purchasing";
       }
     };
 
@@ -302,11 +302,11 @@ export default {
         !form.value.companyCode
       ) {
         ElMessageBox.alert(
-          'Please fill in all required fields.',
-          'Incomplete Information',
+          "Please fill in all required fields.",
+          "Incomplete Information",
           {
-            confirmButtonText: 'OK',
-            type: 'warning',
+            confirmButtonText: "OK",
+            type: "warning",
           }
         );
         return;
@@ -315,44 +315,43 @@ export default {
       try {
         // 发送请求保存供应商数据
         const response = await axios.post(
-          '/api/supplier/create_success',
-          form.value,
-          
+          "/api/supplier/create_success",
+          form.value
         );
 
         if (response.data.code === 1) {
           ElMessageBox.alert(
             `Supplier created successfully! Supplier ID: ${response.data.data.supplierID}`,
-            'Success',
+            "Success",
             {
-              confirmButtonText: 'OK',
-              type: 'success',
+              confirmButtonText: "OK",
+              type: "success",
             }
           );
           // 清空表单
           form.value = {
-            businessPartner: '',
-            bpRole: '',
-            companyCode: '',
+            businessPartner: "",
+            bpRole: "",
+            companyCode: "",
           };
         } else {
           ElMessageBox.alert(
-            'Failed to create supplier. Please try again.',
-            'Error',
+            "Failed to create supplier. Please try again.",
+            "Error",
             {
-              confirmButtonText: 'OK',
-              type: 'error',
+              confirmButtonText: "OK",
+              type: "error",
             }
           );
         }
       } catch (error) {
-        console.error('Error saving supplier data:', error);
+        console.error("Error saving supplier data:", error);
         ElMessageBox.alert(
-          'Failed to create supplier. Please try again.',
-          'Error',
+          "Failed to create supplier. Please try again.",
+          "Error",
           {
-            confirmButtonText: 'OK',
-            type: 'error',
+            confirmButtonText: "OK",
+            type: "error",
           }
         );
       }
@@ -371,7 +370,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
 .supplier {
   background: linear-gradient(
@@ -429,7 +428,7 @@ export default {
   margin-bottom: 5px;
   display: inline-block;
   width: 120px;
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
   color: #498be6;
 }
 
@@ -438,7 +437,7 @@ export default {
   margin-bottom: 20px;
   display: inline-block;
   width: 190px;
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
 }
 
 .divider {
@@ -449,13 +448,13 @@ export default {
 .label {
   font-size: 14px;
   display: inline-block;
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
 }
 
 .value {
   display: inline-block;
   width: 150px; /* 设置标签的固定宽度 */
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
 }
 
 .top {
