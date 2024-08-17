@@ -48,7 +48,10 @@
                 <el-row :gutter="20">
                   <el-col :span="8">
                     <el-form-item label="Supplier Name:">
-                      <el-input v-model="selectedSupplier.suppliername" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.suppliername"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -58,27 +61,42 @@
                 <el-row :gutter="20">
                   <el-col :span="8">
                     <el-form-item label="Street Address:">
-                      <el-input v-model="selectedSupplier.streetAddress" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.streetAddress"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="Postal Code:">
-                      <el-input v-model="selectedSupplier.postalCode" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.postalCode"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="Country:">
-                      <el-input v-model="selectedSupplier.country" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.country"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="Region:">
-                      <el-input v-model="selectedSupplier.region" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.region"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="City:">
-                      <el-input v-model="selectedSupplier.city" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.city"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -88,7 +106,10 @@
                 <el-row :gutter="20">
                   <el-col :span="8">
                     <el-form-item label="Language:">
-                      <el-input v-model="selectedSupplier.communicationLang" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.communicationLang"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -98,12 +119,18 @@
                 <el-row :gutter="20">
                   <el-col :span="8">
                     <el-form-item label="Contact Info:">
-                      <el-input v-model="selectedSupplier.contactInfo" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.contactInfo"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="User ID:">
-                      <el-input v-model="selectedSupplier.userID" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.userID"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -119,7 +146,10 @@
                 <el-row :gutter="20">
                   <el-col :span="8">
                     <el-form-item label="Tax Number:">
-                      <el-input v-model="selectedSupplier.taxNumber" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.taxNumber"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -129,7 +159,10 @@
                 <el-row :gutter="20">
                   <el-col :span="8">
                     <el-form-item label="Reconciliation Acct:">
-                      <el-input v-model="selectedSupplier.reconciliationAcct" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.reconciliationAcct"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -139,12 +172,18 @@
                 <el-row :gutter="20">
                   <el-col :span="8">
                     <el-form-item label="Terms of Payments:">
-                      <el-input v-model="selectedSupplier.termsOfPayment" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.termsOfPayment"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="Check Double Invoice:">
-                      <el-input v-model="selectedSupplier.checkDoubleInvoice" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.checkDoubleInvoice"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -154,7 +193,10 @@
                 <el-row :gutter="20">
                   <el-col :span="8">
                     <el-form-item label="Clerk at Vendor:">
-                      <el-input v-model="selectedSupplier.clerkName" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.clerkName"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -170,7 +212,10 @@
                 <el-row :gutter="20">
                   <el-col :span="8">
                     <el-form-item label="Purch. Organization:">
-                      <el-input v-model="selectedSupplier.purchasingOrg" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.purchasingOrg"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -180,7 +225,10 @@
                 <el-row :gutter="20">
                   <el-col :span="8">
                     <el-form-item label="Order Currency:">
-                      <el-input v-model="selectedSupplier.orderCurrency" class="text-value"></el-input>
+                      <el-input
+                        v-model="selectedSupplier.orderCurrency"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -216,10 +264,10 @@ const mock = new MockAdapter(axios);
 // 模拟POST /supplier/create请求的响应
 mock.onPost('/api/supplier/create_success').reply(200, {
   code: 1,
-  message: "success",
+  message: 'success',
   data: {
-    supplierID: "supplierID_value"
-  }
+    supplierID: 'supplierID_value',
+  },
 });
 
 export default {
@@ -228,7 +276,7 @@ export default {
     const form = ref({
       businessPartner: '',
       bpRole: '',
-      companyCode: ''
+      companyCode: '',
     });
 
     const selectedSupplier = ref({});
@@ -237,8 +285,8 @@ export default {
     function navigateTo(path) {
       router.push(path);
     }
-        // Define nextTab method
-        const nextTab = () => {
+    // Define nextTab method
+    const nextTab = () => {
       if (activeTab.value === 'common') {
         activeTab.value = 'vendor';
       } else if (activeTab.value === 'vendor') {
@@ -248,41 +296,64 @@ export default {
 
     async function saveSupplier() {
       // 验证表单是否填写完整
-      if (!form.value.businessPartner || !form.value.bpRole || !form.value.companyCode) {
-        ElMessageBox.alert('Please fill in all required fields.', 'Incomplete Information', {
-          confirmButtonText: 'OK',
-          type: 'warning',
-        });
+      if (
+        !form.value.businessPartner ||
+        !form.value.bpRole ||
+        !form.value.companyCode
+      ) {
+        ElMessageBox.alert(
+          'Please fill in all required fields.',
+          'Incomplete Information',
+          {
+            confirmButtonText: 'OK',
+            type: 'warning',
+          }
+        );
         return;
       }
 
       try {
         // 发送请求保存供应商数据
-        const response = await axios.post('/api/supplier/create_success', form.value);
+        const response = await axios.post(
+          '/api/supplier/create_success',
+          form.value
+        );
 
         if (response.data.code === 1) {
-          ElMessageBox.alert(`Supplier created successfully! Supplier ID: ${response.data.data.supplierID}`, 'Success', {
-            confirmButtonText: 'OK',
-            type: 'success',
-          });
+          ElMessageBox.alert(
+            `Supplier created successfully! Supplier ID: ${response.data.data.supplierID}`,
+            'Success',
+            {
+              confirmButtonText: 'OK',
+              type: 'success',
+            }
+          );
           // 清空表单
           form.value = {
             businessPartner: '',
             bpRole: '',
-            companyCode: ''
+            companyCode: '',
           };
         } else {
-          ElMessageBox.alert('Failed to create supplier. Please try again.', 'Error', {
-            confirmButtonText: 'OK',
-            type: 'error',
-          });
+          ElMessageBox.alert(
+            'Failed to create supplier. Please try again.',
+            'Error',
+            {
+              confirmButtonText: 'OK',
+              type: 'error',
+            }
+          );
         }
       } catch (error) {
         console.error('Error saving supplier data:', error);
-        ElMessageBox.alert('Failed to create supplier. Please try again.', 'Error', {
-          confirmButtonText: 'OK',
-          type: 'error',
-        });
+        ElMessageBox.alert(
+          'Failed to create supplier. Please try again.',
+          'Error',
+          {
+            confirmButtonText: 'OK',
+            type: 'error',
+          }
+        );
       }
     }
 
@@ -292,12 +363,11 @@ export default {
       activeTab,
       navigateTo,
       saveSupplier,
-      nextTab
+      nextTab,
     };
-  }
-}
+  },
+};
 </script>
-
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');

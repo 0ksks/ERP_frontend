@@ -34,15 +34,6 @@
         </div>
       </button>
 
-      <button class="patch" @click="navigateTo('/Stock')" type="button">
-        <div style="font-size: 2vh; margin-left: 3vh; margin-top: 3vh">
-          Stock
-        </div>
-        <div style="font-size: 3.5vh; margin-right: 3vh; margin-top: 7vh">
-          <el-icon> <Document /> </el-icon>
-        </div>
-      </button>
-
       <button class="patch" @click="navigateTo('/po')" type="button">
         <div style="font-size: 2vh; margin-left: 3vh; margin-top: 3vh">PO</div>
         <div style="font-size: 3.5vh; margin-right: 3vh; margin-top: 7vh">
@@ -65,7 +56,7 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router';
 
 export default {
   setup() {

@@ -18,167 +18,232 @@
     <el-container>
       <!-- 主内容 -->
       <el-main class="main-content" v-if="selectedMaterial">
-            <div>
-              <p class="text-title">General</p>
-              <el-divider class="divider"></el-divider>
-              <el-form :model="selectedMaterial" label-width="150px">
-                <el-row :gutter="20">
-                  <el-col :span="8">
-                    <el-form-item label="Material ID:">
-              <el-input v-model="selectedMaterial.materialID" class="text-value"  disabled ></el-input>
-                    </el-form-item>
-            </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Material Name:">
-                      <el-input v-model="selectedMaterial.materialName" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Description:">
-                      <el-input v-model="selectedMaterial.description" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Base Unit:">
-                      <el-input v-model="selectedMaterial.baseUnit" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Material Group:">
-                      <el-input v-model="selectedMaterial.materialGroup" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Division:">
-                      <el-input v-model="selectedMaterial.division" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  
-                </el-row>
+        <div>
+          <p class="text-title">General</p>
+          <el-divider class="divider"></el-divider>
+          <el-form :model="selectedMaterial" label-width="150px">
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="Material ID:">
+                  <el-input
+                    v-model="selectedMaterial.materialID"
+                    class="text-value"
+                    disabled
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Material Name:">
+                  <el-input
+                    v-model="selectedMaterial.materialName"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Description:">
+                  <el-input
+                    v-model="selectedMaterial.description"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Base Unit:">
+                  <el-input
+                    v-model="selectedMaterial.baseUnit"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Material Group:">
+                  <el-input
+                    v-model="selectedMaterial.materialGroup"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Division:">
+                  <el-input
+                    v-model="selectedMaterial.division"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
 
-                <p class="text-title">Dimensions</p>
-                <el-divider class="divider"></el-divider>
-                <el-row :gutter="20">
-                  <el-col :span="8">
-                    <el-form-item label="Gross Weight:">
-                      <el-input v-model="selectedMaterial.grossWeight" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Net Weight:">
-                      <el-input v-model="selectedMaterial.netWeight" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Weight Unit:">
-                      <el-input v-model="selectedMaterial.weightUnit" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Volume:">
-                      <el-input v-model="selectedMaterial.volume" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Volume Unit:">
-                      <el-input v-model="selectedMaterial.volumeUnit" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
+            <p class="text-title">Dimensions</p>
+            <el-divider class="divider"></el-divider>
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="Gross Weight:">
+                  <el-input
+                    v-model="selectedMaterial.grossWeight"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Net Weight:">
+                  <el-input
+                    v-model="selectedMaterial.netWeight"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Weight Unit:">
+                  <el-input
+                    v-model="selectedMaterial.weightUnit"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Volume:">
+                  <el-input
+                    v-model="selectedMaterial.volume"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Volume Unit:">
+                  <el-input
+                    v-model="selectedMaterial.volumeUnit"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
 
-                <p class="text-title">Shipping Data(times in days)</p>
-                <el-divider class="divider"></el-divider>
-                <el-row :gutter="20">
-                  <el-col :span="8">
-                    <el-form-item label="Trans.Grp:">
-                      <el-input v-model="selectedMaterial.transportationGroup" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Pack Material:">
-                      <el-input v-model="selectedMaterial.packMaterial" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Avail.Check:">
-                      <el-input v-model="selectedMaterial.availabilityCheck" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Loading Group:">
-                      <el-input v-model="selectedMaterial.loadingGroup" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
+            <p class="text-title">Shipping Data(times in days)</p>
+            <el-divider class="divider"></el-divider>
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="Trans.Grp:">
+                  <el-input
+                    v-model="selectedMaterial.transportationGroup"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Pack Material:">
+                  <el-input
+                    v-model="selectedMaterial.packMaterial"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Avail.Check:">
+                  <el-input
+                    v-model="selectedMaterial.availabilityCheck"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Loading Group:">
+                  <el-input
+                    v-model="selectedMaterial.loadingGroup"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
 
-                <p class="text-title">MRP Procedure</p>
-                <el-divider class="divider"></el-divider>
-                <el-row :gutter="20">
-                  <el-col :span="8">
-                    <el-form-item label="MRP Type:">
-                      <el-input v-model="selectedMaterial.mrpType" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="MRP Controller:">
-                      <el-input v-model="selectedMaterial.mrpController" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
+            <p class="text-title">MRP Procedure</p>
+            <el-divider class="divider"></el-divider>
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="MRP Type:">
+                  <el-input
+                    v-model="selectedMaterial.mrpType"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="MRP Controller:">
+                  <el-input
+                    v-model="selectedMaterial.mrpController"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
 
-                <p class="text-title">Lot Size Data</p>
-                <el-divider class="divider"></el-divider>
-                <el-row :gutter="20">
-                  <el-col :span="8">
-                    <el-form-item label="Lot Sizing Proc:">
-                      <el-input v-model="selectedMaterial.lotSize" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
+            <p class="text-title">Lot Size Data</p>
+            <el-divider class="divider"></el-divider>
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="Lot Sizing Proc:">
+                  <el-input
+                    v-model="selectedMaterial.lotSize"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
 
-                <p class="text-title">Scheduling</p>
-                <el-divider class="divider"></el-divider>
-                <el-row :gutter="20">
-                  <el-col :span="8">
-                    <el-form-item label="Plan.Deliv.Time:">
-                      <el-input v-model="selectedMaterial.plannedDeliveryTime" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
+            <p class="text-title">Scheduling</p>
+            <el-divider class="divider"></el-divider>
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="Plan.Deliv.Time:">
+                  <el-input
+                    v-model="selectedMaterial.plannedDeliveryTime"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
 
-                <p class="text-title">Lot Size Data</p>
-                <el-divider class="divider"></el-divider>
-                <el-row :gutter="20">
-                  <el-col :span="8">
-                    <el-form-item label="Valuation Class:">
-                      <el-input v-model="selectedMaterial.valuationClass" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Moving Price:">
-                      <el-input v-model="selectedMaterial.movingPrice" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Price Unit:">
-                      <el-input v-model="selectedMaterial.priceUnit" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="8">
-                    <el-form-item label="Standard Price:">
-                      <el-input v-model="selectedMaterial.standardPrice" class="text-value"></el-input>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
-              </el-form>
-            </div>
+            <p class="text-title">Lot Size Data</p>
+            <el-divider class="divider"></el-divider>
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="Valuation Class:">
+                  <el-input
+                    v-model="selectedMaterial.valuationClass"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Moving Price:">
+                  <el-input
+                    v-model="selectedMaterial.movingPrice"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Price Unit:">
+                  <el-input
+                    v-model="selectedMaterial.priceUnit"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="Standard Price:">
+                  <el-input
+                    v-model="selectedMaterial.standardPrice"
+                    class="text-value"
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+          </el-form>
+        </div>
         <br />
 
-        <el-button
-          type="primary"
-          plain
-          @click="saveMaterial()"
-        >
+        <el-button type="primary" plain @click="saveMaterial()">
           Save
         </el-button>
       </el-main>
@@ -198,19 +263,23 @@ export default {
     const router = useRouter();
     const selectedMaterial = ref(null);
 
-    const fetchMaterialDetails = async (materialID) => {
+    const fetchMaterialDetails = async materialID => {
       try {
         const response = await axios.get('/api/material/query_success', {
-          params: { materialID }
+          params: { materialID },
         });
 
         if (response.data.code === 1 && response.data.data.length > 0) {
           selectedMaterial.value = response.data.data[0];
         } else {
-          ElMessageBox.alert('No material found with the given ID.', 'Search Failed', {
-            confirmButtonText: 'OK',
-            type: 'error',
-          });
+          ElMessageBox.alert(
+            'No material found with the given ID.',
+            'Search Failed',
+            {
+              confirmButtonText: 'OK',
+              type: 'error',
+            }
+          );
           selectedMaterial.value = null;
         }
       } catch (error) {
@@ -234,7 +303,7 @@ export default {
       }
     });
 
-    const navigateTo = (path) => {
+    const navigateTo = path => {
       router.push(path);
     };
 
@@ -248,13 +317,20 @@ export default {
       }
 
       try {
-        const response = await axios.patch('/api/material/update_success', selectedMaterial.value);
+        const response = await axios.patch(
+          '/api/material/update_success',
+          selectedMaterial.value
+        );
 
         if (response.data.code === 1) {
-          ElMessageBox.alert('Material information saved successfully!', 'Success', {
-            confirmButtonText: 'OK',
-            type: 'success',
-          });
+          ElMessageBox.alert(
+            'Material information saved successfully!',
+            'Success',
+            {
+              confirmButtonText: 'OK',
+              type: 'success',
+            }
+          );
         } else {
           ElMessageBox.alert('Failed to save material information.', 'Error', {
             confirmButtonText: 'OK',
@@ -273,12 +349,11 @@ export default {
     return {
       selectedMaterial,
       navigateTo,
-      saveMaterial
+      saveMaterial,
     };
-  }
+  },
 };
 </script>
-
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');

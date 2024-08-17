@@ -83,49 +83,49 @@
 </template>
 
 <script>
-import { ref, onMounted, nextTick } from "vue";
-import Chart from "chart.js/auto";
+import { ref, onMounted, nextTick } from 'vue';
+import Chart from 'chart.js/auto';
 
 export default {
   setup() {
-    const materialID = ref("00000023");
+    const materialID = ref('00000023');
     const dialogFormVisible = ref(false);
     const gridData = ref([
       {
-        stockID: "001",
-        plant: "Plant A",
-        storageLocation: "Location 1",
+        stockID: '001',
+        plant: 'Plant A',
+        storageLocation: 'Location 1',
         quantity: 100,
-        unitOfMeasure: "pcs",
-        stockType: "Type A",
-        valuationType: "Type X",
-        batch: "Batch 2023",
-        specialStockIndicator: "Yes",
-        userID: "user1",
+        unitOfMeasure: 'pcs',
+        stockType: 'Type A',
+        valuationType: 'Type X',
+        batch: 'Batch 2023',
+        specialStockIndicator: 'Yes',
+        userID: 'user1',
       },
       {
-        stockID: "002",
-        plant: "Plant B",
-        storageLocation: "Location 2",
+        stockID: '002',
+        plant: 'Plant B',
+        storageLocation: 'Location 2',
         quantity: 50,
-        unitOfMeasure: "kg",
-        stockType: "Type B",
-        valuationType: "Type Y",
-        batch: "Batch 2024",
-        specialStockIndicator: "No",
-        userID: "user2",
+        unitOfMeasure: 'kg',
+        stockType: 'Type B',
+        valuationType: 'Type Y',
+        batch: 'Batch 2024',
+        specialStockIndicator: 'No',
+        userID: 'user2',
       },
       {
-        stockID: "003",
-        plant: "Plant A",
-        storageLocation: "Location 3",
+        stockID: '003',
+        plant: 'Plant A',
+        storageLocation: 'Location 3',
         quantity: 75,
-        unitOfMeasure: "pcs",
-        stockType: "Type C",
-        valuationType: "Type Z",
-        batch: "Batch 2023",
-        specialStockIndicator: "Yes",
-        userID: "user3",
+        unitOfMeasure: 'pcs',
+        stockType: 'Type C',
+        valuationType: 'Type Z',
+        batch: 'Batch 2023',
+        specialStockIndicator: 'Yes',
+        userID: 'user3',
       },
     ]);
     let chart = ref(null);
@@ -138,49 +138,49 @@ export default {
     };
 
     const initChart = () => {
-      const canvas = document.getElementById("stockChartCanvas");
+      const canvas = document.getElementById('stockChartCanvas');
       if (!canvas) {
-        console.error("Canvas element not found.");
+        console.error('Canvas element not found.');
         return;
       }
 
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext('2d');
       if (!ctx) {
-        console.error("Failed to get Canvas 2D context.");
+        console.error('Failed to get Canvas 2D context.');
         return;
       }
 
       const data = gridData.value;
 
       let cumulativeSum = 0;
-      const cumulativeData = data.map((item) => {
+      const cumulativeData = data.map(item => {
         cumulativeSum += item.quantity;
         return cumulativeSum;
       });
 
-      const stockIDs = data.map((item) => item.stockID);
+      const stockIDs = data.map(item => item.stockID);
 
       if (chart.value) {
         chart.value.destroy();
       }
 
       chart.value = new Chart(ctx, {
-        type: "bar",
+        type: 'bar',
         data: {
           labels: stockIDs,
           datasets: [
             {
-              label: "Quantity",
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
-              borderColor: "rgba(54, 162, 235, 1)",
+              label: 'Quantity',
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
               borderWidth: 1,
-              data: data.map((item) => item.quantity),
+              data: data.map(item => item.quantity),
             },
             {
-              label: "Cumulative Quantity",
-              type: "line",
-              backgroundColor: "rgba(255, 99, 132, 0.2)",
-              borderColor: "rgba(255, 99, 132, 1)",
+              label: 'Cumulative Quantity',
+              type: 'line',
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
               borderWidth: 2,
               data: cumulativeData,
             },
@@ -192,13 +192,13 @@ export default {
               beginAtZero: true,
               title: {
                 display: true,
-                text: "Quantity",
+                text: 'Quantity',
               },
             },
             x: {
               title: {
                 display: true,
-                text: "Stock ID",
+                text: 'Stock ID',
               },
             },
           },
@@ -222,7 +222,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 .header {
   display: flex;

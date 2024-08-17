@@ -1,3 +1,1 @@
-<template>
-  This is a about
-</template>
+<template>This is a about</template>

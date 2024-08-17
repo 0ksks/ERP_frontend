@@ -1,208 +1,217 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <link rel="stylesheet" href="../src/styles/Basic Components.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
+    />
+    <link rel="stylesheet" href="../src/styles/Basic Components.css" />
     <title>Personal Space</title>
     <style>
-        /* 通用样式 */
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #f2f6fc;
-            text-align: center;
-        }
+      /* 通用样式 */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #f2f6fc;
+        text-align: center;
+      }
 
-        /* 头部样式 */
-        .header {
-            color: white;
-            padding: 1% 0;
-            font-size: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
+      /* 头部样式 */
+      .header {
+        color: white;
+        padding: 1% 0;
+        font-size: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
 
-        .custom-icon-button {
-            position: absolute;
-            left: 20px;
-            font-size: 24px;
-            color: white;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
+      .custom-icon-button {
+        position: absolute;
+        left: 20px;
+        font-size: 24px;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
 
-        /* 用户个人信息样式 */
-        .user-profile {
-            background: linear-gradient(to bottom, #8ebdf5, #d2e4fd);
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px auto;
-            max-width: 600px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+      /* 用户个人信息样式 */
+      .user-profile {
+        background: linear-gradient(to bottom, #8ebdf5, #d2e4fd);
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px auto;
+        max-width: 600px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
 
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 4px solid #fff;
-        }
+      .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 4px solid #fff;
+      }
 
-        .user-info {
-            margin: 15px 0;
-        }
+      .user-info {
+        margin: 15px 0;
+      }
 
-        .username {
-            font-size: 28px;
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-        }
+      .username {
+        font-size: 28px;
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+      }
 
-        .username input {
-            font-size: 28px;
-            margin: 10px 0;
-            border: none;
-            background: transparent;
-            text-align: center;
-        }
+      .username input {
+        font-size: 28px;
+        margin: 10px 0;
+        border: none;
+        background: transparent;
+        text-align: center;
+      }
 
-        .username::after {
-            content: url('edit-icon.png');
-            /* 假设编辑图标文件名为edit-icon.png */
-            margin-left: 10px;
-            cursor: pointer;
-        }
+      .username::after {
+        content: url('edit-icon.png');
+        /* 假设编辑图标文件名为edit-icon.png */
+        margin-left: 10px;
+        cursor: pointer;
+      }
 
-        .role,
-        .user-id {
-            font-size: 18px;
-            margin: 5px 0;
-            color: #333;
-        }
+      .role,
+      .user-id {
+        font-size: 18px;
+        margin: 5px 0;
+        color: #333;
+      }
 
-        /* 按钮样式 */
-        .buttons {
-            display: flex;
-            gap: 15px;
-        }
+      /* 按钮样式 */
+      .buttons {
+        display: flex;
+        gap: 15px;
+      }
 
-        .edit-button,
-        .signout-button {
-            font-size: 18px;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+      .edit-button,
+      .signout-button {
+        font-size: 18px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
 
-        .edit-button {
-            background-color: #4e91ff;
-            color: white;
-            border: none;
-        }
+      .edit-button {
+        background-color: #4e91ff;
+        color: white;
+        border: none;
+      }
 
-        .signout-button {
-            background-color: #fff;
-            color: #333;
-            border: 1px solid #ccc;
-        }
+      .signout-button {
+        background-color: #fff;
+        color: #333;
+        border: 1px solid #ccc;
+      }
 
-        .edit-button:hover,
-        .signout-button:hover {
-            opacity: 0.8;
-        }
+      .edit-button:hover,
+      .signout-button:hover {
+        opacity: 0.8;
+      }
 
-        /* 欢迎消息样式 */
-        .welcome-message {
-            margin: 20px auto;
-            max-width: 600px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+      /* 欢迎消息样式 */
+      .welcome-message {
+        margin: 20px auto;
+        max-width: 600px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
 
-        .welcome-message h2 {
-            font-size: 24px;
-            color: #4e91ff;
-            margin-bottom: 10px;
-        }
+      .welcome-message h2 {
+        font-size: 24px;
+        color: #4e91ff;
+        margin-bottom: 10px;
+      }
 
-        .welcome-message p {
-            font-size: 18px;
-            color: #555;
-        }
+      .welcome-message p {
+        font-size: 18px;
+        color: #555;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="header">
-        <button class="custom-icon-button" onclick="goToHomepage()">
-            <i class="el-icon-s-home"></i>
-        </button> <!-- Home Icon -->
-        <h1>User</h1>
+      <button class="custom-icon-button" onclick="goToHomepage()">
+        <i class="el-icon-s-home"></i>
+      </button>
+      <!-- Home Icon -->
+      <h1>User</h1>
     </div>
 
     <div class="user-profile">
-        <img src="profile-placeholder.jpeg" alt="User Avatar" class="avatar">
-        <div class="user-info">
-            <h2 class="username" id="username-display">
-                <input type="text" id="username-input" value="learn-000" readonly>
-            </h2>
-            <p class="role">Administrator</p>
-            <p class="user-id">0000001</p>
-        </div>
-        <div class="buttons">
-            <button class="edit-button" id="edit-button">Edit</button>
-            <button class="signout-button" onclick="goToLogin()">Sign Out</button>
-        </div>
+      <img
+        src="profile-placeholder.jpeg"
+        alt="User Avatar"
+        class="avatar"
+      />
+      <div class="user-info">
+        <h2 class="username" id="username-display">
+          <input type="text" id="username-input" value="learn-000" readonly />
+        </h2>
+        <p class="role">Administrator</p>
+        <p class="user-id">0000001</p>
+      </div>
+      <div class="buttons">
+        <button class="edit-button" id="edit-button">Edit</button>
+        <button class="signout-button" onclick="goToLogin()">Sign Out</button>
+      </div>
     </div>
 
     <div class="welcome-message">
-        <h2>Welcome to the SAP MM module!</h2>
-        <p>Join us to explore innovative material management solutions with millions of businesses globally and embark
-            on a path to success together!</p>
+      <h2>Welcome to the SAP MM module!</h2>
+      <p>
+        Join us to explore innovative material management solutions with
+        millions of businesses globally and embark on a path to success
+        together!
+      </p>
     </div>
 
     <script>
-        function goToHomepage() {
-            window.location.href = "homepage.html"; // 替换为实际的homepage路径
+      function goToHomepage() {
+        window.location.href = '/'; // 替换为实际的homepage路径
+      }
+
+      function goToLogin() {
+        window.location.href = 'login.html'; // 替换为实际的login页面路径
+      }
+
+      // Edit button functionality
+      const editButton = document.getElementById('edit-button');
+      const usernameInput = document.getElementById('username-input');
+
+      editButton.addEventListener('click', function () {
+        if (usernameInput.readOnly) {
+          // Enable editing
+          usernameInput.readOnly = false;
+          usernameInput.focus();
+          editButton.textContent = 'Save';
+        } else {
+          // Save the changes
+          usernameInput.readOnly = true;
+          editButton.textContent = 'Edit';
+          // Here you could also add code to save the username to a server or localStorage
         }
-
-        function goToLogin() {
-            window.location.href = "login.html"; // 替换为实际的login页面路径
-        }
-
-        // Edit button functionality
-        const editButton = document.getElementById('edit-button');
-        const usernameInput = document.getElementById('username-input');
-
-        editButton.addEventListener('click', function () {
-            if (usernameInput.readOnly) {
-                // Enable editing
-                usernameInput.readOnly = false;
-                usernameInput.focus();
-                editButton.textContent = 'Save';
-            } else {
-                // Save the changes
-                usernameInput.readOnly = true;
-                editButton.textContent = 'Edit';
-                // Here you could also add code to save the username to a server or localStorage
-            }
-        });
+      });
     </script>
-</body>
-
+  </body>
 </html>

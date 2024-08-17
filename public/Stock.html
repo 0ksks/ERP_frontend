@@ -1,187 +1,237 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Stock</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Stock</title>
 
-  <!-- 引入 Element UI 的样式表 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css">
-  <!-- 引入 Vue.js -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-  <!-- 引入 Element UI 的 JavaScript 库 -->
-  <script src="https://unpkg.com/element-ui@2.15.14/lib/index.js"></script>
-  <!-- 引入 Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
-  <!-- 引入自定义基本组件的 CSS -->
-  
-  <link rel="stylesheet" href="Basic Components.css" />
+    <!-- 引入 Element UI 的样式表 -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css"
+    />
+    <!-- 引入 Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!-- 引入 Element UI 的 JavaScript 库 -->
+    <script src="https://unpkg.com/element-ui@2.15.14/lib/index.js"></script>
+    <!-- 引入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <!-- 引入自定义基本组件的 CSS -->
 
-</head>
+    <link rel="stylesheet" href="Basic Components.css" />
+  </head>
 
-<body>
-  <div id="app">
-    <div>
+  <body>
+    <div id="app">
+      <div>
         <span>materialID:</span>
         <span id="ID">00000023</span>
-    </div>
-    <div>
-      <!-- 打开嵌套表单的 Dialog -->  
-      <el-button type="text" @click="openDialog()">打开Stock</el-button>
-      <el-dialog title="Storage Information" :visible.sync="dialogFormVisible">
-        <el-row :gutter="20">
-          <el-col :span="10">
-            <div>
-                materialID:       
+      </div>
+      <div>
+        <!-- 打开嵌套表单的 Dialog -->
+        <el-button type="text" @click="openDialog()">打开Stock</el-button>
+        <el-dialog
+          title="Storage Information"
+          :visible.sync="dialogFormVisible"
+        >
+          <el-row :gutter="20">
+            <el-col :span="10">
+              <div>
+                materialID:
                 <span>{{ materialID }}</span>
-            </div>
-          </el-col>
-          <el-table :data="gridData" style="margin-top: 5vh;">
-            <el-table-column property="stockID" label="stockID" width="100"></el-table-column>
-            <el-table-column property="plant" label="plant" width="100"></el-table-column>
-            <el-table-column property="storageLocation" label="storageLocation" width="150"></el-table-column>
-            <el-table-column property="quantity" label="quantity" width="100"></el-table-column>
-            <el-table-column property="unitOfMeasure" label="unitOfMeasure" width="150"></el-table-column>
-            <el-table-column property="stockType" label="stockType" width="100"></el-table-column>
-            <el-table-column property="valuationType" label="valuationType" width="150"></el-table-column>
-            <el-table-column property="batch" label="batch" width="150"></el-table-column>
-            <el-table-column property="specialStockIndicator" label="specialStockIndicator" width="200"></el-table-column>
-            <el-table-column property="userID" label="userID" width="100"></el-table-column>
-          </el-table>
-        </el-row>
-        <div>
-          <canvas id="stockChartCanvas" width="400" height="200"></canvas>
-        </div>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">OK</el-button>
-        </div>
-      </el-dialog>
+              </div>
+            </el-col>
+            <el-table :data="gridData" style="margin-top: 5vh">
+              <el-table-column
+                property="stockID"
+                label="stockID"
+                width="100"
+              ></el-table-column>
+              <el-table-column
+                property="plant"
+                label="plant"
+                width="100"
+              ></el-table-column>
+              <el-table-column
+                property="storageLocation"
+                label="storageLocation"
+                width="150"
+              ></el-table-column>
+              <el-table-column
+                property="quantity"
+                label="quantity"
+                width="100"
+              ></el-table-column>
+              <el-table-column
+                property="unitOfMeasure"
+                label="unitOfMeasure"
+                width="150"
+              ></el-table-column>
+              <el-table-column
+                property="stockType"
+                label="stockType"
+                width="100"
+              ></el-table-column>
+              <el-table-column
+                property="valuationType"
+                label="valuationType"
+                width="150"
+              ></el-table-column>
+              <el-table-column
+                property="batch"
+                label="batch"
+                width="150"
+              ></el-table-column>
+              <el-table-column
+                property="specialStockIndicator"
+                label="specialStockIndicator"
+                width="200"
+              ></el-table-column>
+              <el-table-column
+                property="userID"
+                label="userID"
+                width="100"
+              ></el-table-column>
+            </el-table>
+          </el-row>
+          <div>
+            <canvas id="stockChartCanvas" width="400" height="200"></canvas>
+          </div>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="dialogFormVisible = false"
+              >OK</el-button
+            >
+          </div>
+        </el-dialog>
+      </div>
     </div>
-  </div>
 
-  <script>
-    new Vue({
-      el: '#app',
-      data: {
-        materialID: '00000023',
-        gridData: [
-          { 
-            stockID: '001', 
-            plant: 'Plant A', 
-            storageLocation: 'Location 1', 
-            quantity: 100, 
-            unitOfMeasure: 'pcs', 
-            stockType: 'Type A', 
-            valuationType: 'Type X', 
-            batch: 'Batch 2023', 
-            specialStockIndicator: 'Yes', 
-            userID: 'user1' 
-          },
-          { 
-            stockID: '002', 
-            plant: 'Plant B', 
-            storageLocation: 'Location 2', 
-            quantity: 50, 
-            unitOfMeasure: 'kg', 
-            stockType: 'Type B', 
-            valuationType: 'Type Y', 
-            batch: 'Batch 2024', 
-            specialStockIndicator: 'No', 
-            userID: 'user2' 
-          },
-          { 
-            stockID: '003', 
-            plant: 'Plant A', 
-            storageLocation: 'Location 3', 
-            quantity: 75, 
-            unitOfMeasure: 'pcs', 
-            stockType: 'Type C', 
-            valuationType: 'Type Z', 
-            batch: 'Batch 2023', 
-            specialStockIndicator: 'Yes', 
-            userID: 'user3' 
-          }
-        ],
-        dialogFormVisible: false,
-        chart: null,
-        chartData: []
-      },
-      methods: {
-        openDialog() {
-          this.dialogFormVisible = true;
-          this.$nextTick(() => {
-            this.initChart();
-          });
-        },
-        initChart() {
-          const canvas = document.getElementById('stockChartCanvas');
-          if (!canvas) {
-            console.error('Canvas element not found.');
-            return;
-          }
-          
-          const ctx = canvas.getContext('2d');
-          if (!ctx) {
-            console.error('Failed to get Canvas 2D context.');
-            return;
-          }
-
-          const data = this.gridData;
-
-          // 计算每个 stockID 的 quantity 累加和
-          let cumulativeSum = 0;
-          const cumulativeData = data.map(item => {
-            cumulativeSum += item.quantity;
-            return cumulativeSum;
-          });
-
-          // 提取计算后的数据作为折线图的数据
-          const stockIDs = data.map(item => item.stockID);
-
-          if (this.chart) {
-            this.chart.destroy();
-          }
-
-          this.chart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: stockIDs,
-              datasets: [{
-                label: 'Quantity',
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1,
-                data: data.map(item => item.quantity)
-              }, {
-                label: 'Cumulative Quantity',
-                type: 'line',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 2,
-                data: cumulativeData
-              }]
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          materialID: '00000023',
+          gridData: [
+            {
+              stockID: '001',
+              plant: 'Plant A',
+              storageLocation: 'Location 1',
+              quantity: 100,
+              unitOfMeasure: 'pcs',
+              stockType: 'Type A',
+              valuationType: 'Type X',
+              batch: 'Batch 2023',
+              specialStockIndicator: 'Yes',
+              userID: 'user1',
             },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  title: {
-                    display: true,
-                    text: 'Quantity'
-                  }
-                },
-                x: {
-                  title: {
-                    display: true,
-                    text: 'Stock ID'
-                  }
-                }
-              }
+            {
+              stockID: '002',
+              plant: 'Plant B',
+              storageLocation: 'Location 2',
+              quantity: 50,
+              unitOfMeasure: 'kg',
+              stockType: 'Type B',
+              valuationType: 'Type Y',
+              batch: 'Batch 2024',
+              specialStockIndicator: 'No',
+              userID: 'user2',
+            },
+            {
+              stockID: '003',
+              plant: 'Plant A',
+              storageLocation: 'Location 3',
+              quantity: 75,
+              unitOfMeasure: 'pcs',
+              stockType: 'Type C',
+              valuationType: 'Type Z',
+              batch: 'Batch 2023',
+              specialStockIndicator: 'Yes',
+              userID: 'user3',
+            },
+          ],
+          dialogFormVisible: false,
+          chart: null,
+          chartData: [],
+        },
+        methods: {
+          openDialog() {
+            this.dialogFormVisible = true;
+            this.$nextTick(() => {
+              this.initChart();
+            });
+          },
+          initChart() {
+            const canvas = document.getElementById('stockChartCanvas');
+            if (!canvas) {
+              console.error('Canvas element not found.');
+              return;
             }
-          });
-        }
-      }
-    });
-  </script>
-</body>
+
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+              console.error('Failed to get Canvas 2D context.');
+              return;
+            }
+
+            const data = this.gridData;
+
+            // 计算每个 stockID 的 quantity 累加和
+            let cumulativeSum = 0;
+            const cumulativeData = data.map(item => {
+              cumulativeSum += item.quantity;
+              return cumulativeSum;
+            });
+
+            // 提取计算后的数据作为折线图的数据
+            const stockIDs = data.map(item => item.stockID);
+
+            if (this.chart) {
+              this.chart.destroy();
+            }
+
+            this.chart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: stockIDs,
+                datasets: [
+                  {
+                    label: 'Quantity',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    data: data.map(item => item.quantity),
+                  },
+                  {
+                    label: 'Cumulative Quantity',
+                    type: 'line',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    data: cumulativeData,
+                  },
+                ],
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    title: {
+                      display: true,
+                      text: 'Quantity',
+                    },
+                  },
+                  x: {
+                    title: {
+                      display: true,
+                      text: 'Stock ID',
+                    },
+                  },
+                },
+              },
+            });
+          },
+        },
+      });
+    </script>
+  </body>
 </html>

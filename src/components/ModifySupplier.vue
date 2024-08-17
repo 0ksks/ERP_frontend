@@ -1,5 +1,5 @@
 <template>
-   <el-container class="supplier">
+  <el-container class="supplier">
     <!-- Header 区域 -->
     <el-header class="header">
       <el-icon class="Back" @click="navigateTo('/Supplier')">
@@ -12,160 +12,214 @@
     </el-header>
 
     <!-- 主体内容区域 -->
-<br/>
-<el-container>
-  <el-main class="main-content" v-if="selectedSupplier">
-    <el-tabs v-model="activeTab">
-      <!-- Common Tab -->
-      <el-tab-pane label="Common" name="common">
-        <div>
-          <p class="text-title">Primary</p>
-          <el-divider class="divider"></el-divider>
-          <el-row :gutter="20">
-            <el-col :span="8">
-              <span class="text-label">Supplier ID :</span>
-              <el-input v-model="selectedSupplier.supplierID" class="text-value"  disabled/>
-            </el-col>
-            <el-col :span="8">
-              <span class="text-label">Supplier Name :</span>
-              <el-input v-model="selectedSupplier.suppliername" class="text-value" />
-            </el-col>
-            <el-col :span="8">
-              <span class="text-label">BP Role :</span>
-              <el-input v-model="selectedSupplier.partnerFunctions" class="text-value" />
-            </el-col>
-          </el-row>
-          
-          <p class="text-title">Address</p>
-          <el-divider class="divider"></el-divider>
-          <el-row :gutter="20">
-            <el-col :span="8">
-              <span class="text-label">Street Address :</span>
-              <el-input v-model="selectedSupplier.streetAddress" class="text-value" />
-            </el-col>
-            <el-col :span="8">
-              <span class="text-label">Postal Code :</span>
-              <el-input v-model="selectedSupplier.postalCode" class="text-value" />
-            </el-col>
-            <el-col :span="8">
-              <span class="text-label">Country :</span>
-              <el-input v-model="selectedSupplier.country" class="text-value" />
-            </el-col>
-            <el-col :span="8">
-              <span class="text-label">Region :</span>
-              <el-input v-model="selectedSupplier.region" class="text-value" />
-            </el-col>
-            <el-col :span="8">
-              <span class="text-label">City :</span>
-              <el-input v-model="selectedSupplier.city" class="text-value" />
-            </el-col>
-          </el-row>
+    <br />
+    <el-container>
+      <el-main class="main-content" v-if="selectedSupplier">
+        <el-tabs v-model="activeTab">
+          <!-- Common Tab -->
+          <el-tab-pane label="Common" name="common">
+            <div>
+              <p class="text-title">Primary</p>
+              <el-divider class="divider"></el-divider>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <span class="text-label">Supplier ID :</span>
+                  <el-input
+                    v-model="selectedSupplier.supplierID"
+                    class="text-value"
+                    disabled
+                  />
+                </el-col>
+                <el-col :span="8">
+                  <span class="text-label">Supplier Name :</span>
+                  <el-input
+                    v-model="selectedSupplier.suppliername"
+                    class="text-value"
+                  />
+                </el-col>
+                <el-col :span="8">
+                  <span class="text-label">BP Role :</span>
+                  <el-input
+                    v-model="selectedSupplier.partnerFunctions"
+                    class="text-value"
+                  />
+                </el-col>
+              </el-row>
 
-          <p class="text-title">Communication</p>
-          <el-divider class="divider"></el-divider>
-          <el-row :gutter="20">
-            <el-col :span="8">
-              <span class="text-label">Language :</span>
-              <el-input v-model="selectedSupplier.communicationLang" class="text-value" />
-            </el-col>
-          </el-row>
+              <p class="text-title">Address</p>
+              <el-divider class="divider"></el-divider>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <span class="text-label">Street Address :</span>
+                  <el-input
+                    v-model="selectedSupplier.streetAddress"
+                    class="text-value"
+                  />
+                </el-col>
+                <el-col :span="8">
+                  <span class="text-label">Postal Code :</span>
+                  <el-input
+                    v-model="selectedSupplier.postalCode"
+                    class="text-value"
+                  />
+                </el-col>
+                <el-col :span="8">
+                  <span class="text-label">Country :</span>
+                  <el-input
+                    v-model="selectedSupplier.country"
+                    class="text-value"
+                  />
+                </el-col>
+                <el-col :span="8">
+                  <span class="text-label">Region :</span>
+                  <el-input
+                    v-model="selectedSupplier.region"
+                    class="text-value"
+                  />
+                </el-col>
+                <el-col :span="8">
+                  <span class="text-label">City :</span>
+                  <el-input
+                    v-model="selectedSupplier.city"
+                    class="text-value"
+                  />
+                </el-col>
+              </el-row>
 
-          <p class="text-title">Name</p>
-          <el-divider class="divider"></el-divider>
-          <el-row :gutter="20">
-            <el-col :span="8">
-              <span class="text-label">Contact Info :</span>
-              <el-input v-model="selectedSupplier.contactInfo" class="text-value" />
-            </el-col>
-            <el-col :span="8">
-              <span class="text-label">User ID:</span>
-              <el-input v-model="selectedSupplier.userID" class="text-value" />
-            </el-col>
-          </el-row>
-        </div>
-      </el-tab-pane>
+              <p class="text-title">Communication</p>
+              <el-divider class="divider"></el-divider>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <span class="text-label">Language :</span>
+                  <el-input
+                    v-model="selectedSupplier.communicationLang"
+                    class="text-value"
+                  />
+                </el-col>
+              </el-row>
 
-      <!-- Vendor & Account & Payment Tab -->
-      <el-tab-pane label="Vendor & Account & Payment" name="vendor">
-        <div>
-          <p class="text-title">Tax Data</p>
-          <el-divider class="divider"></el-divider>
-          <el-row :gutter="20">
-            <el-col :span="8">
-              <span class="text-label1">Tax Number :</span>
-              <el-input v-model="selectedSupplier.taxNumber" class="text-value" />
-            </el-col>
-          </el-row>
+              <p class="text-title">Name</p>
+              <el-divider class="divider"></el-divider>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <span class="text-label">Contact Info :</span>
+                  <el-input
+                    v-model="selectedSupplier.contactInfo"
+                    class="text-value"
+                  />
+                </el-col>
+                <el-col :span="8">
+                  <span class="text-label">User ID:</span>
+                  <el-input
+                    v-model="selectedSupplier.userID"
+                    class="text-value"
+                  />
+                </el-col>
+              </el-row>
+            </div>
+          </el-tab-pane>
 
-          <p class="text-title">Account Management</p>
-          <el-divider class="divider"></el-divider>
-          <el-row :gutter="20">
-            <el-col :span="8">
-              <span class="text-label1">Reconciliation Acct :</span>
-              <el-input v-model="selectedSupplier.reconciliationAcct" class="text-value" />
-            </el-col>
-          </el-row>
+          <!-- Vendor & Account & Payment Tab -->
+          <el-tab-pane label="Vendor & Account & Payment" name="vendor">
+            <div>
+              <p class="text-title">Tax Data</p>
+              <el-divider class="divider"></el-divider>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <span class="text-label1">Tax Number :</span>
+                  <el-input
+                    v-model="selectedSupplier.taxNumber"
+                    class="text-value"
+                  />
+                </el-col>
+              </el-row>
 
-          <p class="text-title">Payment Data</p>
-          <el-divider class="divider"></el-divider>
-          <el-row :gutter="20">
-            <el-col :span="8">
-              <span class="text-label1">Terms of Payments :</span>
-              <el-input v-model="selectedSupplier.termsOfPayment" class="text-value" />
-            </el-col>
-            <el-col :span="8">
-              <span class="text-label1">Check Double Invoice :</span>
-              <el-input v-model="selectedSupplier.checkDoubleInvoice" class="text-value" />
-            </el-col>
-          </el-row>
+              <p class="text-title">Account Management</p>
+              <el-divider class="divider"></el-divider>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <span class="text-label1">Reconciliation Acct :</span>
+                  <el-input
+                    v-model="selectedSupplier.reconciliationAcct"
+                    class="text-value"
+                  />
+                </el-col>
+              </el-row>
 
-          <p class="text-title">Correspondence</p>
-          <el-divider class="divider"></el-divider>
-          <el-row :gutter="20">
-            <el-col :span="8">
-              <span class="text-label">Clerk at Vendor :</span>
-              <el-input v-model="selectedSupplier.clerkName" class="text-value" />
-            </el-col>
-          </el-row>
-        </div>
-      </el-tab-pane>
+              <p class="text-title">Payment Data</p>
+              <el-divider class="divider"></el-divider>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <span class="text-label1">Terms of Payments :</span>
+                  <el-input
+                    v-model="selectedSupplier.termsOfPayment"
+                    class="text-value"
+                  />
+                </el-col>
+                <el-col :span="8">
+                  <span class="text-label1">Check Double Invoice :</span>
+                  <el-input
+                    v-model="selectedSupplier.checkDoubleInvoice"
+                    class="text-value"
+                  />
+                </el-col>
+              </el-row>
 
-      <!-- Purchasing Tab -->
-      <el-tab-pane label="Purchasing" name="purchasing">
-        <div>
-          <p class="text-title">Purchasing Organization</p>
-          <el-divider class="divider"></el-divider>
-          <el-row :gutter="20">
-            <el-col :span="8">
-              <span class="text-label1">Purch. Organization :</span>
-              <el-input v-model="selectedSupplier.purchasingOrg" class="text-value" />
-            </el-col>
-          </el-row>
+              <p class="text-title">Correspondence</p>
+              <el-divider class="divider"></el-divider>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <span class="text-label">Clerk at Vendor :</span>
+                  <el-input
+                    v-model="selectedSupplier.clerkName"
+                    class="text-value"
+                  />
+                </el-col>
+              </el-row>
+            </div>
+          </el-tab-pane>
 
-          <p class="text-title">Purchase Data</p>
-          <el-divider class="divider"></el-divider>
-          <el-row :gutter="20">
-            <el-col :span="8">
-              <span class="text-label1">Order Currency :</span>
-              <el-input v-model="selectedSupplier.orderCurrency" class="text-value" />
-            </el-col>
-          </el-row>
-        </div>
-      </el-tab-pane>
-    </el-tabs>
-    <br/>
-     <!-- 根据当前激活的标签页，动态显示按钮 -->
-     <el-button
+          <!-- Purchasing Tab -->
+          <el-tab-pane label="Purchasing" name="purchasing">
+            <div>
+              <p class="text-title">Purchasing Organization</p>
+              <el-divider class="divider"></el-divider>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <span class="text-label1">Purch. Organization :</span>
+                  <el-input
+                    v-model="selectedSupplier.purchasingOrg"
+                    class="text-value"
+                  />
+                </el-col>
+              </el-row>
+
+              <p class="text-title">Purchase Data</p>
+              <el-divider class="divider"></el-divider>
+              <el-row :gutter="20">
+                <el-col :span="8">
+                  <span class="text-label1">Order Currency :</span>
+                  <el-input
+                    v-model="selectedSupplier.orderCurrency"
+                    class="text-value"
+                  />
+                </el-col>
+              </el-row>
+            </div>
+          </el-tab-pane>
+        </el-tabs>
+        <br />
+        <!-- 根据当前激活的标签页，动态显示按钮 -->
+        <el-button
           type="primary"
           plain
           @click="activeTab !== 'purchasing' ? nextTab() : handleSave()"
         >
           {{ activeTab !== 'purchasing' ? 'Next Tab' : 'Save' }}
         </el-button>
-  </el-main>
-</el-container>
-</el-container>
-
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
@@ -181,19 +235,23 @@ export default {
     const activeTab = ref('common');
     const selectedSupplier = ref(null);
 
-    const fetchSupplierDetails = async (supplierID) => {
+    const fetchSupplierDetails = async supplierID => {
       try {
         const response = await axios.get('/api/supplier/query_success', {
-          params: { supplierID }
+          params: { supplierID },
         });
 
         if (response.data.code === 1 && response.data.data.length > 0) {
           selectedSupplier.value = response.data.data[0];
         } else {
-          ElMessageBox.alert('No supplier found with the given ID.', 'Search Failed', {
-            confirmButtonText: 'OK',
-            type: 'error',
-          });
+          ElMessageBox.alert(
+            'No supplier found with the given ID.',
+            'Search Failed',
+            {
+              confirmButtonText: 'OK',
+              type: 'error',
+            }
+          );
           selectedSupplier.value = null;
         }
       } catch (error) {
@@ -217,7 +275,7 @@ export default {
       }
     });
 
-    const navigateTo = (path) => {
+    const navigateTo = path => {
       router.push(path);
     };
 
@@ -231,13 +289,20 @@ export default {
       }
 
       try {
-        const response = await axios.patch('/api/supplier/update_success', selectedSupplier.value);
+        const response = await axios.patch(
+          '/api/supplier/update_success',
+          selectedSupplier.value
+        );
 
         if (response.data.code === 1) {
-          ElMessageBox.alert('Supplier information saved successfully!', 'Success', {
-            confirmButtonText: 'OK',
-            type: 'success',
-          });
+          ElMessageBox.alert(
+            'Supplier information saved successfully!',
+            'Success',
+            {
+              confirmButtonText: 'OK',
+              type: 'success',
+            }
+          );
         } else {
           ElMessageBox.alert('Failed to save supplier information.', 'Error', {
             confirmButtonText: 'OK',
@@ -267,12 +332,11 @@ export default {
       selectedSupplier,
       navigateTo,
       handleSave,
-      nextTab
+      nextTab,
     };
-  }
+  },
 };
 </script>
-
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
@@ -328,7 +392,7 @@ export default {
   margin-bottom: 10px;
 }
 
-.text-label1{
+.text-label1 {
   font-size: 14px;
   margin-bottom: 5px;
   display: inline-block;
@@ -336,7 +400,7 @@ export default {
   font-family: 'Inter', sans;
   color: #498be6;
 }
-.text-label{
+.text-label {
   font-size: 14px;
   margin-bottom: 5px;
   display: inline-block;
@@ -344,7 +408,6 @@ export default {
   font-family: 'Inter', sans;
   color: #498be6;
 }
-
 
 .text-value {
   font-size: 14px;

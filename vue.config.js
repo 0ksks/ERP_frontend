@@ -1,7 +1,7 @@
-const path = require('path')
+const path = require('path');
 
 function resolve(dir) {
-  return path.join(__dirname, dir)
+  return path.join(__dirname, dir);
 }
 
 module.exports = {
@@ -9,12 +9,11 @@ module.exports = {
     config.module
       .rule('thejs')
       .test(/\.js$/)
-      .include
-        .add(path.resolve('src'))
-        .add(path.resolve('node_modules/element-ui/packages'))
-        .end()
+      .include.add(path.resolve('src'))
+      .add(path.resolve('node_modules/element-ui/packages'))
+      .end()
       .use('babel-loader')
-        .loader('babel-loader')
-        .end()
-  }
-}
+      .loader('babel-loader')
+      .end();
+  },
+};
