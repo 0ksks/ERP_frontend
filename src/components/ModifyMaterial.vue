@@ -265,11 +265,9 @@ export default {
 
     const fetchMaterialDetails = async (materialID) => {
       try {
-        const response = await axios.post(
-          "/api/material/query",
-          { materialID:materialID },
-          
-        );
+        const response = await axios.post("/api/material/query", {
+          materialID: materialID,
+        });
 
         if (response.data.code === 200 && response.data.data.length > 0) {
           selectedMaterial.value = response.data.data[0];
@@ -321,7 +319,7 @@ export default {
       try {
         const response = await axios.patch(
           "/api/material/update",
-          selectedMaterial.value,
+          selectedMaterial.value
         );
 
         if (response.data.code === 200) {

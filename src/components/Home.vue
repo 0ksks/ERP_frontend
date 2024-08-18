@@ -35,7 +35,9 @@
       </button>
 
       <button class="patch" @click="navigateTo('/po')" type="button">
-        <div style="font-size: 2vh; margin-left: 3vh; margin-top: 3vh">Purchase Order</div>
+        <div style="font-size: 2vh; margin-left: 3vh; margin-top: 3vh">
+          Purchase Order
+        </div>
         <div style="font-size: 3.5vh; margin-right: 3vh; margin-top: 7vh">
           <el-icon><DocumentAdd /></el-icon>
         </div>
@@ -57,7 +59,6 @@
           <el-icon> <Document /> </el-icon>
         </div>
       </button>
-      
 
       <!-- <el-button @click="navigateTo('/Stock')"></el-button> -->
     </div>

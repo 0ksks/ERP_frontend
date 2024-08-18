@@ -64,7 +64,10 @@
                   <!-- 供应商名称 -->
                   <el-col :span="8">
                     <el-form-item label="Supplier Name:">
-                      <el-input v-model="form.supplierName" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.supplierName"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -76,31 +79,46 @@
                   <!-- 街道地址 -->
                   <el-col :span="8">
                     <el-form-item label="Street Address:">
-                      <el-input v-model="form.streetAddress" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.streetAddress"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <!-- 邮政编码 -->
                   <el-col :span="8">
                     <el-form-item label="Postal Code:">
-                      <el-input v-model="form.postalCode" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.postalCode"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <!-- 国家 -->
                   <el-col :span="8">
                     <el-form-item label="Country:">
-                      <el-input v-model="form.country" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.country"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <!-- 地区 -->
                   <el-col :span="8">
                     <el-form-item label="Region:">
-                      <el-input v-model="form.region" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.region"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <!-- 城市 -->
                   <el-col :span="8">
                     <el-form-item label="City:">
-                      <el-input v-model="form.city" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.city"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -112,7 +130,10 @@
                   <!-- 语言 -->
                   <el-col :span="8">
                     <el-form-item label="Language:">
-                      <el-input v-model="form.communicationLang" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.communicationLang"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -124,13 +145,19 @@
                   <!-- 联系信息 -->
                   <el-col :span="8">
                     <el-form-item label="Contact Info:">
-                      <el-input v-model="form.contactInfo" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.contactInfo"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <!-- 用户 ID -->
                   <el-col :span="8">
                     <el-form-item label="User ID:">
-                      <el-input v-model="form.userID" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.userID"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -150,7 +177,10 @@
                   <!-- 税号 -->
                   <el-col :span="8">
                     <el-form-item label="Tax Number:">
-                      <el-input v-model="form.taxNumber" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.taxNumber"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -162,7 +192,10 @@
                   <!-- 对账账户 -->
                   <el-col :span="8">
                     <el-form-item label="Reconciliation Acct:">
-                      <el-input v-model="form.reconciliationAcct" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.reconciliationAcct"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -174,13 +207,19 @@
                   <!-- 付款条款 -->
                   <el-col :span="8">
                     <el-form-item label="Terms of Payments:">
-                      <el-input v-model="form.termsOfPayment" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.termsOfPayment"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <!-- 检查双重发票 -->
                   <el-col :span="8">
                     <el-form-item label="Check Double Invoice:">
-                      <el-input v-model="form.checkDoubleInvoice" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.checkDoubleInvoice"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -192,7 +231,10 @@
                   <!-- 供应商联系人 -->
                   <el-col :span="8">
                     <el-form-item label="Clerk at Vendor:">
-                      <el-input v-model="form.clerkName" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.clerkName"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -212,7 +254,10 @@
                   <!-- 采购组织 -->
                   <el-col :span="8">
                     <el-form-item label="Purch. Organization:">
-                      <el-input v-model="form.purchasingOrg" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.purchasingOrg"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -224,13 +269,19 @@
                   <!-- 订单货币 -->
                   <el-col :span="8">
                     <el-form-item label="Order Currency:">
-                      <el-input v-model="form.orderCurrency" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.orderCurrency"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                   <!-- 折扣条件 -->
                   <el-col :span="8">
                     <el-form-item label="Discount Conditions:">
-                      <el-input v-model="form.discountConditions" class="text-value"></el-input>
+                      <el-input
+                        v-model="form.discountConditions"
+                        class="text-value"
+                      ></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -323,7 +374,7 @@ export default {
         !form.value.region ||
         !form.value.contactInfo ||
         !form.value.userID
-)  {
+      ) {
         ElMessageBox.alert(
           "Please fill in all required fields.",
           "Incomplete Information",

@@ -32,7 +32,7 @@
               <el-col :span="8">
                 <el-form-item label="Material Name:">
                   <el-input
-                    v-model="form.materialName" 
+                    v-model="form.materialName"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -41,7 +41,7 @@
               <el-col :span="8">
                 <el-form-item label="Description:">
                   <el-input
-                    v-model="form.description" 
+                    v-model="form.description"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -50,7 +50,7 @@
               <el-col :span="8">
                 <el-form-item label="Base Unit:">
                   <el-input
-                    v-model="form.baseUnit" 
+                    v-model="form.baseUnit"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -59,7 +59,7 @@
               <el-col :span="8">
                 <el-form-item label="Material Group:">
                   <el-input
-                    v-model="form.materialGroup" 
+                    v-model="form.materialGroup"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -68,7 +68,7 @@
               <el-col :span="8">
                 <el-form-item label="Division:">
                   <el-input
-                    v-model="form.division" 
+                    v-model="form.division"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -83,7 +83,7 @@
               <el-col :span="8">
                 <el-form-item label="Gross Weight:">
                   <el-input
-                    v-model="form.grossWeight" 
+                    v-model="form.grossWeight"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -92,7 +92,7 @@
               <el-col :span="8">
                 <el-form-item label="Net Weight:">
                   <el-input
-                    v-model="form.netWeight" 
+                    v-model="form.netWeight"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -101,7 +101,7 @@
               <el-col :span="8">
                 <el-form-item label="Weight Unit:">
                   <el-input
-                    v-model="form.weightUnit" 
+                    v-model="form.weightUnit"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -109,17 +109,14 @@
               <!-- 体积 -->
               <el-col :span="8">
                 <el-form-item label="Volume:">
-                  <el-input
-                    v-model="form.volume" 
-                    class="text-value"
-                  ></el-input>
+                  <el-input v-model="form.volume" class="text-value"></el-input>
                 </el-form-item>
               </el-col>
               <!-- 体积单位 -->
               <el-col :span="8">
                 <el-form-item label="Volume Unit:">
                   <el-input
-                    v-model="form.volumeUnit" 
+                    v-model="form.volumeUnit"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -134,7 +131,7 @@
               <el-col :span="8">
                 <el-form-item label="Trans.Grp:">
                   <el-input
-                    v-model="form.transportationGroup" 
+                    v-model="form.transportationGroup"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -143,7 +140,7 @@
               <el-col :span="8">
                 <el-form-item label="Pack Material:">
                   <el-input
-                    v-model="form.packMaterial" 
+                    v-model="form.packMaterial"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -152,7 +149,7 @@
               <el-col :span="8">
                 <el-form-item label="Avail.Check:">
                   <el-input
-                    v-model="form.availabilityCheck" 
+                    v-model="form.availabilityCheck"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -161,7 +158,7 @@
               <el-col :span="8">
                 <el-form-item label="Loading Group:">
                   <el-input
-                    v-model="form.loadingGroup" 
+                    v-model="form.loadingGroup"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -176,7 +173,7 @@
               <el-col :span="8">
                 <el-form-item label="MRP Type:">
                   <el-input
-                    v-model="form.mrpType" 
+                    v-model="form.mrpType"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -185,7 +182,7 @@
               <el-col :span="8">
                 <el-form-item label="MRP Controller:">
                   <el-input
-                    v-model="form.mrpController" 
+                    v-model="form.mrpController"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -200,7 +197,7 @@
               <el-col :span="8">
                 <el-form-item label="Lot Sizing Proc:">
                   <el-input
-                    v-model="form.lotSize" 
+                    v-model="form.lotSize"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -209,7 +206,7 @@
               <el-col :span="8">
                 <el-form-item label="Minimum Lot Size:">
                   <el-input
-                    v-model="form.minimumLotSize" 
+                    v-model="form.minimumLotSize"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -224,7 +221,7 @@
               <el-col :span="8">
                 <el-form-item label="Plan.Deliv.Time:">
                   <el-input
-                    v-model="form.plannedDeliveryTime" 
+                    v-model="form.plannedDeliveryTime"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -239,7 +236,7 @@
               <el-col :span="8">
                 <el-form-item label="Valuation Class:">
                   <el-input
-                    v-model="form.valuationClass" 
+                    v-model="form.valuationClass"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -248,7 +245,7 @@
               <el-col :span="8">
                 <el-form-item label="Moving Price:">
                   <el-input
-                    v-model="form.movingPrice" 
+                    v-model="form.movingPrice"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -257,7 +254,7 @@
               <el-col :span="8">
                 <el-form-item label="Price Unit:">
                   <el-input
-                    v-model="form.priceUnit" 
+                    v-model="form.priceUnit"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -266,7 +263,7 @@
               <el-col :span="8">
                 <el-form-item label="Standard Price:">
                   <el-input
-                    v-model="form.standardPrice" 
+                    v-model="form.standardPrice"
                     class="text-value"
                   ></el-input>
                 </el-form-item>
@@ -296,29 +293,29 @@ export default {
     const router = useRouter();
     // 定义表单数据的响应式对象
     const form = ref({
-      materialName: '',
-      description: '',
-      baseUnit: '',
-      materialGroup: '',
-      division: '',
-      grossWeight: '',
-      netWeight: '',
-      weightUnit: '',
-      volume: '',
-      volumeUnit: '',
-      packMaterial: '',
-      availabilityCheck: '',
-      transportationGroup: '',
-      loadingGroup: '',
-      mrpType: '',
-      mrpController: '',
-      lotSize: '',
-      minimumLotSize: '',
-      plannedDeliveryTime: '',
-      valuationClass: '',
-      movingPrice: '',
-      priceUnit: '',
-      standardPrice: ''
+      materialName: "",
+      description: "",
+      baseUnit: "",
+      materialGroup: "",
+      division: "",
+      grossWeight: "",
+      netWeight: "",
+      weightUnit: "",
+      volume: "",
+      volumeUnit: "",
+      packMaterial: "",
+      availabilityCheck: "",
+      transportationGroup: "",
+      loadingGroup: "",
+      mrpType: "",
+      mrpController: "",
+      lotSize: "",
+      minimumLotSize: "",
+      plannedDeliveryTime: "",
+      valuationClass: "",
+      movingPrice: "",
+      priceUnit: "",
+      standardPrice: "",
     });
 
     // 导航到指定路径的方法
@@ -368,10 +365,7 @@ export default {
 
       try {
         // 发送 POST 请求以保存材料
-        const response = await axios.post(
-          "/api/material/create",
-          form.value
-        );
+        const response = await axios.post("/api/material/create", form.value);
 
         // 根据响应的状态码显示不同的提示信息
         if (response.data.code === 201) {

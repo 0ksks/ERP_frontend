@@ -75,7 +75,7 @@ export default {
         // 如果搜索项有内容，则直接执行查找操作
         this.search = false;
         this.queryByPO(this.searchPO);
-        if(this.poDetail){
+        if (this.poDetail) {
           this.routeToCreate(this.poDetail);
         }
       }
@@ -83,13 +83,13 @@ export default {
     queryByPO(searchPO) {
       axios
         .post("/api/purchase_order/query", {
-          purchaseOrderID: searchPO
+          purchaseOrderID: searchPO,
         })
         .then((response) => {
           if (response.status === 200) {
             // 处理正常的响应情况
             console.log("Purchase Orders Found:", response.data);
-            this.poDetail = response.data ; //根据返回值情况修改
+            this.poDetail = response.data; //根据返回值情况修改
           } else if (response.status === 204) {
             // 处理订单未找到的情况
             console.log("Response:", response);
@@ -112,7 +112,7 @@ export default {
       //query By UserID(search term)
       axios
         .post("/api/purchase_order/query", {
-          userID: sterm.value
+          userID: sterm.value,
         })
         .then((response) => {
           if (response.status === 200) {

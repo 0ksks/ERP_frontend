@@ -245,7 +245,7 @@ const save = () => {
     .map((item) => ({
       stockId: item.stockId,
       quantity: item.quantity,
-      netPrice: item.netPrice, 
+      netPrice: item.netPrice,
       currency: item.currency,
       purchasingGroup: item.purchasingGroup,
       purchasingOrganization: item.purchasingOrganization,

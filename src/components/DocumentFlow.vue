@@ -77,15 +77,15 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import axios from 'axios';
-import { ElMessageBox } from 'element-plus';
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
+import { ElMessageBox } from "element-plus";
 
 export default {
   setup() {
     // 响应式变量，存储用户输入的User ID
-    const searchQuery = ref('');
+    const searchQuery = ref("");
 
     // 响应式变量，存储筛选后的表格数据
     const filteredTableData = ref([]);
@@ -97,14 +97,17 @@ export default {
     async function fetchData(userID) {
       try {
         // 发送POST请求获取数据
-        const response = await axios.post('/api/document_flow/display', {
-          userID: userID
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json'
+        const response = await axios.post(
+          "/api/document_flow/display",
+          {
+            userID: userID,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-        });
+        );
 
         // 检查响应并更新表格数据
         if (response.data.code === 200 && response.data.data.length > 0) {
@@ -113,27 +116,27 @@ export default {
           // 如果未找到数据，则清空表格并显示提示框
           filteredTableData.value = [];
           ElMessageBox.alert(
-            'No records found with the given ID.',
-            'Search Failed',
+            "No records found with the given ID.",
+            "Search Failed",
             {
-              confirmButtonText: 'OK',
-              type: 'error',
+              confirmButtonText: "OK",
+              type: "error",
             }
           );
         }
       } catch (error) {
         // 请求失败时的错误处理
-        console.error('Error fetching data:', error);
-        ElMessageBox.alert('Failed to fetch data!', 'Error', {
-          confirmButtonText: 'OK',
-          type: 'error',
+        console.error("Error fetching data:", error);
+        ElMessageBox.alert("Failed to fetch data!", "Error", {
+          confirmButtonText: "OK",
+          type: "error",
         });
       }
     }
 
     // 在点击“GO”按钮时应用筛选的函数
     function applyFilter() {
-      fetchData(searchQuery.value); 
+      fetchData(searchQuery.value);
     }
 
     // 导航到指定路径的函数
@@ -153,7 +156,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
 /* 全局背景样式 */
 .DocumentFlow {
