@@ -340,20 +340,21 @@ export default {
     const gridData = ref([]);
 
     const authHeader = {
-      Authorization: `Bearer ${token_value}`,
       "Content-Type": "application/json",
     };
 
     async function fetchData(materialID) {
       try {
-        const response = await axios.get(
-          "/api/stock/display_success/finished",
+        const response = await axios.post(
+          "/api/stock/query",
+          {
+            materialID: materialID,
+          },
           {
             headers: authHeader,
-            params: { materialID },
           }
         );
-        if (response.data.code === 1 && response.data.data.length > 0) {
+        if (response.data.code === 200 && response.data.data.length > 0) {
           gridData.value = response.data.data;
           nextTick(() => {
             initChart();

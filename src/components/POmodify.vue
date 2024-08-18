@@ -253,58 +253,58 @@ const save = () => {
       paymentTerms: item.paymentTerms,
     }));
   // 注意这里是将完整的表单重新覆盖原有的表单，而并非原始的Patch路径，可能需要和端口部分的同学商量一下，下面有Patch版本的
-  axios
-    .post(
-      "/purchase_order/update",
-      {
-        ...metaData.value,
-        items: purchaseOrderItems,
-        // userID 按文档里面说要加，但是我觉得更换下面的用户token可能已经有了，如果不行的话在这行加上
-      },
-      {
-        headers: {
-          // 这里要更换为调试用的用户token
-          // Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then((response) => {
-      if (response.status === 200) {
-        // 显示成功提示
-        ElMessage({
-          message: "修改成功",
-          type: "success",
-        });
-      }
-    })
-    .catch((error) => {
-      console.error("Error updating Purchase Orders:", error);
-    });
+  // axios
+  //   .post(
+  //     "/purchase_order/update",
+  //     {
+  //       ...metaData.value,
+  //       items: purchaseOrderItems,
+  //       // userID 按文档里面说要加，但是我觉得更换下面的用户token可能已经有了，如果不行的话在这行加上
+  //     },
+  //     {
+  //       headers: {
+  //         // 这里要更换为调试用的用户token
+  //         // Authorization: 'Bearer YOUR_ACCESS_TOKEN',
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   )
+  //   .then((response) => {
+  //     if (response.status === 200) {
+  //       // 显示成功提示
+  //       ElMessage({
+  //         message: "修改成功",
+  //         type: "success",
+  //       });
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error updating Purchase Orders:", error);
+  //   });
 
   // Patch版本
-  // axios.patch('/purchase_order/update', {
-  //   ...metaData.value,
-  //   items: purchaseOrderItems,
-  //   // userID
-  // }, {
-  //   headers: {
-  //     // 更换token
-  //     // Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-  //     'Content-Type': 'application/json',
-  //   },
-  // })
-  // .then(response => {
-  //     if (response.status === 200) {
-  //     // 显示成功提示
-  //     ElMessage({
-  //       message: '修改成功',
-  //       type: 'success',
-  //     });}
-  // })
-  // .catch(error => {
-  //   console.error('Error updating Purchase Orders:', error);
-  // });
+  axios.patch('/api/purchase_order/update', {
+    ...metaData.value,
+    items: purchaseOrderItems,
+    // userID
+  }, {
+    headers: {
+      // 更换token
+      // Authorization: 'Bearer YOUR_ACCESS_TOKEN',
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(response => {
+      if (response.status === 200) {
+      // 显示成功提示
+      ElMessage({
+        message: '修改成功',
+        type: 'success',
+      });}
+  })
+  .catch(error => {
+    console.error('Error updating Purchase Orders:', error);
+  });
 };
 
 const tableRef = ref();

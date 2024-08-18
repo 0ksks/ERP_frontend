@@ -260,7 +260,7 @@ const save = () => {
     }));
   axios
     .post(
-      "/stock/create",
+      "/api/stock/create",
       {
         items: stockItems,
         // userID
@@ -289,7 +289,7 @@ const save = () => {
 
   axios
     .post(
-      "/purchase_order/create",
+      "/api/purchase_order/create",
       {
         ...metaData.value,
         items: purchaseOrderItems,

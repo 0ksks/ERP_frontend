@@ -82,19 +82,18 @@ export default {
     async function fetchData(userID) {
       try {
         // 发起 POST 请求获取数据
-        const response = await axios.post('/document_flow/display',
+        const response = await axios.post('/api/document_flow/display',
       {
         userID: userID// 请求体，包含用户ID
       },
       // 设置请求头
       {
         headers: {
-          'Authorization': `Bearer <token>`,
           'Content-Type': 'application/json'
         }
       }
     );
-    if (response.data.code === 1 && response.data.data.length > 0) {
+    if (response.data.code === 200 && response.data.data.length > 0) {
       // 获取到有效数据，则更新表格内容
       filteredTableData.value = response.data.data;
     } else {

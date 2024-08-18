@@ -10,6 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/element-ui@2.15.14/lib/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex@3/dist/vuex.js"></script>
+    <script src="https://unpkg.com/vuex-persistedstate@4.1.0/dist/vuex-persistedstate.umd.js"></script>
+
     <title>Login Page</title>
     <style>
       body,
@@ -17,7 +20,7 @@
         height: 100%;
         margin: 0;
         font-family: Arial, sans-serif;
-        background: url("images/index_bg.jpg") no-repeat center center fixed;
+        background: url("index_bg.jpg") no-repeat center center fixed;
         background-size: cover;
         display: flex;
         justify-content: center;
@@ -142,9 +145,34 @@
     </div>
 
     <script>
-      import { useAuthStore } from "../src/store";
+      // import { store } from "../src/store";
+      const store = new Vuex.Store({
+        state: {
+          token: "", // 存储用户登录的 token
+          userInfo: null, // 存储用户信息
+        },
+        mutations: {
+          SET_TOKEN(state, token) {
+            state.token = token;
+          },
+          LOGOUT(state) {
+            state.token = "";
+            state.userInfo = null;
+          },
+        },
+        actions: {
+          login({ commit }, token) {
+            commit("SET_TOKEN", token);
+          },
+          logout({ commit }) {
+            commit("LOGOUT");
+          },
+        },
+        plugins: [createPersistedState()], // 使用 vuex-persistedstate 插件
+      });
       new Vue({
         el: "#app",
+        store,
         data: function () {
           return {
             username: "",
@@ -167,24 +195,18 @@
             };
 
             axios
-              .post("/User/login", loginData, {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: "Bearer <token>",
-                },
-              })
+              .post("/api/user/login", loginData)
               .then((response) => {
                 const res = response.data;
-                if (res.code === 1) {
+                if (res.code === 201) {
                   // 使用 Pinia 存储 token
-                  const authStore = useAuthStore();
-                  authStore.setToken(res.data.token);
+                  this.$store.dispatch("login", res.data.token);
                   this.$message({
                     message: `Login successful! Welcome ${res.data.username} (${res.data.role})`,
                     type: "success",
                   });
                   // 登录成功后跳转到主页
-                  window.location.href = "homepage.html";
+                  window.location.href = "/";
                 } else {
                   this.$message.error(res.message);
                 }
@@ -211,15 +233,11 @@
             };
 
             axios
-              .post("/User/register", registerData, {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: "Bearer <token>",
-                },
-              })
+              .post("/api/user/register", registerData)
               .then((response) => {
                 const res = response.data;
-                if (res.code === 1) {
+                console.log(res);
+                if (res.code === 201) {
                   this.$message({
                     message: `Registration successful! Your UserID is ${res.data.userID}`,
                     type: "success",
@@ -250,16 +268,11 @@
               newPassword: this.newPassword,
             };
 
-            axios
-              .post("/User/changePassword", changePasswordData, {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: "Bearer <token>",
-                },
-              })
+            this.$axios
+              .post("/api/user/change_password", changePasswordData, {})
               .then((response) => {
                 const res = response.data;
-                if (res.code === 1) {
+                if (res.code === 200) {
                   this.$message({
                     message: "Password changed successfully!",
                     type: "success",

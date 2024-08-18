@@ -288,7 +288,7 @@
           plain
           @click="activeTab !== 'purchasing' ? nextTab() : saveSupplier()"
         >
-          {{ activeTab !== 'purchasing' ? 'Next Tab' : 'Save' }}
+          {{ activeTab !== "purchasing" ? "Next Tab" : "Save" }}
         </el-button>
       </el-main>
     </el-container>
@@ -296,38 +296,38 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
-import { ref } from 'vue';
-import axios from 'axios';
-import { ElMessageBox } from 'element-plus';
+import { useRouter } from "vue-router";
+import { ref } from "vue";
+import axios from "axios";
+import { ElMessageBox } from "element-plus";
 
 export default {
   setup() {
     const router = useRouter();
     // 供应商表单数据的响应式对象
     const form = ref({
-      suppliername: '',
-      communicationLang: '',
-      taxNumber: '',
-      companyCode: '',
-      reconciliationAcct: '',
-      termsOfPayment: '',
-      checkDoubleInvoice: '',
-      clerkName: '',
-      purchasingOrg: '',
-      orderCurrency: '',
-      partnerFunctions: '',
-      streetAddress: '',
-      postalCode: '',
-      city: '',
-      country: '',
-      region: '',
-      contactInfo: '',
-      userID: ''
+      suppliername: "",
+      communicationLang: "",
+      taxNumber: "",
+      companyCode: "",
+      reconciliationAcct: "",
+      termsOfPayment: "",
+      checkDoubleInvoice: "",
+      clerkName: "",
+      purchasingOrg: "",
+      orderCurrency: "",
+      partnerFunctions: "",
+      streetAddress: "",
+      postalCode: "",
+      city: "",
+      country: "",
+      region: "",
+      contactInfo: "",
+      userID: "",
     });
 
     // 当前激活的标签页
-    const activeTab = ref('common');
+    const activeTab = ref("common");
 
     // 跳转到指定路径的函数
     function navigateTo(path) {
@@ -336,23 +336,28 @@ export default {
 
     // 切换到下一个标签页
     const nextTab = () => {
-      if (activeTab.value === 'common') {
-        activeTab.value = 'vendor';
-      } else if (activeTab.value === 'vendor') {
-        activeTab.value = 'purchasing';
+      if (activeTab.value === "common") {
+        activeTab.value = "vendor";
+      } else if (activeTab.value === "vendor") {
+        activeTab.value = "purchasing";
       }
     };
 
     // 保存供应商信息的函数
     async function saveSupplier() {
       // 验证表单是否填写完整
-      if (!form.value.suppliername || !form.value.communicationLang || !form.value.taxNumber || !form.value.companyCode) {
+      if (
+        !form.value.suppliername ||
+        !form.value.communicationLang ||
+        !form.value.taxNumber ||
+        !form.value.companyCode
+      ) {
         ElMessageBox.alert(
-          'Please fill in all required fields.',
-          'Incomplete Information',
+          "Please fill in all required fields.",
+          "Incomplete Information",
           {
-            confirmButtonText: 'OK',
-            type: 'warning',
+            confirmButtonText: "OK",
+            type: "warning",
           }
         );
         return;
@@ -360,66 +365,57 @@ export default {
 
       try {
         // 发送请求保存供应商信息
-        const response = await axios.post(
-          '/supplier/create',
-          form.value,
-          {
-            headers: {
-              Authorization: `Bearer ${token_value}`, // 请确保 token_value 已定义并且包含有效的令牌
-              'Content-Type': 'application/json'
-            }
-          }
-        );
+        const response = await axios.post("/api/supplier/create", form.value);
 
         // 根据响应结果显示不同的提示信息
         if (response.data.code === 201) {
           ElMessageBox.alert(
             `Supplier created successfully! Supplier ID: ${response.data.data.supplierID}`,
-            'Success',
+            "Success",
             {
-              confirmButtonText: 'OK',
-              type: 'success',
+              confirmButtonText: "OK",
+              type: "success",
             }
           );
           // 清空表单
           form.value = {
-            suppliername: '',
-            communicationLang: '',
-            taxNumber: '',
-            companyCode: '',
-            reconciliationAcct: '',
-            termsOfPayment: '',
-            checkDoubleInvoice: '',
-            clerkName: '',
-            purchasingOrg: '',
-            orderCurrency: '',
-            partnerFunctions: '',
-            streetAddress: '',
-            postalCode: '',
-            city: '',
-            country: '',
-            region: '',
-            contactInfo: '',
-            userID: ''
+            suppliername: "",
+            communicationLang: "",
+            taxNumber: "",
+            companyCode: "",
+            reconciliationAcct: "",
+            termsOfPayment: "",
+            checkDoubleInvoice: "",
+            clerkName: "",
+            purchasingOrg: "",
+            orderCurrency: "",
+            partnerFunctions: "",
+            streetAddress: "",
+            postalCode: "",
+            city: "",
+            country: "",
+            region: "",
+            contactInfo: "",
+            userID: "",
           };
         } else {
           ElMessageBox.alert(
-            'Failed to create supplier. Please try again.',
-            'Error',
+            "Failed to create supplier. Please try again.",
+            "Error",
             {
-              confirmButtonText: 'OK',
-              type: 'error',
+              confirmButtonText: "OK",
+              type: "error",
             }
           );
         }
       } catch (error) {
-        console.error('Error saving supplier data:', error);
+        console.error("Error saving supplier data:", error);
         ElMessageBox.alert(
-          'Failed to create supplier. Please try again.',
-          'Error',
+          "Failed to create supplier. Please try again.",
+          "Error",
           {
-            confirmButtonText: 'OK',
-            type: 'error',
+            confirmButtonText: "OK",
+            type: "error",
           }
         );
       }
@@ -434,12 +430,11 @@ export default {
     };
   },
 };
-
 </script>
 
 <style scoped>
 /* 引入 Google 字体 */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
 /* 主要容器样式 */
 .supplier {
@@ -473,7 +468,8 @@ export default {
 }
 
 /* 首页和返回按钮样式 */
-.House, .Back {
+.House,
+.Back {
   font-size: 25px;
 }
 
@@ -501,9 +497,10 @@ export default {
 }
 
 /* 标签和输入框样式 */
-.text-label, .text-value {
+.text-label,
+.text-value {
   font-size: 14px;
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
 }
 
 .text-label {
@@ -529,14 +526,14 @@ export default {
 .label {
   font-size: 14px;
   display: inline-block;
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
 }
 
 /* 输入框样式 */
 .value {
   display: inline-block;
   width: 150px; /* 设置标签的固定宽度 */
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
 }
 
 /* 顶部内容区域样式 */

@@ -94,7 +94,8 @@
                   plain
                   @click="filterResults"
                   style="margin-left: 200px"
-                >Filter</el-button>
+                  >Filter</el-button
+                >
               </el-form>
             </el-col>
           </el-row>
@@ -130,55 +131,55 @@
               <el-divider class="divider"></el-divider>
               <span class="text-label">Supplier ID :</span>
               <span class="text-value">{{
-                selectedSupplier.supplierID || '000000'
+                selectedSupplier.supplierID || "000000"
               }}</span>
               <span class="text-label">Supplier Name :</span>
               <span class="text-value">{{
-                selectedSupplier.suppliername || '000000'
+                selectedSupplier.suppliername || "000000"
               }}</span>
               <span class="text-label">BP Role :</span>
               <span class="text-value">{{
-                selectedSupplier.partnerFunctions || '000000'
+                selectedSupplier.partnerFunctions || "000000"
               }}</span>
               <p class="text-title">Address</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label">Street Address :</span>
               <span class="text-value">{{
-                selectedSupplier.streetAddress || '000000'
+                selectedSupplier.streetAddress || "000000"
               }}</span>
               <span class="text-label">Postal Code :</span>
               <span class="text-value">{{
-                selectedSupplier.postalCode || '000000'
+                selectedSupplier.postalCode || "000000"
               }}</span>
               <p>
                 <span class="text-label">Country :</span>
                 <span class="text-value">{{
-                  selectedSupplier.country || '000000'
+                  selectedSupplier.country || "000000"
                 }}</span>
                 <span class="text-label">Region :</span>
                 <span class="text-value">{{
-                  selectedSupplier.region || '000000'
+                  selectedSupplier.region || "000000"
                 }}</span>
                 <span class="text-label">City :</span>
                 <span class="text-value">{{
-                  selectedSupplier.city || '000000'
+                  selectedSupplier.city || "000000"
                 }}</span>
               </p>
               <p class="text-title">Communication</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label">Language :</span>
               <span class="text-value">{{
-                selectedSupplier.communicationLang || '000000'
+                selectedSupplier.communicationLang || "000000"
               }}</span>
               <p class="text-title">Contact :</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label">Contact Info :</span>
               <span class="text-value">{{
-                selectedSupplier.contactInfo || '000000'
+                selectedSupplier.contactInfo || "000000"
               }}</span>
               <span class="text-label">User ID:</span>
               <span class="text-value">{{
-                selectedSupplier.userID || '000000'
+                selectedSupplier.userID || "000000"
               }}</span>
             </div>
           </el-tab-pane>
@@ -190,29 +191,29 @@
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Tax Number :</span>
               <span class="text-value">{{
-                selectedSupplier.taxNumber || '000000'
+                selectedSupplier.taxNumber || "000000"
               }}</span>
               <p class="text-title">Account Management</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Reconciliation Acct :</span>
               <span class="text-value">{{
-                selectedSupplier.reconciliationAcct || '000000'
+                selectedSupplier.reconciliationAcct || "000000"
               }}</span>
               <p class="text-title">Payment Data</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Terms of Payments :</span>
               <span class="text-value">{{
-                selectedSupplier.termsOfPayment || '000000'
+                selectedSupplier.termsOfPayment || "000000"
               }}</span>
               <span class="text-label1">Check Double Invoice :</span>
               <span class="text-value">{{
-                selectedSupplier.checkDoubleInvoice || '000000'
+                selectedSupplier.checkDoubleInvoice || "000000"
               }}</span>
               <p class="text-title">Correspondence</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Clerk at Vendor :</span>
               <span class="text-value">{{
-                selectedSupplier.clerkName || '000000'
+                selectedSupplier.clerkName || "000000"
               }}</span>
             </div>
           </el-tab-pane>
@@ -224,13 +225,13 @@
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Purch. Organization :</span>
               <span class="text-value">{{
-                selectedSupplier.purchasingOrg || '000000'
+                selectedSupplier.purchasingOrg || "000000"
               }}</span>
               <p class="text-title">Purchase Data</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Order Currency :</span>
               <span class="text-value">{{
-                selectedSupplier.orderCurrency || '000000'
+                selectedSupplier.orderCurrency || "000000"
               }}</span>
             </div>
           </el-tab-pane>
@@ -246,10 +247,10 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
-import { ref } from 'vue';
-import axios from 'axios';
-import { ElMessageBox } from 'element-plus';
+import { useRouter } from "vue-router";
+import { ref } from "vue";
+import axios from "axios";
+import { ElMessageBox } from "element-plus";
 
 export default {
   setup() {
@@ -257,19 +258,19 @@ export default {
     const router = useRouter();
     // 过滤条件的响应式对象
     const filters = ref({
-      keyword1: '',
-      keyword2: '',
-      keyword3: '',
-      keyword4: '',
+      keyword1: "",
+      keyword2: "",
+      keyword3: "",
+      keyword4: "",
     });
 
     // 表格数据和选中的供应商的响应式对象
     const tableData = ref([]);
     const selectedSupplier = ref(null);
     // 当前激活的标签页
-    const activeTab = ref('common');
+    const activeTab = ref("common");
     // 搜索查询内容的响应式对象
-    const searchQuery = ref('');
+    const searchQuery = ref("");
 
     // 导航到指定路径
     function navigateTo(path) {
@@ -281,47 +282,38 @@ export default {
       try {
         if (!searchQuery.value) {
           ElMessageBox.alert(
-            'Please enter a Supplier ID before searching.',
-            'No Input',
+            "Please enter a Supplier ID before searching.",
+            "No Input",
             {
-              confirmButtonText: 'OK',
-              type: 'warning',
+              confirmButtonText: "OK",
+              type: "warning",
             }
           );
           return;
         }
 
-        const response = await axios.post(
-          '/supplier/query',
-          {
-            supplierID: searchQuery.value,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token_value}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const response = await axios.post("/api/supplier/query", {
+          supplierID: searchQuery.value,
+        });
 
         if (response.data.code === 200 && response.data.data.length > 0) {
           selectedSupplier.value = response.data.data[0];
         } else {
           ElMessageBox.alert(
-            'No supplier found with the given ID.',
-            'Search Failed',
+            "No supplier found with the given ID.",
+            "Search Failed",
             {
-              confirmButtonText: 'OK',
-              type: 'error',
+              confirmButtonText: "OK",
+              type: "error",
             }
           );
           selectedSupplier.value = null;
         }
       } catch (error) {
-        console.error('Error fetching supplier data:', error);
-        ElMessageBox.alert('Failed to fetch supplier data!', 'Error', {
-          confirmButtonText: 'OK',
-          type: 'error',
+        console.error("Error fetching supplier data:", error);
+        ElMessageBox.alert("Failed to fetch supplier data!", "Error", {
+          confirmButtonText: "OK",
+          type: "error",
         });
       }
     }
@@ -336,50 +328,41 @@ export default {
           !filters.value.keyword4
         ) {
           ElMessageBox.alert(
-            'Please enter at least one filter criterion.',
-            'No Filters',
+            "Please enter at least one filter criterion.",
+            "No Filters",
             {
-              confirmButtonText: 'OK',
-              type: 'warning',
+              confirmButtonText: "OK",
+              type: "warning",
             }
           );
           return;
         }
 
-        const response = await axios.post(
-          '/supplier/query',
-          {
-            suppliername: filters.value.keyword1,
-            country: filters.value.keyword2,
-            contactInfo: filters.value.keyword3,
-            userID: filters.value.keyword4,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token_value}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const response = await axios.post("/api/supplier/query", {
+          suppliername: filters.value.keyword1,
+          country: filters.value.keyword2,
+          contactInfo: filters.value.keyword3,
+          userID: filters.value.keyword4,
+        });
 
         if (response.data.code === 200 && response.data.data.length > 0) {
           tableData.value = response.data.data;
         } else {
           ElMessageBox.alert(
-            'No results found with the given filters.',
-            'Filter Results',
+            "No results found with the given filters.",
+            "Filter Results",
             {
-              confirmButtonText: 'OK',
-              type: 'warning',
+              confirmButtonText: "OK",
+              type: "warning",
             }
           );
           tableData.value = [];
         }
       } catch (error) {
-        console.error('Error filtering results:', error);
-        ElMessageBox.alert('Failed to fetch results!', 'Error', {
-          confirmButtonText: 'OK',
-          type: 'error',
+        console.error("Error filtering results:", error);
+        ElMessageBox.alert("Failed to fetch results!", "Error", {
+          confirmButtonText: "OK",
+          type: "error",
         });
       }
     }
@@ -388,14 +371,14 @@ export default {
     const handleModifyClick = async () => {
       if (selectedSupplier.value) {
         const supplierID = selectedSupplier.value.supplierID;
-        router.push({ name: 'ModifySupplier', params: { id: supplierID } });
+        router.push({ name: "ModifySupplier", params: { id: supplierID } });
       } else {
         ElMessageBox.alert(
-          'Please select a supplier to modify.',
-          'No Supplier Selected',
+          "Please select a supplier to modify.",
+          "No Supplier Selected",
           {
-            confirmButtonText: 'OK',
-            type: 'warning',
+            confirmButtonText: "OK",
+            type: "warning",
           }
         );
       }
@@ -413,7 +396,7 @@ export default {
 
     // 切换标签页
     function switchTab() {
-      activeTab.value = activeTab.value === 'common' ? 'vendor' : 'common';
+      activeTab.value = activeTab.value === "common" ? "vendor" : "common";
     }
 
     return {
@@ -435,7 +418,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 .supplier {
   background: linear-gradient(
     to bottom,
@@ -537,7 +520,7 @@ export default {
   margin-bottom: 5px;
   display: inline-block;
   width: 120px; /* 设置标签的固定宽度 */
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
   color: #498be6;
 }
 
@@ -546,7 +529,7 @@ export default {
   margin-bottom: 5px;
   display: inline-block;
   width: 160px; /* 设置标签的固定宽度 */
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
   color: #498be6;
 }
 
@@ -555,7 +538,7 @@ export default {
   margin-bottom: 20px;
   display: inline-block;
   width: 190px; /* 设置固定宽度 */
-  font-family: 'Inter', sans;
+  font-family: "Inter", sans;
 }
 .divider {
   margin-top: 15px; /* 设置分割线的上边距 */
