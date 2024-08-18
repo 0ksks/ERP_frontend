@@ -68,6 +68,7 @@ export default {
   },
   methods: {
     find() {
+      console.log(this.poDetail)
       if (!this.searchPO) {
         // 如果搜索项为空，则显示用于查找的弹出框
         this.search = true;
@@ -75,13 +76,20 @@ export default {
         // 如果搜索项有内容，则直接执行查找操作
         this.search = false;
         this.queryByPO(this.searchPO);
-        this.routeToCreate(this.poDetail);
+        if(this.poDetail){
+          this.routeToCreate(this.poDetail);
+        }
       }
     },
     queryByPO(searchPO) {
       axios
         .post("/api/purchase_order/query", {
-          purchaseOrderID: searchPO.value,
+          purchaseOrderID: searchPO.value
+        }, {
+          headers: {
+            // Authorization: `Bearer ${token_value}`,
+            "Content-Type": "application/json"
+          }
         })
         .then((response) => {
           if (response.status === 200) {
@@ -110,7 +118,12 @@ export default {
       //query By UserID(search term)
       axios
         .post("/api/purchase_order/query", {
-          userID: sterm.value,
+          userID: sterm.value
+        }, {
+          headers: {
+            Authorization: `Bearer ${token_value}`,
+            "Content-Type": "application/json"
+          }
         })
         .then((response) => {
           if (response.status === 200) {

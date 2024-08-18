@@ -72,8 +72,8 @@
     >
       <vxe-column type="seq" width="70"></vxe-column>
       <vxe-column
-        field="materialId"
-        title="Material ID"
+        field="stockId"
+        title="Stock ID"
         :edit-render="{ name: 'input' }"
         width="180"
       ></vxe-column>
@@ -140,7 +140,13 @@ const totalPrice = ref(0.0);
 //根据订单号查询并展示订单
 const find = () => {
   axios
-    .post("/api/purchase_order/query", { purchaseOrderID: poNum.value })
+    .get("/api/purchase_order/query", {
+      params: { purchaseOrderID: poNum.value },
+      headers: {
+        Authorization: `Bearer ${token_value}`,
+        "Content-Type": "application/json",
+      },
+    })
     .then((response) => {
       if (response.status === 200) {
         // 处理正常的响应情况
@@ -166,7 +172,7 @@ const updateData = (responseData) => {
   // 假设 responseData 是一个数组，每个元素都是一个采购订单的信息
   if (Array.isArray(responseData)) {
     poData.value = responseData.map((order) => ({
-      materialId: order.materialId,
+      stockId: order.stockId,
       quantity: order.quantity,
       netPrice: order.netPrice,
       currency: order.currency,
@@ -237,21 +243,29 @@ const save = () => {
   const purchaseOrderItems = poData.value
     .filter((item) => item.quantity && item.netPrice)
     .map((item) => ({
-      materialID: item.materialId,
+      stockId: item.stockId,
       quantity: item.quantity,
-      netPrice: item.netPrice, //未单独定义为float，因为js好像不定义数据类型
+      netPrice: item.netPrice, 
       currency: item.currency,
       purchasingGroup: item.purchasingGroup,
       purchasingOrganization: item.purchasingOrganization,
       plant: item.plant,
       paymentTerms: item.paymentTerms,
     }))[0];
-  // 注意这里是将完整的表单重新覆盖原有的表单，而并非原始的Patch路径，可能需要和端口部分的同学商量一下，下面有Patch版本的
   axios
-    .post("/api/purchase_order/update", {
-      ...metaData.value,
-      ...purchaseOrderItems,
-    })
+    .post(
+      "/api/purchase_order/update",
+      {
+        ...metaData.value,
+        ...purchaseOrderItems,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token_value}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
     .then((response) => {
       if (response.status === 200) {
         // 显示成功提示

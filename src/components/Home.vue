@@ -21,7 +21,7 @@
           Material Maters For Trading Goods
         </div>
         <div style="font-size: 3.5vh; margin-right: 3vh; margin-top: 7vh">
-          <el-icon> <Document /> </el-icon>
+          <el-icon> <Box /> </el-icon>
         </div>
       </button>
 
@@ -30,23 +30,23 @@
           Stock
         </div>
         <div style="font-size: 3.5vh; margin-right: 3vh; margin-top: 7vh">
-          <el-icon> <Document /> </el-icon>
+          <el-icon><TrendCharts /></el-icon>
         </div>
       </button>
 
       <button class="patch" @click="navigateTo('/po')" type="button">
-        <div style="font-size: 2vh; margin-left: 3vh; margin-top: 3vh">PO</div>
+        <div style="font-size: 2vh; margin-left: 3vh; margin-top: 3vh">Purchase Order</div>
         <div style="font-size: 3.5vh; margin-right: 3vh; margin-top: 7vh">
-          <el-icon> <Document /> </el-icon>
+          <el-icon><DocumentAdd /></el-icon>
         </div>
       </button>
 
       <button class="patch" @click="navigateTo('/rec')" type="button">
         <div style="font-size: 2vh; margin-left: 3vh; margin-top: 3vh">
-          Receipt
+          Goods Receipt
         </div>
         <div style="font-size: 3.5vh; margin-right: 3vh; margin-top: 7vh">
-          <el-icon> <Document /> </el-icon>
+          <el-icon><Checked /></el-icon>
         </div>
       </button>
       <button class="patch" @click="navigateTo('/DocumentFlow')" type="button">
