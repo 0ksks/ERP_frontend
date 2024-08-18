@@ -155,9 +155,9 @@ export default {
     },
     fetchData(poDetail) {
       axios
-        .post("/api/purchase_order/query", 
-          { purchaseOrderID: poDetail }
-        )
+        .post("/api/purchase_order/query", {
+          purchaseOrderID: poDetail,
+        })
         .then((response) => {
           if (response.status === 200) {
             console.log("Purchase Orders Found:", response.data);
@@ -202,12 +202,8 @@ export default {
     },
     queryStock(stockId) {
       axios
-        .get("/stock/query", {
-          params: { stockID: stockId },
-          headers: {
-            Authorization: "Bearer YOUR_ACCESS_TOKEN", // 更改 token
-            "Content-Type": "application/json",
-          },
+        .post("/stock/query", {
+          stockID: stockId,
         })
         .then((response) => {
           if (response.status === 200) {
@@ -244,16 +240,9 @@ export default {
       const requestBody = {
         ...this.metaData,
         items: goodsReceiptItems,
-        //user ID
       };
       axios
-        .post("/goods_receipt/create", requestBody, {
-          headers: {
-            // 这里要更换为调试用的用户token
-            Authorization: "Bearer YOUR_ACCESS_TOKEN",
-            "Content-Type": "application/json",
-          },
-        })
+        .post("/goods_receipt/create", requestBody)
         .then((response) => {
           if (response.status === 201) {
             // 显示成功提示

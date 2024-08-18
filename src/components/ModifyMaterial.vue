@@ -268,12 +268,7 @@ export default {
         const response = await axios.post(
           "/api/material/query",
           { materialID:materialID },
-          {
-            headers: {
-              Authorization: `Bearer ${token_value}`,
-              "Content-Type": "application/json",
-            },
-          }
+          
         );
 
         if (response.data.code === 200 && response.data.data.length > 0) {

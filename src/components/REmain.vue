@@ -80,9 +80,9 @@ export default {
     },
     queryByPO(searchPO) {
       axios
-        .post("/api/purchase_order/query", 
-           { purchaseOrderID: searchPO.value },
-        )
+        .post("/api/purchase_order/query", {
+          purchaseOrderID: searchPO.value,
+        })
         .then((response) => {
           if (response.status === 200) {
             // 处理正常的响应情况
@@ -109,9 +109,9 @@ export default {
     go(sterm) {
       //query By UserID(search term)
       axios
-        .post("/api/purchase_order/query", 
-          { userID: sterm.value }
-        )
+        .post("/api/purchase_order/query", {
+          userID: sterm.value,
+        })
         .then((response) => {
           if (response.status === 200) {
             // 处理正常的响应情况

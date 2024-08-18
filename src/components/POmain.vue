@@ -190,17 +190,16 @@ export default {
       this.poDetail = poNumber;
     },
     queryByPO(searchPO) {
-      axios.post("/api/purchase_order/query", 
-          { purchaseOrderID: searchPO.value },
-        )
+      axios
+        .post("/api/purchase_order/query", {
+          purchaseOrderID: searchPO.value,
+        })
         .then((response) => {
           if (response.status === 200) {
             // 处理正常的响应情况
-
             console.log("Purchase Orders Found:", response.data);
             // 更新数据
             this.updateData(response.data);
-            this.poDetail = response.data.purchaseOrderID; //根据返回值情况修改
           } else if (response.status === 204) {
             // 处理订单未找到的情况
             console.log("Response:", response);
@@ -235,11 +234,11 @@ export default {
       }
     },
     go(sterm) {
-      //query By UserID(search term)
+      // query By UserID(search term)
       this.result = true;
       axios
         .post("/api/purchase_order/query", {
-          userID: sterm.value
+          userID: sterm.value,
         })
         .then((response) => {
           if (response.status === 200) {

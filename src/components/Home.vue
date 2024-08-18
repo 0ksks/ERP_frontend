@@ -25,9 +25,9 @@
         </div>
       </button>
 
-      <button class="patch" @click="navigateTo('/DocumentFlow')" type="button">
+      <button class="patch" @click="navigateTo('/Stock')" type="button">
         <div style="font-size: 2vh; margin-left: 3vh; margin-top: 3vh">
-          Document Flow
+          Stock
         </div>
         <div style="font-size: 3.5vh; margin-right: 3vh; margin-top: 7vh">
           <el-icon> <Document /> </el-icon>
@@ -49,6 +49,15 @@
           <el-icon> <Document /> </el-icon>
         </div>
       </button>
+      <button class="patch" @click="navigateTo('/DocumentFlow')" type="button">
+        <div style="font-size: 2vh; margin-left: 3vh; margin-top: 3vh">
+          Document Flow
+        </div>
+        <div style="font-size: 3.5vh; margin-right: 3vh; margin-top: 7vh">
+          <el-icon> <Document /> </el-icon>
+        </div>
+      </button>
+      
 
       <!-- <el-button @click="navigateTo('/Stock')"></el-button> -->
     </div>

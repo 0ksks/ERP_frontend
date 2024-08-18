@@ -237,13 +237,13 @@ const save = () => {
     .filter((item) => item.quantity && item.netPrice)
     .map((item) => ({
       quantity: item.quantity,
-      netPrice: item.netPrice, //未单独定义为float，因为js好像不定义数据类型
+      netPrice: item.netPrice,
       currency: item.currency,
       purchasingGroup: item.purchasingGroup,
       purchasingOrganization: item.purchasingOrganization,
       plant: item.plant,
       paymentTerms: item.paymentTerms,
-    }));
+    }))[0];
 
   const stockItems = poData.value
     .filter((item) => item.quantity && item.netPrice)
@@ -259,20 +259,7 @@ const save = () => {
       quantity: item.quantity,
     }));
   axios
-    .post(
-      "/api/stock/create",
-      {
-        items: stockItems,
-        // userID
-      },
-      {
-        headers: {
-          // 这里要更换为调试用的用户token
-          // Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    .post("/api/stock/create", stockItems[0])
     .then((response) => {
       if (response.status === 201) {
         // 显示成功提示
@@ -287,23 +274,11 @@ const save = () => {
       console.error("Error creating stock", error);
     });
 
-  axios
-    .post(
-      "/api/purchase_order/create",
-      {
-        ...metaData.value,
-        items: purchaseOrderItems,
-        stockID: stockID,
-        // userID 按文档里面说要加，但是我觉得更换下面的用户token可能已经有了，如果不行的话在这行加上
-      },
-      {
-        headers: {
-          // 这里要更换为调试用的用户token
-          // Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-          "Content-Type": "application/json",
-        },
-      }
-    )
+  axios.post("/api/purchase_order/create", {
+      ...metaData.value,
+      ...purchaseOrderItems,
+      stockID: stockID.value,
+    })
     .then((response) => {
       if (response.status === 201) {
         // 显示成功提示
