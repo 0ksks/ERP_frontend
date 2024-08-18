@@ -6,7 +6,7 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import * as ElIconList from "@element-plus/icons-vue";
 import "./assets/styles.css"; // 引入全局样式
-import axios from 'axios'
+import axios from './utils/axios.js'
 // 引入 Mock 服务
 // import './mocks/Supplier.js';
 // import './mocks/Material.js';

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import store from './store'; // 引入Vuex store
+import store from '../store'; // 引入Vuex store
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // API的base_url
+  baseURL: "", // API的base_url
   timeout: 5000, // 请求超时时间
 });
 
@@ -11,10 +11,10 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
       config.headers["Content-Type"] = "application/json"
-
+      console.log(store.state.token);
+      
     // 可以在请求发送之前做一些处理，例如加入token
     if (config.url.includes('/login') || config.url.includes('/register')) {
-      
       return config;
     }
     if (store.state.token) {
@@ -27,3 +27,5 @@ service.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+export default service;

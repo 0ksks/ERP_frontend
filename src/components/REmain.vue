@@ -68,7 +68,6 @@ export default {
   },
   methods: {
     find() {
-      console.log(this.poDetail)
       if (!this.searchPO) {
         // 如果搜索项为空，则显示用于查找的弹出框
         this.search = true;
@@ -84,18 +83,13 @@ export default {
     queryByPO(searchPO) {
       axios
         .post("/api/purchase_order/query", {
-          purchaseOrderID: searchPO.value
-        }, {
-          headers: {
-            // Authorization: `Bearer ${token_value}`,
-            "Content-Type": "application/json"
-          }
+          purchaseOrderID: searchPO
         })
         .then((response) => {
           if (response.status === 200) {
             // 处理正常的响应情况
             console.log("Purchase Orders Found:", response.data);
-            this.poDetail = response.data.purchaseOrderID; //根据返回值情况修改
+            this.poDetail = response.data ; //根据返回值情况修改
           } else if (response.status === 204) {
             // 处理订单未找到的情况
             console.log("Response:", response);
@@ -119,11 +113,6 @@ export default {
       axios
         .post("/api/purchase_order/query", {
           userID: sterm.value
-        }, {
-          headers: {
-            Authorization: `Bearer ${token_value}`,
-            "Content-Type": "application/json"
-          }
         })
         .then((response) => {
           if (response.status === 200) {

@@ -163,7 +163,8 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import axios from "axios";
+import axios from "../utils/axios";
+// import axios from "axios";
 import { ElMessage } from "element-plus";
 
 const supplierID = ref("");
@@ -268,16 +269,17 @@ const save = () => {
           type: "success",
         });
       }
-      stockID.value = response.data;
+      stockID.value = response.data.data;
     })
     .catch((error) => {
       console.error("Error creating stock", error);
     });
 
-  axios.post("/api/purchase_order/create", {
+  axios
+    .post("/api/purchase_order/create", {
       ...metaData.value,
       ...purchaseOrderItems,
-      stockID: stockID.value,
+      stockID: stockID.value.stockID,
     })
     .then((response) => {
       if (response.status === 201) {
@@ -290,7 +292,7 @@ const save = () => {
       console.log("Purchase Orders Created:", response.data);
 
       // 显示创建完成后的订单号，可能需要根据不同的response进行调整
-      standardPOnum.value = response.data;
+      standardPOnum.value = response.data.data.purchaseOrderID;
     })
     .catch((error) => {
       console.error("Error creating Purchase Orders:", error);
