@@ -1,12 +1,14 @@
 <template>
-  <el-container class="material">
+  <el-container class="DocumentFlow">
     <el-header class="header">
+      <!-- 头部区域 -->
       <el-icon class="House" @click="navigateTo('/')">
         <House />
       </el-icon>
       <span class="title">Display Document Flow</span>
     </el-header>
 
+    <!-- 搜索输入区域 -->
     <el-row class="input">
       <el-col :span="8"></el-col>
 
@@ -28,7 +30,7 @@
       </el-col>
     </el-row>
 
-    <!-- 筛选出的记录 -->
+    <!-- 显示筛选后的记录 -->
     <div>
       <el-table
         :data="filteredTableData"
@@ -64,59 +66,68 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import axios from "axios";
-import { ElMessageBox } from "element-plus";
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
+import { ElMessageBox } from 'element-plus';
 
 export default {
   setup() {
-    const searchQuery = ref(""); // Use searchQuery for user input
-    const filteredTableData = ref([]);
+     // 定义响应式数据
+    const searchQuery = ref(''); //存储用户输入的userID
+    const filteredTableData = ref([]);//存储筛选后表格数据
     const router = useRouter();
 
+    // 根据用户ID获取数据函数——{{在applyFilter函数中调用}}
     async function fetchData(userID) {
       try {
-        const response = await axios.get(
-          "/api/document_flow/display_success/finished",
-          {
-            params: { userID },
-          }
-        );
-        if (response.data.code === 1 && response.data.data.length > 0) {
-          filteredTableData.value = response.data.data;
-        } else {
-          filteredTableData.value = []; // Clear data if no results
-          ElMessageBox.alert(
-            "No records found with the given ID.",
-            "Search Failed",
-            {
-              confirmButtonText: "OK",
-              type: "error",
-            }
-          );
+        // 发起 POST 请求获取数据
+        const response = await axios.post('/document_flow/display',
+      {
+        userID: userID// 请求体，包含用户ID
+      },
+      // 设置请求头
+      {
+        headers: {
+          'Authorization': `Bearer <token>`,
+          'Content-Type': 'application/json'
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        ElMessageBox.alert("Failed to fetch data!", "Error", {
-          confirmButtonText: "OK",
-          type: "error",
-        });
       }
+    );
+    if (response.data.code === 1 && response.data.data.length > 0) {
+      // 获取到有效数据，则更新表格内容
+      filteredTableData.value = response.data.data;
+    } else {
+      // 没有找到记录，则清空数据，弹出提示框
+      filteredTableData.value = []; 
+      ElMessageBox.alert(
+        'No records found with the given ID.',
+        'Search Failed',
+        {
+          confirmButtonText: 'OK',
+          type: 'error',
+        }
+      );
     }
-
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    ElMessageBox.alert('Failed to fetch data!', 'Error', {
+      confirmButtonText: 'OK',
+      type: 'error',
+    });
+  }
+}
+    //调用fetchData函数——{{点击GO按钮时调用}}
     function applyFilter() {
-      fetchData(searchQuery.value); // Pass searchQuery to fetchData
+      fetchData(searchQuery.value); 
     }
 
+    // 导航到指定路径
     function navigateTo(path) {
       router.push(path);
     }
 
-    onMounted(() => {
-      // Fetch initial data if needed
-    });
-    console.log("filteredTableData:", filteredTableData); // 输出过滤后的数据
+    
     return {
       searchQuery,
       filteredTableData,
@@ -128,9 +139,10 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
-.material {
+/* 背景 */
+.DocumentFlow {
   background: linear-gradient(
     to bottom,
     rgba(127, 167, 226, 1),
@@ -142,6 +154,8 @@ export default {
   padding: 0 80px;
   box-sizing: border-box;
 }
+
+/* 头部 */
 .header {
   display: flex;
   align-items: center;
@@ -149,11 +163,13 @@ export default {
   border-bottom: 2px solid black;
 }
 
+/* 返回主页图标 */
 .House {
   font-size: 25px;
   right: 60px;
 }
 
+/* DocumentFlow文字 */
 .title {
   flex-grow: 1;
   font-size: 20px;
@@ -162,20 +178,18 @@ export default {
   color: white;
 }
 
+/* 输入框 */
 .input {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.divider {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
+/* UserID文字 */
 .label {
   font-size: 17px;
 }
 
+/* 表格 */
 .el-table {
   background-color: #fefefee4;
 }
