@@ -1,7 +1,7 @@
 <template>
   <el-container class="DocumentFlow">
     <el-header class="header">
-      <!-- 头部区域 -->
+      <!-- 头部区域，包含主页图标和标题 -->
       <el-icon class="House" @click="navigateTo('/')">
         <House />
       </el-icon>
@@ -10,12 +10,15 @@
 
     <!-- 搜索输入区域 -->
     <el-row class="input">
+      <!-- 占位列 -->
       <el-col :span="8"></el-col>
 
+      <!-- 用户ID标签 -->
       <el-col :span="2">
         <span class="label">User ID :</span>
       </el-col>
 
+      <!-- 用户ID输入框 -->
       <el-col :span="4">
         <el-input
           v-model="searchQuery"
@@ -24,7 +27,10 @@
         ></el-input>
       </el-col>
 
+      <!-- 占位列 -->
       <el-col :span="1"></el-col>
+
+      <!-- GO按钮，应用筛选 -->
       <el-col :span="4">
         <el-button type="primary" @click="applyFilter" plain> GO </el-button>
       </el-col>
@@ -45,16 +51,21 @@
         class="custom-table"
         style="width: 250vh; margin-top: 1vh"
       >
+        <!-- 用户ID列 -->
         <el-table-column
           prop="userID"
           label="userID"
           width="495"
         ></el-table-column>
+
+        <!-- 采购订单ID列 -->
         <el-table-column
           prop="purchaseOrderID"
           label="PurchaseOrderID"
           width="500"
         ></el-table-column>
+
+        <!-- 收货单ID列 -->
         <el-table-column
           prop="goodsReceiptID"
           label="GoodsReceiptID"
@@ -73,60 +84,64 @@ import { ElMessageBox } from 'element-plus';
 
 export default {
   setup() {
-     // 定义响应式数据
-    const searchQuery = ref(''); //存储用户输入的userID
-    const filteredTableData = ref([]);//存储筛选后表格数据
+    // 响应式变量，存储用户输入的User ID
+    const searchQuery = ref('');
+
+    // 响应式变量，存储筛选后的表格数据
+    const filteredTableData = ref([]);
+
+    // Vue Router实例，用于处理导航
     const router = useRouter();
 
-    // 根据用户ID获取数据函数——{{在applyFilter函数中调用}}
+    // 根据用户ID获取数据的函数
     async function fetchData(userID) {
       try {
-        // 发起 POST 请求获取数据
-        const response = await axios.post('/api/document_flow/display',
-      {
-        userID: userID// 请求体，包含用户ID
-      },
-      // 设置请求头
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-    if (response.data.code === 200 && response.data.data.length > 0) {
-      // 获取到有效数据，则更新表格内容
-      filteredTableData.value = response.data.data;
-    } else {
-      // 没有找到记录，则清空数据，弹出提示框
-      filteredTableData.value = []; 
-      ElMessageBox.alert(
-        'No records found with the given ID.',
-        'Search Failed',
+        // 发送POST请求获取数据
+        const response = await axios.post('/api/document_flow/display', {
+          userID: userID
+        },
         {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        // 检查响应并更新表格数据
+        if (response.data.code === 200 && response.data.data.length > 0) {
+          filteredTableData.value = response.data.data;
+        } else {
+          // 如果未找到数据，则清空表格并显示提示框
+          filteredTableData.value = [];
+          ElMessageBox.alert(
+            'No records found with the given ID.',
+            'Search Failed',
+            {
+              confirmButtonText: 'OK',
+              type: 'error',
+            }
+          );
+        }
+      } catch (error) {
+        // 请求失败时的错误处理
+        console.error('Error fetching data:', error);
+        ElMessageBox.alert('Failed to fetch data!', 'Error', {
           confirmButtonText: 'OK',
           type: 'error',
-        }
-      );
+        });
+      }
     }
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    ElMessageBox.alert('Failed to fetch data!', 'Error', {
-      confirmButtonText: 'OK',
-      type: 'error',
-    });
-  }
-}
-    //调用fetchData函数——{{点击GO按钮时调用}}
+
+    // 在点击“GO”按钮时应用筛选的函数
     function applyFilter() {
       fetchData(searchQuery.value); 
     }
 
-    // 导航到指定路径
+    // 导航到指定路径的函数
     function navigateTo(path) {
       router.push(path);
     }
 
-    
+    // 返回响应式变量和方法，供模板使用
     return {
       searchQuery,
       filteredTableData,
@@ -140,7 +155,7 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
-/* 背景 */
+/* 全局背景样式 */
 .DocumentFlow {
   background: linear-gradient(
     to bottom,
@@ -154,7 +169,7 @@ export default {
   box-sizing: border-box;
 }
 
-/* 头部 */
+/* 头部样式 */
 .header {
   display: flex;
   align-items: center;
@@ -162,13 +177,13 @@ export default {
   border-bottom: 2px solid black;
 }
 
-/* 返回主页图标 */
+/* 主页图标样式 */
 .House {
   font-size: 25px;
   right: 60px;
 }
 
-/* DocumentFlow文字 */
+/* 标题样式 */
 .title {
   flex-grow: 1;
   font-size: 20px;
@@ -177,18 +192,18 @@ export default {
   color: white;
 }
 
-/* 输入框 */
+/* 输入区域样式 */
 .input {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-/* UserID文字 */
+/* 标签样式 */
 .label {
   font-size: 17px;
 }
 
-/* 表格 */
+/* 表格样式 */
 .el-table {
   background-color: #fefefee4;
 }
