@@ -113,8 +113,8 @@
               label="Supplier ID"
             ></el-table-column>
             <el-table-column
-              prop="suppliername"
-              label="SupplierName"
+              prop="supplierName"
+              label="supplierName"
             ></el-table-column>
             <el-table-column prop="userID" label="User ID"></el-table-column>
           </el-table>
@@ -135,7 +135,7 @@
               }}</span>
               <span class="text-label">Supplier Name :</span>
               <span class="text-value">{{
-                selectedSupplier.suppliername || "000000"
+                selectedSupplier.supplierName || "000000"
               }}</span>
               <span class="text-label">BP Role :</span>
               <span class="text-value">{{
@@ -339,12 +339,13 @@ export default {
         }
 
         const response = await axios.post("/api/supplier/query", {
-          suppliername: filters.value.keyword1,
+          supplierName: filters.value.keyword1,
           country: filters.value.keyword2,
           contactInfo: filters.value.keyword3,
           userID: filters.value.keyword4,
         });
-
+        console.log(response.data);
+        
         if (response.data.code === 200 && response.data.data.length > 0) {
           tableData.value = response.data.data;
         } else {

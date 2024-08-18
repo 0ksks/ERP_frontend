@@ -26,7 +26,7 @@
       </el-col>
       <!-- 显示供应商 ID 的输入框，禁用状态 -->
       <el-col :span="5">
-        <el-input v-model="form.supplierIDr" class="value" disabled></el-input>
+        <el-input v-model="form.supplierID" class="value" disabled></el-input>
       </el-col>
       <!-- 创建业务合作伙伴角色标签 -->
       <el-col :span="3">
@@ -65,7 +65,7 @@
                   <el-col :span="8">
                     <el-form-item label="Supplier Name:">
                       <el-input
-                        v-model="selectedSupplier.suppliername"
+                        v-model="selectedSupplier.supplierName"
                         class="text-value"
                       ></el-input>
                     </el-form-item>
@@ -306,7 +306,7 @@ export default {
     const router = useRouter();
     // 供应商表单数据的响应式对象
     const form = ref({
-      suppliername: "",
+      supplierName: "",
       communicationLang: "",
       taxNumber: "",
       companyCode: "",
@@ -325,6 +325,7 @@ export default {
       contactInfo: "",
       userID: "",
     });
+    const selectedSupplier = form;
 
     // 当前激活的标签页
     const activeTab = ref("common");
@@ -347,7 +348,7 @@ export default {
     async function saveSupplier() {
       // 验证表单是否填写完整
       if (
-        !form.value.suppliername ||
+        !form.value.supplierName ||
         !form.value.communicationLang ||
         !form.value.taxNumber ||
         !form.value.companyCode
@@ -379,7 +380,7 @@ export default {
           );
           // 清空表单
           form.value = {
-            suppliername: "",
+            supplierName: "",
             communicationLang: "",
             taxNumber: "",
             companyCode: "",

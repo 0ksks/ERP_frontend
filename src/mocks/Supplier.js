@@ -28,7 +28,7 @@ mock.onPatch("/api/supplier/update_not_found").reply(404, {
 const mockData = [
   {
     supplierID: "supplierID_value1",
-    suppliername: "suppliername_value1",
+    supplierName: "supplierName_value1",
     communicationLang: "communicationLang_value1",
     taxNumber: "taxNumber_value1",
     companyCode: "companyCode_value1",
@@ -49,7 +49,7 @@ const mockData = [
   },
   {
     supplierID: "supplierID_value2",
-    suppliername: "suppliername_value2",
+    supplierName: "supplierName_value2",
     communicationLang: "communicationLang_value2",
     taxNumber: "taxNumber_value2",
     companyCode: "companyCode_value2",
@@ -72,7 +72,7 @@ const mockData = [
 
 // Mock for GET /supplier/query
 mock.onGet("/api/supplier/query_success").reply((config) => {
-  const { supplierID, suppliername, country, contactInfo, userID } =
+  const { supplierID, supplierName, country, contactInfo, userID } =
     config.params;
 
   // 过滤数据
@@ -83,9 +83,9 @@ mock.onGet("/api/supplier/query_success").reply((config) => {
       (item) => item.supplierID === supplierID
     );
   }
-  if (suppliername) {
+  if (supplierName) {
     filteredData = filteredData.filter((item) =>
-      item.suppliername.includes(suppliername)
+      item.supplierName.includes(supplierName)
     );
   }
   if (country) {

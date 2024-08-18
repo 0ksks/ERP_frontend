@@ -42,7 +42,7 @@
                 <el-col :span="8">
                   <span class="text-label">Supplier Name :</span>
                   <el-input
-                    v-model="selectedSupplier.suppliername"
+                    v-model="selectedSupplier.supplierName"
                     class="text-value"
                   />
                 </el-col>
@@ -274,7 +274,7 @@ export default {
     const fetchSupplierDetails = async (supplierID) => {
       try {
         const response = await axios.post("/api/supplier/query", {
-          supplierID:supplierID
+          supplierID: supplierID,
         });
 
         // 如果返回数据正常，更新 selectedSupplier，否则显示错误提示
@@ -332,7 +332,7 @@ export default {
       try {
         const response = await axios.patch(
           "/api/supplier/update",
-          selectedSupplier.value,
+          selectedSupplier.value
         );
 
         // 如果保存成功，显示成功消息，否则显示错误消息
