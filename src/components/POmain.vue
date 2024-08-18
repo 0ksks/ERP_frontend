@@ -190,14 +190,9 @@ export default {
       this.poDetail = poNumber;
     },
     queryByPO(searchPO) {
-      axios
-        .get("/purchase_order/query", {
-          params: { purchaseOrderID: searchPO.value },
-          headers: {
-            Authorization: "Bearer YOUR_ACCESS_TOKEN", // 更改 token
-            "Content-Type": "application/json",
-          },
-        })
+      axios.post("/api/purchase_order/query", 
+          { purchaseOrderID: searchPO.value },
+        )
         .then((response) => {
           if (response.status === 200) {
             // 处理正常的响应情况
@@ -243,12 +238,8 @@ export default {
       //query By UserID(search term)
       this.result = true;
       axios
-        .get("/purchase_order/query", {
-          params: { userID: sterm.value },
-          headers: {
-            Authorization: "Bearer YOUR_ACCESS_TOKEN", // 更改 token
-            "Content-Type": "application/json",
-          },
+        .post("/api/purchase_order/query", {
+          userID: sterm.value
         })
         .then((response) => {
           if (response.status === 200) {

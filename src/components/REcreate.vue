@@ -155,13 +155,9 @@ export default {
     },
     fetchData(poDetail) {
       axios
-        .get("/purchase_order/query", {
-          params: { purchaseOrderID: poDetail },
-          headers: {
-            Authorization: "Bearer YOUR_ACCESS_TOKEN", // 更改 token
-            "Content-Type": "application/json",
-          },
-        })
+        .post("/api/purchase_order/query", 
+          { purchaseOrderID: poDetail }
+        )
         .then((response) => {
           if (response.status === 200) {
             console.log("Purchase Orders Found:", response.data);

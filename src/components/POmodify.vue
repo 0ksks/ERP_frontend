@@ -140,13 +140,9 @@ const totalPrice = ref(0.0);
 //根据订单号查询并展示订单
 const find = () => {
   axios
-    .get("/purchase_order/query", {
-      params: { purchaseOrderID: poNum.value },
-      headers: {
-        Authorization: "Bearer YOUR_ACCESS_TOKEN", // 改token
-        "Content-Type": "application/json",
-      },
-    })
+    .get("/api/purchase_order/query", 
+      { purchaseOrderID: poNum.value },
+    )
     .then((response) => {
       if (response.status === 200) {
         // 处理正常的响应情况
@@ -287,13 +283,8 @@ const save = () => {
     ...metaData.value,
     items: purchaseOrderItems,
     // userID
-  }, {
-    headers: {
-      // 更换token
-      // Authorization: 'Bearer YOUR_ACCESS_TOKEN',
-      'Content-Type': 'application/json',
-    },
-  })
+  },
+  )
   .then(response => {
       if (response.status === 200) {
       // 显示成功提示
