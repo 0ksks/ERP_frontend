@@ -252,10 +252,10 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import axios from "axios";
-import { ElMessageBox } from "element-plus";
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
+import { ElMessageBox } from 'element-plus';
 
 export default {
   setup() {
@@ -263,30 +263,36 @@ export default {
     const router = useRouter();
     const selectedMaterial = ref(null);
 
-    const fetchMaterialDetails = async (materialID) => {
+    const fetchMaterialDetails = async materialID => {
       try {
-        const response = await axios.get("/api/material/query_success", {
-          params: { materialID },
-        });
+        const response = await axios.post('/api/material/query', 
+          { materialID }, 
+          { 
+            headers: {
+              Authorization: `Bearer ${token_value}`,
+              'Content-Type': 'application/json'
+            }
+          }
+        );
 
-        if (response.data.code === 1 && response.data.data.length > 0) {
+        if (response.data.code === 200 && response.data.data.length > 0) {
           selectedMaterial.value = response.data.data[0];
         } else {
           ElMessageBox.alert(
-            "No material found with the given ID.",
-            "Search Failed",
+            'No material found with the given ID.',
+            'Search Failed',
             {
-              confirmButtonText: "OK",
-              type: "error",
+              confirmButtonText: 'OK',
+              type: 'error',
             }
           );
           selectedMaterial.value = null;
         }
       } catch (error) {
-        console.error("Error fetching material data:", error);
-        ElMessageBox.alert("Failed to fetch material data!", "Error", {
-          confirmButtonText: "OK",
-          type: "error",
+        console.error('Error fetching material data:', error);
+        ElMessageBox.alert('Failed to fetch material data!', 'Error', {
+          confirmButtonText: 'OK',
+          type: 'error',
         });
       }
     };
@@ -296,52 +302,57 @@ export default {
       if (materialID) {
         fetchMaterialDetails(materialID);
       } else {
-        ElMessageBox.alert("No Material ID provided.", "Error", {
-          confirmButtonText: "OK",
-          type: "error",
+        ElMessageBox.alert('No Material ID provided.', 'Error', {
+          confirmButtonText: 'OK',
+          type: 'error',
         });
       }
     });
 
-    const navigateTo = (path) => {
+    const navigateTo = path => {
       router.push(path);
     };
 
     const saveMaterial = async () => {
       if (!selectedMaterial.value) {
-        ElMessageBox.alert("No material data to save.", "Error", {
-          confirmButtonText: "OK",
-          type: "error",
+        ElMessageBox.alert('No material data to save.', 'Error', {
+          confirmButtonText: 'OK',
+          type: 'error',
         });
         return;
       }
 
       try {
-        const response = await axios.patch(
-          "/api/material/update_success",
-          selectedMaterial.value
+        const response = await axios.post('/api/material/save',
+          selectedMaterial.value,
+          {
+            headers: {
+              Authorization: `Bearer ${token_value}`,
+              'Content-Type': 'application/json'
+            }
+          }
         );
 
-        if (response.data.code === 1) {
+        if (response.data.code === 200) {
           ElMessageBox.alert(
-            "Material information saved successfully!",
-            "Success",
+            'Material information saved successfully!',
+            'Success',
             {
-              confirmButtonText: "OK",
-              type: "success",
+              confirmButtonText: 'OK',
+              type: 'success',
             }
           );
         } else {
-          ElMessageBox.alert("Failed to save material information.", "Error", {
-            confirmButtonText: "OK",
-            type: "error",
+          ElMessageBox.alert('Failed to save material information.', 'Error', {
+            confirmButtonText: 'OK',
+            type: 'error',
           });
         }
       } catch (error) {
-        console.error("Error saving material data:", error);
-        ElMessageBox.alert("Failed to save material data!", "Error", {
-          confirmButtonText: "OK",
-          type: "error",
+        console.error('Error saving material data:', error);
+        ElMessageBox.alert('Failed to save material data!', 'Error', {
+          confirmButtonText: 'OK',
+          type: 'error',
         });
       }
     };
@@ -355,8 +366,9 @@ export default {
 };
 </script>
 
+
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 .material {
   background: linear-gradient(
@@ -414,7 +426,7 @@ export default {
   margin-bottom: 5px;
   display: inline-block;
   width: 120px;
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
   color: #498be6;
 }
 
@@ -423,7 +435,7 @@ export default {
   margin-bottom: 20px;
   display: inline-block;
   width: 190px;
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
 }
 
 .divider {
@@ -434,13 +446,13 @@ export default {
 .label {
   font-size: 14px;
   display: inline-block;
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
 }
 
 .value {
   display: inline-block;
   width: 150px; /* 设置标签的固定宽度 */
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
 }
 
 .top {

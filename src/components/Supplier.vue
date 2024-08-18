@@ -2,6 +2,7 @@
   <el-container class="supplier">
     <!-- Header 区域 -->
     <el-header class="header">
+      <!-- 返回首页的图标 -->
       <el-icon class="House" @click="navigateTo('/')">
         <House />
       </el-icon>
@@ -10,7 +11,7 @@
 
     <!-- Header 下方的一排内容 -->
     <el-row class="top">
-      <!-- Create new button -->
+      <!-- 新建按钮 -->
       <el-col :span="7">
         <el-button
           type="text"
@@ -21,11 +22,12 @@
         </el-button>
       </el-col>
 
-      <!-- Centered content -->
+      <!-- 中间内容：业务伙伴标签 -->
       <el-col :span="3">
         <span class="label">Business Partner :</span>
       </el-col>
 
+      <!-- 输入供应商 ID 的输入框 -->
       <el-col :span="4">
         <el-input
           v-model="searchQuery"
@@ -33,6 +35,8 @@
           class="input-field"
         ></el-input>
       </el-col>
+
+      <!-- 搜索按钮 -->
       <el-col :span="1">
         <el-button
           slot="append"
@@ -40,6 +44,8 @@
           @click="searchSupplier"
         ></el-button>
       </el-col>
+
+      <!-- 修改按钮 -->
       <el-col :span="4">
         <el-button type="primary" @click="handleModifyClick" plain>
           Modify
@@ -49,10 +55,12 @@
 
     <!-- 主体内容区域，包含侧边栏和主要内容 -->
     <el-container>
+      <!-- 侧边栏 -->
       <el-aside width="300px" class="sidebar">
         <div class="find-text">Find</div>
         <div class="sidebar-content">
           <div class="filter-header">Find Supplier By :</div>
+          <!-- 过滤条件表单 -->
           <el-row>
             <el-col :span="24">
               <el-form label-position="left" label-width="118px">
@@ -80,18 +88,19 @@
                     placeholder="Enter keyword..."
                   ></el-input>
                 </el-form-item>
+                <!-- 过滤按钮 -->
                 <el-button
                   type="primary"
                   plain
                   @click="filterResults"
                   style="margin-left: 200px"
-                  >Filter</el-button
-                >
+                >Filter</el-button>
               </el-form>
             </el-col>
           </el-row>
           <br />
           <div class="result-text">Results:</div>
+          <!-- 供应商数据表格 -->
           <el-table
             :data="tableData"
             @row-dblclick="viewDetails"
@@ -111,120 +120,123 @@
         </div>
       </el-aside>
 
-      <!-- 主内容 -->
+      <!-- 主内容区域 -->
       <el-main class="main-content" v-if="selectedSupplier">
         <el-tabs v-model="activeTab">
+          <!-- 通用信息标签页 -->
           <el-tab-pane label="Common" name="common">
             <div>
               <p class="text-title">Primary</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label">Supplier ID :</span>
               <span class="text-value">{{
-                selectedSupplier.supplierID || "000000"
+                selectedSupplier.supplierID || '000000'
               }}</span>
               <span class="text-label">Supplier Name :</span>
               <span class="text-value">{{
-                selectedSupplier.suppliername || "000000"
+                selectedSupplier.suppliername || '000000'
               }}</span>
               <span class="text-label">BP Role :</span>
               <span class="text-value">{{
-                selectedSupplier.partnerFunctions || "000000"
+                selectedSupplier.partnerFunctions || '000000'
               }}</span>
               <p class="text-title">Address</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label">Street Address :</span>
               <span class="text-value">{{
-                selectedSupplier.streetAddress || "000000"
+                selectedSupplier.streetAddress || '000000'
               }}</span>
               <span class="text-label">Postal Code :</span>
               <span class="text-value">{{
-                selectedSupplier.postalCode || "000000"
+                selectedSupplier.postalCode || '000000'
               }}</span>
               <p>
                 <span class="text-label">Country :</span>
                 <span class="text-value">{{
-                  selectedSupplier.country || "000000"
+                  selectedSupplier.country || '000000'
                 }}</span>
                 <span class="text-label">Region :</span>
                 <span class="text-value">{{
-                  selectedSupplier.region || "000000"
+                  selectedSupplier.region || '000000'
                 }}</span>
                 <span class="text-label">City :</span>
                 <span class="text-value">{{
-                  selectedSupplier.city || "000000"
+                  selectedSupplier.city || '000000'
                 }}</span>
               </p>
               <p class="text-title">Communication</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label">Language :</span>
               <span class="text-value">{{
-                selectedSupplier.communicationLang || "000000"
+                selectedSupplier.communicationLang || '000000'
               }}</span>
               <p class="text-title">Contact :</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label">Contact Info :</span>
               <span class="text-value">{{
-                selectedSupplier.contactInfo || "000000"
+                selectedSupplier.contactInfo || '000000'
               }}</span>
               <span class="text-label">User ID:</span>
               <span class="text-value">{{
-                selectedSupplier.userID || "000000"
+                selectedSupplier.userID || '000000'
               }}</span>
             </div>
           </el-tab-pane>
 
+          <!-- 供应商 & 账户 & 支付标签页 -->
           <el-tab-pane label="Vendor & Account & Payment" name="vendor">
             <div>
               <p class="text-title">Tax Data</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Tax Number :</span>
               <span class="text-value">{{
-                selectedSupplier.taxNumber || "000000"
+                selectedSupplier.taxNumber || '000000'
               }}</span>
               <p class="text-title">Account Management</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Reconciliation Acct :</span>
               <span class="text-value">{{
-                selectedSupplier.reconciliationAcct || "000000"
+                selectedSupplier.reconciliationAcct || '000000'
               }}</span>
               <p class="text-title">Payment Data</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Terms of Payments :</span>
               <span class="text-value">{{
-                selectedSupplier.termsOfPayment || "000000"
+                selectedSupplier.termsOfPayment || '000000'
               }}</span>
               <span class="text-label1">Check Double Invoice :</span>
               <span class="text-value">{{
-                selectedSupplier.checkDoubleInvoice || "000000"
+                selectedSupplier.checkDoubleInvoice || '000000'
               }}</span>
               <p class="text-title">Correspondence</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Clerk at Vendor :</span>
               <span class="text-value">{{
-                selectedSupplier.clerkName || "000000"
+                selectedSupplier.clerkName || '000000'
               }}</span>
             </div>
           </el-tab-pane>
 
+          <!-- 采购标签页 -->
           <el-tab-pane label="Purchasing" name="purchasing">
             <div>
               <p class="text-title">Purchasing Organization</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Purch. Organization :</span>
               <span class="text-value">{{
-                selectedSupplier.purchasingOrg || "000000"
+                selectedSupplier.purchasingOrg || '000000'
               }}</span>
               <p class="text-title">Purchase Data</p>
               <el-divider class="divider"></el-divider>
               <span class="text-label1">Order Currency :</span>
               <span class="text-value">{{
-                selectedSupplier.orderCurrency || "000000"
+                selectedSupplier.orderCurrency || '000000'
               }}</span>
             </div>
           </el-tab-pane>
         </el-tabs>
         <br />
-
+        <!-- 切换标签页按钮 -->
         <el-button type="primary" plain @click="switchTab">
           Switch Tab
         </el-button>
@@ -234,80 +246,87 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
-import { ref } from "vue";
-import axios from "axios";
-import { ElMessageBox } from "element-plus";
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import axios from 'axios';
+import { ElMessageBox } from 'element-plus';
 
 export default {
   setup() {
+    // 使用 Vue Router 的导航功能
     const router = useRouter();
+    // 过滤条件的响应式对象
     const filters = ref({
-      keyword1: "",
-      keyword2: "",
-      keyword3: "",
-      keyword4: "",
+      keyword1: '',
+      keyword2: '',
+      keyword3: '',
+      keyword4: '',
     });
 
+    // 表格数据和选中的供应商的响应式对象
     const tableData = ref([]);
     const selectedSupplier = ref(null);
-    const activeTab = ref("common");
-    const searchQuery = ref("");
+    // 当前激活的标签页
+    const activeTab = ref('common');
+    // 搜索查询内容的响应式对象
+    const searchQuery = ref('');
 
+    // 导航到指定路径
     function navigateTo(path) {
       router.push(path);
     }
 
+    // 搜索供应商
     async function searchSupplier() {
       try {
-        // 检查是否输入了搜索关键词
         if (!searchQuery.value) {
           ElMessageBox.alert(
-            "Please enter a Supplier ID before searching.",
-            "No Input",
+            'Please enter a Supplier ID before searching.',
+            'No Input',
             {
-              confirmButtonText: "OK",
-              type: "warning",
+              confirmButtonText: 'OK',
+              type: 'warning',
             }
           );
           return;
         }
 
-        // 发送请求获取指定 Supplier ID 的详细信息
         const response = await axios.post(
-          "/api/supplier/query",
+          '/supplier/query',
           {
             supplierID: searchQuery.value,
           },
           {
             headers: {
-              "Content-Type": "application/json",
+              Authorization: `Bearer ${token_value}`,
+              'Content-Type': 'application/json',
             },
           }
         );
 
         if (response.data.code === 200 && response.data.data.length > 0) {
-          selectedSupplier.value = response.data.data[0]; // 假设返回的 data 是数组，取第一个元素
+          selectedSupplier.value = response.data.data[0];
         } else {
           ElMessageBox.alert(
-            "No supplier found with the given ID.",
-            "Search Failed",
+            'No supplier found with the given ID.',
+            'Search Failed',
             {
-              confirmButtonText: "OK",
-              type: "error",
+              confirmButtonText: 'OK',
+              type: 'error',
             }
           );
           selectedSupplier.value = null;
         }
       } catch (error) {
-        console.error("Error fetching supplier data:", error);
-        ElMessageBox.alert("Failed to fetch supplier data!", "Error", {
-          confirmButtonText: "OK",
-          type: "error",
+        console.error('Error fetching supplier data:', error);
+        ElMessageBox.alert('Failed to fetch supplier data!', 'Error', {
+          confirmButtonText: 'OK',
+          type: 'error',
         });
       }
     }
 
+    // 过滤结果
     async function filterResults() {
       try {
         if (
@@ -317,75 +336,84 @@ export default {
           !filters.value.keyword4
         ) {
           ElMessageBox.alert(
-            "Please enter at least one filter criterion.",
-            "No Filters",
+            'Please enter at least one filter criterion.',
+            'No Filters',
             {
-              confirmButtonText: "OK",
-              type: "warning",
+              confirmButtonText: 'OK',
+              type: 'warning',
             }
           );
           return;
         }
 
-        // 发送请求获取过滤后的结果
-        const response = await axios.get("/api/supplier/query_success", {
-          params: {
+        const response = await axios.post(
+          '/supplier/query',
+          {
             suppliername: filters.value.keyword1,
             country: filters.value.keyword2,
             contactInfo: filters.value.keyword3,
             userID: filters.value.keyword4,
           },
-        });
+          {
+            headers: {
+              Authorization: `Bearer ${token_value}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
 
-        if (response.data.code === 1 && response.data.data.length > 0) {
+        if (response.data.code === 200 && response.data.data.length > 0) {
           tableData.value = response.data.data;
         } else {
           ElMessageBox.alert(
-            "No results found with the given filters.",
-            "Filter Results",
+            'No results found with the given filters.',
+            'Filter Results',
             {
-              confirmButtonText: "OK",
-              type: "warning",
+              confirmButtonText: 'OK',
+              type: 'warning',
             }
           );
           tableData.value = [];
         }
       } catch (error) {
-        console.error("Error filtering results:", error);
-        ElMessageBox.alert("Failed to fetch results!", "Error", {
-          confirmButtonText: "OK",
-          type: "error",
+        console.error('Error filtering results:', error);
+        ElMessageBox.alert('Failed to fetch results!', 'Error', {
+          confirmButtonText: 'OK',
+          type: 'error',
         });
       }
     }
 
+    // 处理修改按钮点击事件
     const handleModifyClick = async () => {
       if (selectedSupplier.value) {
         const supplierID = selectedSupplier.value.supplierID;
-        router.push({ name: "ModifySupplier", params: { id: supplierID } });
+        router.push({ name: 'ModifySupplier', params: { id: supplierID } });
       } else {
         ElMessageBox.alert(
-          "Please select a supplier to modify.",
-          "No Supplier Selected",
+          'Please select a supplier to modify.',
+          'No Supplier Selected',
           {
-            confirmButtonText: "OK",
-            type: "warning",
+            confirmButtonText: 'OK',
+            type: 'warning',
           }
         );
       }
     };
 
+    // 查看供应商详细信息
     function viewDetails(row) {
       selectedSupplier.value = row;
     }
 
+    // 处理当前行的改变事件
     function handleCurrentChange(row) {
       selectedSupplier.value = row;
     }
 
+    // 切换标签页
     function switchTab() {
-      // 切换标签页的逻辑
-      activeTab.value = activeTab.value === "common" ? "vendor" : "common";
+      activeTab.value = activeTab.value === 'common' ? 'vendor' : 'common';
     }
 
     return {
@@ -407,7 +435,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 .supplier {
   background: linear-gradient(
     to bottom,
@@ -509,7 +537,7 @@ export default {
   margin-bottom: 5px;
   display: inline-block;
   width: 120px; /* 设置标签的固定宽度 */
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
   color: #498be6;
 }
 
@@ -518,7 +546,7 @@ export default {
   margin-bottom: 5px;
   display: inline-block;
   width: 160px; /* 设置标签的固定宽度 */
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
   color: #498be6;
 }
 
@@ -526,9 +554,8 @@ export default {
   font-size: 14px;
   margin-bottom: 20px;
   display: inline-block;
-  display: inline-block;
   width: 190px; /* 设置固定宽度 */
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
 }
 .divider {
   margin-top: 15px; /* 设置分割线的上边距 */

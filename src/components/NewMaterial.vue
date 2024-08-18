@@ -243,107 +243,103 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
-import { ref } from "vue";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
-import { ElMessageBox } from "element-plus";
-
-// 设置模拟请求
-const mock = new MockAdapter(axios);
-
-// 模拟POST /material/create请求的响应
-mock.onPost("/api/material/create_success").reply(200, {
-  code: 1,
-  message: "success",
-  data: {
-    materialID: "materialID_value",
-  },
-});
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import axios from 'axios';
+import { ElMessageBox } from 'element-plus';
 
 export default {
   setup() {
     const router = useRouter();
-    const form = ref({
-      businessPartner: "",
-      bpRole: "",
-      companyCode: "",
-    });
-
     const selectedMaterial = ref({});
-    const activeTab = ref("common");
+    
 
     function navigateTo(path) {
       router.push(path);
     }
 
     async function saveMaterial() {
-      // 验证表单是否填写完整
-      if (
-        !form.value.businessPartner ||
-        !form.value.bpRole ||
-        !form.value.companyCode
-      ) {
+      if (!selectedMaterial.value.materialName || 
+          !selectedMaterial.value.description ||
+          !selectedMaterial.value.baseUnit ||
+          !selectedMaterial.value.materialGroup ||
+          !selectedMaterial.value.division ||
+          !selectedMaterial.value.grossWeight ||
+          !selectedMaterial.value.netWeight ||
+          !selectedMaterial.value.weightUnit ||
+          !selectedMaterial.value.volume ||
+          !selectedMaterial.value.volumeUnit ||
+          !selectedMaterial.value.packMaterial ||
+          !selectedMaterial.value.availabilityCheck ||
+          !selectedMaterial.value.transportationGroup ||
+          !selectedMaterial.value.loadingGroup ||
+          !selectedMaterial.value.mrpType ||
+          !selectedMaterial.value.mrpController ||
+          !selectedMaterial.value.lotSize ||
+          !selectedMaterial.value.minimumLotSize ||
+          !selectedMaterial.value.plannedDeliveryTime ||
+          !selectedMaterial.value.valuationClass ||
+          !selectedMaterial.value.movingPrice ||
+          !selectedMaterial.value.priceUnit ||
+          !selectedMaterial.value.standardPrice) {
         ElMessageBox.alert(
-          "Please fill in all required fields.",
-          "Incomplete Information",
+          'Please fill in all required fields.',
+          'Incomplete Information',
           {
-            confirmButtonText: "OK",
-            type: "warning",
+            confirmButtonText: 'OK',
+            type: 'warning',
           }
         );
         return;
       }
 
       try {
-        // 发送请求保存供应商数据
         const response = await axios.post(
-          "/api/material/create_success",
-          form.value
+          '/api/material/create',
+          selectedMaterial.value,
+          {
+            headers: {
+              Authorization: `Bearer ${token_value}`,
+              'Content-Type': 'application/json',
+            },
+          }
         );
 
-        if (response.data.code === 1) {
+        if (response.data.code === 201) {
           ElMessageBox.alert(
             `Material created successfully! Material ID: ${response.data.data.materialID}`,
-            "Success",
+            'Success',
             {
-              confirmButtonText: "OK",
-              type: "success",
+              confirmButtonText: 'OK',
+              type: 'success',
             }
           );
-          // 清空表单
-          form.value = {
-            businessPartner: "",
-            bpRole: "",
-            companyCode: "",
-          };
+          selectedMaterial.value = {}; // 清空表单
         } else {
           ElMessageBox.alert(
-            "Failed to create material. Please try again.",
-            "Error",
+            'Failed to create material. Please try again.',
+            'Error',
             {
-              confirmButtonText: "OK",
-              type: "error",
+              confirmButtonText: 'OK',
+              type: 'error',
             }
           );
         }
       } catch (error) {
-        console.error("Error saving material data:", error);
+        console.error('Error saving material data:', error);
         ElMessageBox.alert(
-          "Failed to create material. Please try again.",
-          "Error",
+          'Failed to create material. Please try again.',
+          'Error',
           {
-            confirmButtonText: "OK",
-            type: "error",
+            confirmButtonText: 'OK',
+            type: 'error',
           }
         );
       }
     }
 
     return {
-      form,
       selectedMaterial,
-      activeTab,
       navigateTo,
       saveMaterial,
     };
@@ -351,8 +347,9 @@ export default {
 };
 </script>
 
+
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 .material {
   background: linear-gradient(
@@ -410,7 +407,7 @@ export default {
   margin-bottom: 5px;
   display: inline-block;
   width: 120px;
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
   color: #498be6;
 }
 
@@ -419,7 +416,7 @@ export default {
   margin-bottom: 20px;
   display: inline-block;
   width: 190px;
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
 }
 
 .divider {
@@ -430,13 +427,13 @@ export default {
 .label {
   font-size: 14px;
   display: inline-block;
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
 }
 
 .value {
   display: inline-block;
   width: 150px; /* 设置标签的固定宽度 */
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
 }
 
 .top {

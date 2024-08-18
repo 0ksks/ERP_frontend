@@ -194,52 +194,52 @@
           <el-divider class="divider"></el-divider>
           <span class="text-label">Material ID :</span>
           <span class="text-value">{{
-            selectedMaterial.materialID || "000000"
+            selectedMaterial.materialID || '000000'
           }}</span>
           <span class="text-label">Material Name :</span>
           <span class="text-value">{{
-            selectedMaterial.materialName || "000000"
+            selectedMaterial.materialName || '000000'
           }}</span>
           <span class="text-label">Description :</span>
           <span class="text-value">{{
-            selectedMaterial.description || "000000"
+            selectedMaterial.description || '000000'
           }}</span>
           <p>
             <span class="text-label">Base Unit :</span>
             <span class="text-value">{{
-              selectedMaterial.baseUnit || "000000"
+              selectedMaterial.baseUnit || '000000'
             }}</span>
             <span class="text-label">Material Group :</span>
             <span class="text-value">{{
-              selectedMaterial.materialGroup || "000000"
+              selectedMaterial.materialGroup || '000000'
             }}</span>
             <span class="text-label">Division :</span>
             <span class="text-value">{{
-              selectedMaterial.division || "000000"
+              selectedMaterial.division || '000000'
             }}</span>
           </p>
           <p class="text-title">Dimensions</p>
           <el-divider class="divider"></el-divider>
           <span class="text-label">Gross Weight :</span>
           <span class="text-value">{{
-            selectedMaterial.grossWeight || "000000"
+            selectedMaterial.grossWeight || '000000'
           }}</span>
           <span class="text-label">Net Weight :</span>
           <span class="text-value">{{
-            selectedMaterial.netWeight || "000000"
+            selectedMaterial.netWeight || '000000'
           }}</span>
           <span class="text-label">Weight Unit :</span>
           <span class="text-value">{{
-            selectedMaterial.weightUnit || "000000"
+            selectedMaterial.weightUnit || '000000'
           }}</span>
           <p>
             <span class="text-label">Volume :</span>
             <span class="text-value">{{
-              selectedMaterial.volume || "000000"
+              selectedMaterial.volume || '000000'
             }}</span>
             <span class="text-label">Volume Unit :</span>
             <span class="text-value">{{
-              selectedMaterial.volumeUnit || "000000"
+              selectedMaterial.volumeUnit || '000000'
             }}</span>
           </p>
 
@@ -247,20 +247,20 @@
           <el-divider class="divider"></el-divider>
           <span class="text-label">Trans.Grp :</span>
           <span class="text-value">{{
-            selectedMaterial.transportationGroup || "000000"
+            selectedMaterial.transportationGroup || '000000'
           }}</span>
           <span class="text-label">Pack Material :</span>
           <span class="text-value">{{
-            selectedMaterial.packMaterial || "000000"
+            selectedMaterial.packMaterial || '000000'
           }}</span>
           <span class="text-label">Avail.Check :</span>
           <span class="text-value">{{
-            selectedMaterial.availabilityCheck || "000000"
+            selectedMaterial.availabilityCheck || '000000'
           }}</span>
           <p>
             <span class="text-label">Loading Group :</span>
             <span class="text-value">{{
-              selectedMaterial.loadingGroup || "000000"
+              selectedMaterial.loadingGroup || '000000'
             }}</span>
           </p>
 
@@ -268,45 +268,45 @@
           <el-divider class="divider"></el-divider>
           <span class="text-label">MRP Type :</span>
           <span class="text-value">{{
-            selectedMaterial.mrpType || "000000"
+            selectedMaterial.mrpType || '000000'
           }}</span>
           <span class="text-label">MRP Controller:</span>
           <span class="text-value">{{
-            selectedMaterial.mrpController || "000000"
+            selectedMaterial.mrpController || '000000'
           }}</span>
 
           <p class="text-title">Lot Size Data</p>
           <el-divider class="divider"></el-divider>
           <span class="text-label">Lot Sizing Proc :</span>
           <span class="text-value">{{
-            selectedMaterial.lotSize || "000000"
+            selectedMaterial.lotSize || '000000'
           }}</span>
 
           <p class="text-title">Scheduling</p>
           <el-divider class="divider"></el-divider>
           <span class="text-label">Plan.Delv.Tome :</span>
           <span class="text-value">{{
-            selectedMaterial.planningDeliveryTime || "000000"
+            selectedMaterial.planningDeliveryTime || '000000'
           }}</span>
 
           <p class="text-title">Accounting</p>
           <el-divider class="divider"></el-divider>
           <span class="text-label">Valuation Class :</span>
           <span class="text-value">{{
-            selectedMaterial.valuationClass || "000000"
+            selectedMaterial.valuationClass || '000000'
           }}</span>
           <span class="text-label">Moving Price:</span>
           <span class="text-value">{{
-            selectedMaterial.movingPrice || "000000"
+            selectedMaterial.movingPrice || '000000'
           }}</span>
           <span class="text-label">Price Unit:</span>
           <span class="text-value">{{
-            selectedMaterial.priceUnit || "000000"
+            selectedMaterial.priceUnit || '000000'
           }}</span>
           <p>
             <span class="text-label">Standard Price:</span>
             <span class="text-value">{{
-              selectedMaterial.standardPrice || "000000"
+              selectedMaterial.standardPrice || '000000'
             }}</span>
           </p>
         </div>
@@ -316,34 +316,41 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
-import { ref, onMounted, nextTick } from "vue";
-import Chart from "chart.js/auto";
-import axios from "axios";
-import { ElMessageBox } from "element-plus";
+import { useRouter } from 'vue-router';
+import { ref, onMounted, nextTick } from 'vue';
+import Chart from 'chart.js/auto';
+import axios from 'axios';
+import { ElMessageBox } from 'element-plus';
 
 export default {
   setup() {
     const router = useRouter();
     const filters = ref({
-      keyword1: "",
-      keyword2: "",
-      keyword3: "",
-      keyword4: "",
+      keyword1: '',
+      keyword2: '',
+      keyword3: '',
+      keyword4: '',
     });
 
     const tableData = ref([]);
     const selectedMaterial = ref(null);
-    const searchQuery = ref("");
+    const searchQuery = ref('');
 
     const dialogFormVisible = ref(false);
     const gridData = ref([]);
 
+
+    const authHeader = {
+      Authorization: `Bearer ${token_value}`,
+      'Content-Type': 'application/json',
+    };
+
     async function fetchData(materialID) {
       try {
         const response = await axios.get(
-          "/api/stock/display_success/finished",
+          '/api/stock/display_success/finished',
           {
+            headers: authHeader,
             params: { materialID },
           }
         );
@@ -355,19 +362,19 @@ export default {
         } else {
           gridData.value = []; // Clear data if no results
           ElMessageBox.alert(
-            "No records found with the given ID.",
-            "Search Failed",
+            'No records found with the given ID.',
+            'Search Failed',
             {
-              confirmButtonText: "OK",
-              type: "error",
+              confirmButtonText: 'OK',
+              type: 'error',
             }
           );
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
-        ElMessageBox.alert("Failed to fetch data!", "Error", {
-          confirmButtonText: "OK",
-          type: "error",
+        console.error('Error fetching data:', error);
+        ElMessageBox.alert('Failed to fetch data!', 'Error', {
+          confirmButtonText: 'OK',
+          type: 'error',
         });
       }
     }
@@ -382,52 +389,51 @@ export default {
     };
 
     const initChart = () => {
-      const canvas = document.getElementById("stockChartCanvas");
+      const canvas = document.getElementById('stockChartCanvas');
       if (!canvas) {
-        console.error("Canvas element not found.");
+        console.error('Canvas element not found.');
         return;
       }
 
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext('2d');
       if (!ctx) {
-        console.error("Failed to get Canvas 2D context.");
+        console.error('Failed to get Canvas 2D context.');
         return;
       }
 
       const data = gridData.value;
 
       let cumulativeSum = 0;
-      const cumulativeData = data.map((item) => {
-        // 确保 item.quantity 转换为数字
-        const quantity = Number(item.quantity); // 或者使用 +item.quantity
+      const cumulativeData = data.map(item => {
+        // Ensure item.quantity is converted to a number
+        const quantity = Number(item.quantity); // or use +item.quantity
         cumulativeSum += quantity;
-        console.log("cumulativeSum:", cumulativeSum); // 输出累计和
         return cumulativeSum;
       });
 
-      const stockIDs = data.map((item) => item.stockID);
+      const stockIDs = data.map(item => item.stockID);
 
       if (chart.value) {
         chart.value.destroy();
       }
 
       chart.value = new Chart(ctx, {
-        type: "bar",
+        type: 'bar',
         data: {
           labels: stockIDs,
           datasets: [
             {
-              label: "Quantity",
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
-              borderColor: "rgba(54, 162, 235, 1)",
+              label: 'Quantity',
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
               borderWidth: 1,
-              data: data.map((item) => item.quantity),
+              data: data.map(item => item.quantity),
             },
             {
-              label: "Cumulative Quantity",
-              type: "line",
-              backgroundColor: "rgba(255, 99, 132, 0.2)",
-              borderColor: "rgba(255, 99, 132, 1)",
+              label: 'Cumulative Quantity',
+              type: 'line',
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
               borderWidth: 2,
               data: cumulativeData,
             },
@@ -439,19 +445,20 @@ export default {
               beginAtZero: true,
               title: {
                 display: true,
-                text: "Quantity",
+                text: 'Quantity',
               },
             },
             x: {
               title: {
                 display: true,
-                text: "Stock ID",
+                text: 'Stock ID',
               },
             },
           },
         },
       });
     };
+
     onMounted(() => {
       initChart();
     });
@@ -462,44 +469,42 @@ export default {
 
     async function searchMaterial() {
       try {
-        // 检查是否输入了搜索关键词
         if (!searchQuery.value) {
           ElMessageBox.alert(
-            "Please enter a Material ID before searching.",
-            "No Input",
+            'Please enter a Material ID before searching.',
+            'No Input',
             {
-              confirmButtonText: "OK",
-              type: "warning",
+              confirmButtonText: 'OK',
+              type: 'warning',
             }
           );
           return;
         }
 
-        // 发送请求获取指定 Material ID 的详细信息
-        const response = await axios.get("/api/material/query_success", {
-          params: {
-            materialID: searchQuery.value,
-          },
+        const response = await axios.post('/material/query', {
+          materialID: searchQuery.value,
+        }, {
+          headers: authHeader,
         });
 
-        if (response.data.code === 1 && response.data.data.length > 0) {
-          selectedMaterial.value = response.data.data[0]; // 假设返回的 data 是数组，取第一个元素
+        if (response.data.code === 200 && response.data.data.length > 0) {
+          selectedMaterial.value = response.data.data[0]; // Assume data is an array, take the first element
         } else {
           ElMessageBox.alert(
-            "No material found with the given ID.",
-            "Search Failed",
+            'No material found with the given ID.',
+            'Search Failed',
             {
-              confirmButtonText: "OK",
-              type: "error",
+              confirmButtonText: 'OK',
+              type: 'error',
             }
           );
           selectedMaterial.value = null;
         }
       } catch (error) {
-        console.error("Error fetching material data:", error);
-        ElMessageBox.alert("Failed to fetch material data!", "Error", {
-          confirmButtonText: "OK",
-          type: "error",
+        console.error('Error fetching material data:', error);
+        ElMessageBox.alert('Failed to fetch material data!', 'Error', {
+          confirmButtonText: 'OK',
+          type: 'error',
         });
       }
     }
@@ -513,95 +518,82 @@ export default {
           !filters.value.keyword4
         ) {
           ElMessageBox.alert(
-            "Please enter at least one filter criterion.",
-            "No Filters",
+            'Please enter at least one filter criterion.',
+            'No Filters',
             {
-              confirmButtonText: "OK",
-              type: "warning",
+              confirmButtonText: 'OK',
+              type: 'warning',
             }
           );
           return;
         }
 
-        // 发送请求获取过滤后的结果
-        const response = await axios.get("/api/material/query_success", {
-          params: {
-            materialName: filters.value.keyword1,
-            description: filters.value.keyword2,
-            materialGroup: filters.value.keyword3,
-            userID: filters.value.keyword4,
-          },
+        const response = await axios.post('/material/query', {
+          materialName: filters.value.keyword1,
+          description: filters.value.keyword2,
+          materialGroup: filters.value.keyword3,
+          userID: filters.value.keyword4,
+        }, {
+          headers: authHeader,
         });
 
-        if (response.data.code === 1 && response.data.data.length > 0) {
+        if (response.data.code === 200) {
           tableData.value = response.data.data;
         } else {
           ElMessageBox.alert(
-            "No results found with the given filters.",
-            "Filter Results",
+            'No materials found with the given criteria.',
+            'Filter Failed',
             {
-              confirmButtonText: "OK",
-              type: "warning",
+              confirmButtonText: 'OK',
+              type: 'error',
             }
           );
           tableData.value = [];
         }
       } catch (error) {
-        console.error("Error filtering results:", error);
-        ElMessageBox.alert("Failed to fetch results!", "Error", {
-          confirmButtonText: "OK",
-          type: "error",
+        console.error('Error fetching filter results:', error);
+        ElMessageBox.alert('Failed to fetch filter results!', 'Error', {
+          confirmButtonText: 'OK',
+          type: 'error',
         });
       }
     }
 
-    const handleModifyClick = async () => {
-      if (selectedMaterial.value) {
-        const materialID = selectedMaterial.value.materialID;
-        router.push({ name: "ModifyMaterial", params: { id: materialID } });
-      } else {
+    async function handleModifyClick() {
+      if (!selectedMaterial.value || !selectedMaterial.value.materialID) {
         ElMessageBox.alert(
-          "Please select a material to modify.",
-          "No Material Selected",
+          'Please select a material before modifying.',
+          'No Selection',
           {
-            confirmButtonText: "OK",
-            type: "warning",
+            confirmButtonText: 'OK',
+            type: 'warning',
           }
         );
+        return;
       }
-    };
-
-    function viewDetails(row) {
-      selectedMaterial.value = row;
-    }
-
-    function handleCurrentChange(row) {
-      selectedMaterial.value = row;
+      router.push(`/ModifyMaterial/${selectedMaterial.value.materialID}`);
     }
 
     return {
       filters,
       tableData,
-      handleModifyClick,
       selectedMaterial,
       searchQuery,
-      navigateTo,
-      searchMaterial,
-      filterResults,
-      viewDetails,
-      handleCurrentChange,
-
       dialogFormVisible,
       gridData,
       openDialog,
-      initChart,
+      navigateTo,
+      searchMaterial,
+      filterResults,
+      handleModifyClick,
     };
   },
 };
 </script>
 
+
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 .material {
   background: linear-gradient(
     to bottom,
@@ -709,7 +701,7 @@ export default {
   margin-bottom: 5px;
   display: inline-block;
   width: 120px; /* 设置标签的固定宽度 */
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
   color: #969fab;
 }
 
@@ -718,7 +710,7 @@ export default {
   margin-bottom: 5px;
   display: inline-block;
   width: 160px; /* 设置标签的固定宽度 */
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
   color: #498be6;
 }
 
@@ -728,7 +720,7 @@ export default {
   display: inline-block;
   display: inline-block;
   width: 190px; /* 设置固定宽度 */
-  font-family: "Inter", sans;
+  font-family: 'Inter', sans;
 }
 .divider {
   margin-top: 15px; /* 设置分割线的上边距 */
